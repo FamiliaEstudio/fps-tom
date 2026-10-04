@@ -1,0 +1,8 @@
+FPS Tom: atlas.png, tiro.wav, dano.wav e item.wav
+
+Pixel art procedural e áudio sintetizado originalmente para este projeto.
+Não contêm imagens, gravações ou recursos do Doom ou de terceiros.
+Gerador reproduzível: ../scripts/generate-assets.js
+
+Dedicados ao domínio público sob CC0 1.0 Universal.
+https://creativecommons.org/publicdomain/zero/1.0/

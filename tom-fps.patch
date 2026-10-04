@@ -1,0 +1,227 @@
+diff --git a/tom-lang/core/builtins.js b/tom-lang/core/builtins.js
+index 06b0ea1..f5e4d2a 100755
+--- a/tom-lang/core/builtins.js
++++ b/tom-lang/core/builtins.js
+@@ -101,6 +101,11 @@ const builtins = {
+   SubstituirTrechoTxt: { c:'tom_text_substitute',args:['RefBuffer','InUd64','InUd64','Txt'],result:'Vazio',lib:'text' },
+   LocalizarTxt: { c:'tom_text_find',args:['Txt','Txt','InUd64'],result:'InSd64',lib:'text' },
+   RaizQuadradaFl64: { c:'tom_sqrt_f64',args:['Fl64'],result:'Fl64',lib:'math' },
++  SenoFl64: { c:'tom_sin_f64',args:['Fl64'],result:'Fl64',lib:'math' },
++  CossenoFl64: { c:'tom_cos_f64',args:['Fl64'],result:'Fl64',lib:'math' },
++  VisualImagemCarregar: { c:'tom_visual_image',args:['Janela','Txt'],result:'Visual',lib:'ui',owner:0 },
++  DesenharVisualRegiao: { c:'tom_draw_visual_region',args:['RefJanela','Visual','InSd32','InSd32','InSd32','InSd32','Fl64','Fl64','Fl64','Fl64','InUd32'],result:'Vazio',lib:'ui' },
++  JanelaMouseRelativo: { c:'tom_window_relative_mouse',args:['RefJanela','Bl'],result:'Vazio',lib:'ui' },
+   HipotenusaFl64: { c:'tom_hypot_f64',args:['Fl64','Fl64'],result:'Fl64',lib:'math' },
+   JanelaEventosRolagem: { c:'tom_window_wheel_events',args:['RefJanela','Bl'],result:'Vazio',lib:'ui' },
+   EventoCampoFl64: { c:'tom_event_field_f64',args:['Evento','InSd32'],result:'Fl64',lib:'ui' },
+diff --git a/tom-lang/runtime/stable/CMakeLists.txt b/tom-lang/runtime/stable/CMakeLists.txt
+index 0d7b0f0..1c83990 100755
+--- a/tom-lang/runtime/stable/CMakeLists.txt
++++ b/tom-lang/runtime/stable/CMakeLists.txt
+@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21)
+ project(tom_runtime VERSION 0.4.0 LANGUAGES C)
+ set(CMAKE_C_STANDARD 17)
+ set(CMAKE_C_STANDARD_REQUIRED ON)
+-find_package(SDL3 CONFIG REQUIRED)
++find_package(SDL3 3.4 CONFIG REQUIRED)
+ find_package(SDL3_ttf CONFIG REQUIRED)
+ find_path(MPDEC_INCLUDE_DIR mpdecimal.h REQUIRED)
+ find_library(MPDEC_LIBRARY NAMES mpdec REQUIRED)
+diff --git a/tom-lang/runtime/stable/math.c b/tom-lang/runtime/stable/math.c
+index 2dccba0..247a71e 100755
+--- a/tom-lang/runtime/stable/math.c
++++ b/tom-lang/runtime/stable/math.c
+@@ -37,6 +37,14 @@ int32_t tom_sqrt_f64(double value, double *out) {
+   if (!out || !isfinite(value) || value < 0) return TOM_INVALID;
+   *out = sqrt(value); return TOM_OK;
+ }
++int32_t tom_sin_f64(double value, double *out) {
++  if (!out || !isfinite(value)) return TOM_INVALID;
++  *out = sin(value); return TOM_OK;
++}
++int32_t tom_cos_f64(double value, double *out) {
++  if (!out || !isfinite(value)) return TOM_INVALID;
++  *out = cos(value); return TOM_OK;
++}
+ int32_t tom_hypot_f64(double x, double y, double *out) {
+   if (!out || !isfinite(x) || !isfinite(y)) return TOM_INVALID;
+   double result = hypot(x,y); if (!isfinite(result)) return TOM_OVERFLOW;
+diff --git a/tom-lang/runtime/stable/tom_runtime.h b/tom-lang/runtime/stable/tom_runtime.h
+index 27d9fc4..f905171 100755
+--- a/tom-lang/runtime/stable/tom_runtime.h
++++ b/tom-lang/runtime/stable/tom_runtime.h
+@@ -210,6 +210,8 @@ int32_t tom_f64_i32(double value, int32_t *out);
+ int32_t tom_f64_i64(double value, int64_t *out);
+ int32_t tom_power_f64(double a, double b, double *out);
+ int32_t tom_sqrt_f64(double value, double *out);
++int32_t tom_sin_f64(double value, double *out);
++int32_t tom_cos_f64(double value, double *out);
+ int32_t tom_hypot_f64(double x, double y, double *out);
+ int32_t tom_random_new(uint64_t seed, uint64_t stream, TomRandom **out);
+ void tom_random_free(TomRandom *value);
+@@ -219,6 +221,7 @@ int32_t tom_event_time(const TomEvent *event, int64_t *out);
+ int32_t tom_event_until(TomWindow *window, TomEvent *event, int64_t deadline, int32_t *available);
+ int32_t tom_window_events(TomWindow *window, int32_t extended);
+ int32_t tom_window_pointer_events(TomWindow *window,int32_t enabled);
++int32_t tom_window_relative_mouse(TomWindow *window,int32_t enabled);
+ int32_t tom_key_held(TomWindow *window, int32_t scancode, int32_t *out);
+ int32_t tom_font_file(const char *relative, int32_t size, TomFont **out);
+ int32_t tom_draw_line(TomWindow *window, double x1, double y1, double x2, double y2, double thickness, uint32_t rgba);
+@@ -227,6 +230,10 @@ int32_t tom_window_clip(TomWindow *window, int32_t x, int32_t y, int32_t w, int3
+ int32_t tom_window_unclip(TomWindow *window);
+ int32_t tom_visual_text(TomWindow *window, TomFont *font, const char *text, TomVisual **out);
+ int32_t tom_visual_glyph(TomWindow *window, TomFont *font, int32_t code, TomVisual **out);
++int32_t tom_visual_image(TomWindow *window, const char *relative, TomVisual **out);
++int32_t tom_draw_visual_region(TomWindow *window, TomVisual *value,
++  int32_t sx, int32_t sy, int32_t sw, int32_t sh,
++  double x, double y, double width, double height, uint32_t rgba);
+ void tom_visual_free(TomVisual *value);
+ int32_t tom_visual_metric(TomVisual *value, int32_t field, int32_t *out);
+ int32_t tom_draw_visual(TomWindow *window, TomVisual *value, double x, double y, uint32_t rgba);
+diff --git a/tom-lang/runtime/stable/ui.c b/tom-lang/runtime/stable/ui.c
+index 660922e..2902686 100755
+--- a/tom-lang/runtime/stable/ui.c
++++ b/tom-lang/runtime/stable/ui.c
+@@ -52,7 +52,7 @@ static void window_release(TomWindow *value) {
+ int tom_ui_on_main(void) { return on_main(); }
+ void tom_ui_window_retain(TomWindow *value) { value->references++; }
+ void tom_ui_window_release(TomWindow *value) { window_release(value); }
+-void tom_window_free(TomWindow *value) { if (value) { value->closed = 1; window_release(value); } }
++void tom_window_free(TomWindow *value) { if (value) { SDL_SetWindowRelativeMouseMode(value->window,false); value->closed = 1; window_release(value); } }
+ void tom_font_free(TomFont *value) { if (value) { TTF_CloseFont(value->font); free(value); released(); } }
+ void tom_event_free(TomEvent *value) { if (value) { tom_text_free(value->dynamic_text); free(value); released(); } }
+ int32_t tom_window_new(const char *title, int32_t width, int32_t height, TomWindow **out) {
+@@ -162,7 +162,10 @@ static int32_t translate(TomWindow *window, SDL_Event *event, TomEvent *out) {
+       break;
+     case SDL_EVENT_WINDOW_FOCUS_LOST: case SDL_EVENT_WINDOW_FOCUS_GAINED:
+       out->window_id = (int32_t)event->window.windowID;
+-      if (target && event->type == SDL_EVENT_WINDOW_FOCUS_LOST) { memset(target->held, 0, sizeof(target->held)); target->buttons=0; }
++      if (target && event->type == SDL_EVENT_WINDOW_FOCUS_LOST) {
++        memset(target->held, 0, sizeof(target->held)); target->buttons=0;
++        if (SDL_GetWindowRelativeMouseMode(target->window) && !SDL_SetWindowRelativeMouseMode(target->window,false)) return TOM_RESOURCE;
++      }
+       out->kind = target && (target->extended || target->pointer_events || target->editor_count) ? (event->type == SDL_EVENT_WINDOW_FOCUS_LOST ? 8 : 9) : 0; break;
+     case SDL_EVENT_MOUSE_BUTTON_DOWN: case SDL_EVENT_MOUSE_BUTTON_UP:
+       out->kind = event->type==SDL_EVENT_MOUSE_BUTTON_DOWN ? 4 : target && (target->pointer_events||target->editor_count) ? 11 : 0;
+@@ -174,6 +177,8 @@ static int32_t translate(TomWindow *window, SDL_Event *event, TomEvent *out) {
+       return coordinates(target ? target : window, event->button.x, event->button.y, out);
+     case SDL_EVENT_MOUSE_MOTION:
+       if(!target || !(target->pointer_events||target->editor_count))break;
++      if(!isfinite(event->motion.xrel)||!isfinite(event->motion.yrel))return TOM_INVALID;
++      out->relative_x=event->motion.xrel;out->relative_y=event->motion.yrel;
+       target->buttons=event->motion.state;out->buttons=(int32_t)target->buttons;
+       out->kind=10;out->window_id=(int32_t)event->motion.windowID;
+       return coordinates(target,event->motion.x,event->motion.y,out);
+@@ -210,11 +215,17 @@ static int32_t scripted_event(TomWindow *window, TomEvent *out) {
+     out->kind=(window->extended||window->editor_count)?7:0;if(out->scancode>0 && out->scancode<SDL_SCANCODE_COUNT)window->held[out->scancode]=0;
+   } else if(!strcmp(line,"focuslost")) {
+     out->kind=window->extended||(window->pointer_events||window->editor_count)?8:0;memset(window->held,0,sizeof(window->held));window->buttons=0;
++    if(SDL_GetWindowRelativeMouseMode(window->window)&&!SDL_SetWindowRelativeMouseMode(window->window,false))return TOM_RESOURCE;
+   } else if(!strcmp(line,"focusgain"))out->kind=window->extended||(window->pointer_events||window->editor_count)?9:0;
+   else if(sscanf(line,"wheel %f %f %f %f %d",&px,&py,&wx,&wy,&flipped)==5) {
+     if(!isfinite(wx)||!isfinite(wy)||(flipped!=0&&flipped!=1))return TOM_INVALID;
+     out->kind=(window->wheel_events||window->editor_count)?12:0;out->wheel_x=flipped?-wx:wx;out->wheel_y=flipped?-wy:wy;
+     return coordinates(window,px,py,out);
++  } else if(sscanf(line,"relative %f %f %f %f",&px,&py,&wx,&wy)==4) {
++    if(!isfinite(wx)||!isfinite(wy))return TOM_INVALID;
++    out->kind=(window->pointer_events||window->editor_count)?10:0;
++    out->relative_x=wx;out->relative_y=wy;out->buttons=(int32_t)window->buttons;
++    return coordinates(window,px,py,out);
+   } else if(sscanf(line,"motion %f %f",&px,&py)==2) {
+     out->kind=(window->pointer_events||window->editor_count)?10:0;out->buttons=(int32_t)window->buttons;
+     return coordinates(window,px,py,out);
+@@ -269,7 +280,7 @@ int32_t tom_event_field(const TomEvent *event, int32_t field, int32_t *out) {
+ int32_t tom_event_text(const TomEvent *event, TomText *out) { return event ? tom_text_set(out, tom_ui_event_text(event)) : TOM_INVALID; }
+ int32_t tom_event_field_f64(const TomEvent *event, int32_t field, double *out) {
+   if(!event||!out)return TOM_INVALID;
+-  switch(field){case 1:*out=event->precise_x;break;case 2:*out=event->precise_y;break;case 12:*out=event->wheel_x;break;case 13:*out=event->wheel_y;break;default:return TOM_BOUNDS;}
++  switch(field){case 1:*out=event->precise_x;break;case 2:*out=event->precise_y;break;case 12:*out=event->wheel_x;break;case 13:*out=event->wheel_y;break;case 17:*out=event->relative_x;break;case 18:*out=event->relative_y;break;default:return TOM_BOUNDS;}
+   return TOM_OK;
+ }
+ int32_t tom_event_time(const TomEvent *event, int64_t *out) { if (!event || !out) return TOM_INVALID; *out = event->timestamp; return TOM_OK; }
+@@ -282,6 +293,11 @@ int32_t tom_window_pointer_events(TomWindow *window,int32_t enabled) {
+   if(!window || window->closed || !on_main())return TOM_RESOURCE;
+   if(enabled!=0 && enabled!=1)return TOM_INVALID;window->pointer_events=enabled;window->buttons=0;return TOM_OK;
+ }
++int32_t tom_window_relative_mouse(TomWindow *window,int32_t enabled) {
++  if(!window||window->closed||!on_main())return TOM_RESOURCE;
++  if(enabled!=0&&enabled!=1)return TOM_INVALID;
++  return SDL_SetWindowRelativeMouseMode(window->window,enabled!=0)?TOM_OK:TOM_RESOURCE;
++}
+ int32_t tom_window_wheel_events(TomWindow *window,int32_t enabled) {
+   if(!window||window->closed||!on_main())return TOM_RESOURCE;
+   if(enabled!=0&&enabled!=1)return TOM_INVALID;window->wheel_events=enabled;return TOM_OK;
+@@ -457,6 +473,45 @@ int32_t tom_visual_text(TomWindow *window, TomFont *font, const char *text, TomV
+   return visual(window,font,text,0,out);
+ }
+ int32_t tom_visual_glyph(TomWindow *window, TomFont *font, int32_t code, TomVisual **out) { return visual(window,font,NULL,(uint32_t)code,out); }
++int32_t tom_visual_image(TomWindow *window, const char *relative, TomVisual **out) {
++  if(!window||window->closed||!out||!on_main())return TOM_RESOURCE;
++  char *file=NULL;int32_t error=tom_asset_path(relative,&file);if(error)return error;
++  SDL_IOStream *io=SDL_IOFromFile(file,"rb");free(file);if(!io)return TOM_RESOURCE;
++  // Packaged PNGs only. Check the header before decoding to bound allocations.
++  Uint8 header[24];Sint64 bytes=SDL_GetIOSize(io);
++  if(bytes<24||bytes>67108864){SDL_CloseIO(io);return bytes>67108864?TOM_CAPACITY:TOM_INVALID;}
++  if(SDL_ReadIO(io,header,sizeof(header))!=sizeof(header)||memcmp(header,"\x89PNG\r\n\x1a\n",8)||
++     memcmp(header+8,"\0\0\0\x0dIHDR",8)){SDL_CloseIO(io);return TOM_INVALID;}
++  uint32_t width=((uint32_t)header[16]<<24)|((uint32_t)header[17]<<16)|((uint32_t)header[18]<<8)|header[19];
++  uint32_t height=((uint32_t)header[20]<<24)|((uint32_t)header[21]<<16)|((uint32_t)header[22]<<8)|header[23];
++  if(!width||!height||width>4096||height>4096){SDL_CloseIO(io);return TOM_CAPACITY;}
++  if(SDL_SeekIO(io,0,SDL_IO_SEEK_SET)!=0){SDL_CloseIO(io);return TOM_RESOURCE;}
++  SDL_Surface *surface=SDL_LoadPNG_IO(io,true);if(!surface)return TOM_RESOURCE;
++  TomVisual *value=calloc(1,sizeof(*value));if(!value){SDL_DestroySurface(surface);return TOM_MEMORY;}
++  value->width=surface->w;value->height=surface->h;value->advance=surface->w;
++  value->texture=SDL_CreateTextureFromSurface(window->renderer,surface);SDL_DestroySurface(surface);
++  if(!value->texture||!SDL_SetTextureBlendMode(value->texture,SDL_BLENDMODE_BLEND)||
++     !SDL_SetTextureScaleMode(value->texture,SDL_SCALEMODE_NEAREST)){
++    SDL_DestroyTexture(value->texture);free(value);return TOM_RESOURCE;
++  }
++  value->owner=window;window->references++;acquired();
++  tom_visual_free(*out);*out=value;return TOM_OK;
++}
++int32_t tom_draw_visual_region(TomWindow *window, TomVisual *value,
++  int32_t sx,int32_t sy,int32_t sw,int32_t sh,double x,double y,double width,double height,uint32_t rgba) {
++  if(!window||window->closed||!value||value->owner!=window||!on_main())return TOM_RESOURCE;
++  if(sx<0||sy<0||sw<=0||sh<=0||(int64_t)sx+sw>value->width||(int64_t)sy+sh>value->height)return TOM_BOUNDS;
++  if(!coordinate(x)||!coordinate(y)||!isfinite(width)||!isfinite(height)||width<0||height<0||
++     width>16384||height>16384||!coordinate(x+width)||!coordinate(y+height))return TOM_INVALID;
++  if(!width||!height)return TOM_OK;
++  SDL_Color c=color(rgba);SDL_FRect src={(float)sx,(float)sy,(float)sw,(float)sh},dst={(float)x,(float)y,(float)width,(float)height};
++  SDL_ScaleMode previous;if(!SDL_GetTextureScaleMode(value->texture,&previous))return TOM_RESOURCE;
++  bool ok=SDL_SetTextureScaleMode(value->texture,SDL_SCALEMODE_NEAREST)&&
++    SDL_SetTextureColorMod(value->texture,c.r,c.g,c.b)&&SDL_SetTextureAlphaMod(value->texture,c.a)&&
++    SDL_RenderTexture(window->renderer,value->texture,&src,&dst);
++  if(!SDL_SetTextureScaleMode(value->texture,previous))ok=false;
++  return ok?TOM_OK:TOM_RESOURCE;
++}
+ void tom_visual_free(TomVisual *value) {
+   if (value) { if (value->texture) SDL_DestroyTexture(value->texture); window_release(value->owner); free(value); released(); }
+ }
+diff --git a/tom-lang/runtime/stable/ui_internal.h b/tom-lang/runtime/stable/ui_internal.h
+index d86bc32..edd4d3d 100755
+--- a/tom-lang/runtime/stable/ui_internal.h
++++ b/tom-lang/runtime/stable/ui_internal.h
+@@ -6,7 +6,7 @@
+ #include <SDL3_ttf/SDL_ttf.h>
+ struct TomWindow { SDL_Window *window; SDL_Renderer *renderer; int editor_count; TomEditor *editor_focus; int extended, pointer_events, wheel_events, references, closed; uint32_t buttons; Uint8 held[SDL_SCANCODE_COUNT]; struct TomWindow *next; };
+ struct TomFont { TTF_Font *font; };
+-struct TomEvent { int32_t kind, x, y, button, key, width, height, window_id, repeat, scancode, modifiers, buttons; int64_t timestamp; double precise_x, precise_y, wheel_x, wheel_y; char text[256]; TomText *dynamic_text; int32_t composition_start,composition_length,clicks; };
++struct TomEvent { int32_t kind, x, y, button, key, width, height, window_id, repeat, scancode, modifiers, buttons; int64_t timestamp; double precise_x, precise_y, wheel_x, wheel_y, relative_x, relative_y; char text[256]; TomText *dynamic_text; int32_t composition_start,composition_length,clicks; };
+ int tom_ui_on_main(void);
+ void tom_ui_window_retain(TomWindow *window);
+ void tom_ui_window_release(TomWindow *window);
+diff --git a/tom-lang/stdlib/teclado.tom b/tom-lang/stdlib/teclado.tom
+index 93ffacb..dc6b82f 100755
+--- a/tom-lang/stdlib/teclado.tom
++++ b/tom-lang/stdlib/teclado.tom
+@@ -59,3 +59,10 @@ DefConstInSd32xEVENTO_COMPOSICAOy13
+ DefConstInSd32xCAMPO_CLIQUESy14
+ DefConstInSd32xCAMPO_COMPOSICAO_INICIOy15
+ DefConstInSd32xCAMPO_COMPOSICAO_TAMANHOy16
++// Deslocamentos do mouse em unidades nativas, lidos com EventoCampoFl64.
++DefConstInSd32xCAMPO_MOUSE_DXy17
++DefConstInSd32xCAMPO_MOUSE_DYy18
++DefConstInSd32xFISICA_Sy22
++DefConstInSd32xFISICA_ESQUERDAy80
++DefConstInSd32xFISICA_DIREITAy79
++DefConstInSd32xFISICA_CTRL_ESQUERDOy224
