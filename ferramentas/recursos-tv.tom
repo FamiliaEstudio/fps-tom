@@ -1,0 +1,85 @@
+Importar[l'./recursos-comuns.tom']
+Importar[l'./clipe-metadados.tom']
+
+DefFuncaoxFpsRecursoTV[TxtxPasta]yVazio
+DefRecursoxAtlasyImagemCriar[1024,1152]
+DefRecursoxQuadroyImagemCriar[128,96]
+DefRecursoxPixelsyBufferInUd32Criar[12288,12288]
+ParaxFrame[0,96,1]
+InSd64ParaFl64[@Frame]
+DefVarFl64xTempoy(@ULTIMO / 12.0)
+CossenoFl64[@Tempo]
+DefVarFl64xOrbitaXy(@ULTIMO * 20.0)
+SenoFl64[@Tempo]
+DefVarFl64xOrbitaYy(@ULTIMO * 20.0)
+ParaxY[0,96,1]
+DefVarFl64xScany1.0
+DefVarInSd64xRestoy(@Y - @Y / 3 * 3)
+CompararIgualxyInSd64x@Restoy0
+Sex@ULTIMO
+SetVarFl64xScany0.55
+FimSe
+ParaxX[0,128,1]
+InSd64ParaFl64[(@X - 64)]
+DefVarFl64xDXy(@ULTIMO - @OrbitaX)
+InSd64ParaFl64[(@Y - 48)]
+HipotenusaFl64[@DX,(@ULTIMO - @OrbitaY)]
+DefVarFl64xOrbitay@ULTIMO
+DefVarInSd64xVy(@X + @Frame * 3)
+SetVarInSd64xVy(@V - @V / 128 * 128)
+DefVarInSd64xRy(15 + @X / 16 * 8)
+DefVarInSd64xGy(35 + @V)
+DefVarInSd64xBy(@Frame * 7 + @Y)
+SetVarInSd64xBy(65 + @B - @B / 105 * 105)
+CompararMenorxyFl64x@Orbitay17.0
+Sex@ULTIMO
+SetVarInSd64xRy239
+SetVarInSd64xGy185
+SetVarInSd64xBy54
+Senao
+CompararMenorxyInSd64x@Yy14
+Sex@ULTIMO
+SetVarInSd64xRy20
+SetVarInSd64xGy210
+SetVarInSd64xBy160
+FimSe
+FimSe
+InSd64ParaFl64[@R]
+ChamarxFpsRecursoArredondar[(@ULTIMO * @Scan)]yR
+InSd64ParaFl64[@G]
+ChamarxFpsRecursoArredondar[(@ULTIMO * @Scan)]yG
+InSd64ParaFl64[@B]
+ChamarxFpsRecursoArredondar[(@ULTIMO * @Scan)]yB
+ChamarxFpsArteCor[@R,@G,@B,255]
+DefVarInUd32xCory@ULTIMO
+InSd64ParaInUd64[(@Y * 128 + @X)]
+BufferInUd32Gravar[@Pixels,@ULTIMO,@Cor]
+FimPara
+FimPara
+ImagemPixelsEnviar[@Quadro,@Pixels]
+InSd64ParaInUd32[((@Frame - @Frame / 8 * 8) * 128)]
+DefVarInUd32xDXy@ULTIMO
+InSd64ParaInUd32[(@Frame / 8 * 96)]
+ImagemRegiaoCopiar[@Quadro,0,0,128,96,@Atlas,@DX,@ULTIMO]
+FimPara
+DefRecursoxCaminhoyTextoCriar[l'',65536]
+ChamarxFpsRecursoCaminho[@Pasta,l'tv.png',@Caminho]
+ImagemSalvarPNG[@Atlas,@Caminho]
+DefVarRegistro<FpsClipe3D>xClipeyPadrao
+SetVarInSd64xClipe.larguray128
+SetVarInSd64xClipe.alturay96
+SetVarInSd64xClipe.taxay12
+SetVarInSd64xClipe.quadrosy96
+SetVarInSd64xClipe.colunasy8
+SetVarInSd64xClipe.linhasy12
+SetVarInSd64xClipe.duracaoAmostrasy384000
+SetVarBlxClipe.audioyVerdadeiro
+ChamarxFpsClipeValidar[@Clipe,1024,1152]
+DefRecursoxMetadadosyTextoCriar[l'',4096]
+ChamarxFpsClipeJSON[@Clipe,@Metadados]
+ChamarxFpsRecursoCaminho[@Pasta,l'tv.json',@Caminho]
+ArquivoGravarTexto[@Caminho,@Metadados]
+ChamarxFpsClipeTom[@Clipe,@Metadados]
+ChamarxFpsRecursoCaminho[@Pasta,l'tv.tom',@Caminho]
+ArquivoGravarTexto[@Caminho,@Metadados]
+FimFuncao

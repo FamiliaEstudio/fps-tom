@@ -1,0 +1,46 @@
+// Formulas do FPS anteriores a GA004.1; referencia congelada de equivalencia.
+DefFuncaoxReferenciaFps3DUV[InSd32xTile,Fl64xU,Fl64xV]yVec4<Fl32>
+DefVarInSd32xTYy(@Tile / 16)
+DefVarInSd32xTXy(@Tile - @TY * 16)
+InSd32ParaFl64[@TX]
+DefVarFl64xXy@ULTIMO
+InSd32ParaFl64[@TY]
+DefVarFl64xYy@ULTIMO
+DefVarVec4<Fl32>xRy[0.0,0.0,0.0,0.0]
+Fl64ParaFl32[((@X * 64.0 + 0.5 + @U * 63.0) / 1024.0)]yR.x
+Fl64ParaFl32[((@Y * 64.0 + 0.5 + @V * 63.0) / 512.0)]yR.y
+Retornarx@R
+FimFuncao
+
+DefFuncaoxReferenciaFps3DClipeUV[Fl64xU,Fl64xV,InSd64xAmostra,Registro<FpsClipe3D>xClipe]yVec4<Fl32>
+ChamarxReferenciaFpsClipeQuadro[@Clipe,@Amostra]
+DefVarInSd64xFramey@ULTIMO
+DefVarInSd64xYy(@Frame/@Clipe.colunas)
+DefVarInSd64xXy(@Frame-@Y*@Clipe.colunas)
+InSd64ParaFl64[@X]
+DefVarFl64xFXy@ULTIMO
+InSd64ParaFl64[@Y]
+DefVarFl64xFYy@ULTIMO
+InSd64ParaFl64[@Clipe.largura]
+DefVarFl64xLarguray@ULTIMO
+InSd64ParaFl64[@Clipe.altura]
+DefVarFl64xAlturay@ULTIMO
+InSd64ParaFl64[@Clipe.colunas]
+DefVarFl64xLarguraAtlasy(@Largura*@ULTIMO)
+InSd64ParaFl64[@Clipe.linhas]
+DefVarFl64xAlturaAtlasy(@Altura*@ULTIMO)
+DefVarVec4<Fl32>xRy[0.0,0.0,0.0,0.0]
+Fl64ParaFl32[((@FX*@Largura+0.5+@U*(@Largura-1.0))/@LarguraAtlas)]yR.x
+Fl64ParaFl32[((@FY*@Altura+0.5+@V*(@Altura-1.0))/@AlturaAtlas)]yR.y
+Retornarx@R
+FimFuncao
+
+DefFuncaoxReferenciaFpsClipeQuadro[Registro<FpsClipe3D>xClipe,InSd64xAmostra]yInSd64
+DefVarInSd64xAmostraSeguray@Amostra
+CompararMenorxyInSd64x@AmostraSeguray0
+Sex@ULTIMO
+SetVarInSd64xAmostraSeguray0
+FimSe
+DefVarInSd64xQuadroy(@AmostraSegura/(48000/@Clipe.taxa))
+Retornarx(@Quadro-(@Quadro/@Clipe.quadros)*@Clipe.quadros)
+FimFuncao

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "width": 128,
+  "height": 96,
+  "fps": 12,
+  "frames": 96,
+  "columns": 8,
+  "rows": 12,
+  "durationSamples": 384000,
+  "audio": true
+}

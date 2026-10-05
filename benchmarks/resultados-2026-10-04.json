@@ -1,0 +1,1579 @@
+{
+  "data": "2026-10-04",
+  "protocolo": {
+    "warmupPorMapa": 20,
+    "quadrosMedidosPorMapa": 240,
+    "mapas": 3,
+    "otimizacao": "O2",
+    "execucao": "sequencial, sem suites de testes concorrentes",
+    "stress": "64 sentinelas sobrepostas em sala aberta, simulacao ativa em todos os quadros",
+    "tempoGPU": "submissoes de desenho; separado de tempos do host e apresentacao",
+    "limites": "Janelas usam VSYNC; Linux usa Vulkan llvmpipe em software. Nao estabelece garantia para outros computadores."
+  },
+  "sdkGpuSha256": {
+    "linux": "2be8160546e82d327357d6fbfe34cab438733efca5b7ab685156026a5f7827fa",
+    "windows": "7732b3825dca627c46a8aae03d7d28513b5372a6198836ddd76ea11dfb1e6029"
+  },
+  "resultados": {
+    "linux": {
+      "gpu-desktop": {
+        "platform": "linux",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "gpu",
+        "driver": "desktop",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": false,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [
+          "vulkan | llvmpipe (LLVM 21.1.8, 256 bits) | llvmpipe",
+          "UPLOAD_BYTES=22744848",
+          "GPU_TIMESTAMPS=available"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.008118,
+              "p95Ms": 0.012937,
+              "maxMs": 0.021865
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.155759,
+              "p95Ms": 0.186077,
+              "maxMs": 0.40988
+            },
+            "transfer": {
+              "p50Ms": 1.970799,
+              "p95Ms": 2.963924,
+              "maxMs": 3.86523
+            },
+            "drawing": {
+              "p50Ms": 5.635538,
+              "p95Ms": 6.268798,
+              "maxMs": 7.353997
+            },
+            "presentation": {
+              "p50Ms": 1.864265,
+              "p95Ms": 2.209316,
+              "maxMs": 2.696916
+            },
+            "frame": {
+              "p50Ms": 9.839878,
+              "p95Ms": 10.880528,
+              "maxMs": 12.456216
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 4.358366,
+              "p95Ms": 4.886693,
+              "maxMs": 5.630104
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.007824,
+              "p95Ms": 0.012804,
+              "maxMs": 0.022756
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.167633,
+              "p95Ms": 0.193422,
+              "maxMs": 0.459383
+            },
+            "transfer": {
+              "p50Ms": 2.012133,
+              "p95Ms": 2.873579,
+              "maxMs": 3.724103
+            },
+            "drawing": {
+              "p50Ms": 5.519583,
+              "p95Ms": 6.194345,
+              "maxMs": 6.464544
+            },
+            "presentation": {
+              "p50Ms": 1.843943,
+              "p95Ms": 2.181906,
+              "maxMs": 2.783686
+            },
+            "frame": {
+              "p50Ms": 9.785656,
+              "p95Ms": 10.79876,
+              "maxMs": 11.427775
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 4.251619,
+              "p95Ms": 4.808345,
+              "maxMs": 5.12666
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.00828,
+              "p95Ms": 0.012175,
+              "maxMs": 0.024066
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.165066,
+              "p95Ms": 0.196366,
+              "maxMs": 0.317265
+            },
+            "transfer": {
+              "p50Ms": 1.984127,
+              "p95Ms": 2.85321,
+              "maxMs": 3.470653
+            },
+            "drawing": {
+              "p50Ms": 5.475314,
+              "p95Ms": 6.150223,
+              "maxMs": 7.702385
+            },
+            "presentation": {
+              "p50Ms": 1.863087,
+              "p95Ms": 2.28598,
+              "maxMs": 2.63762
+            },
+            "frame": {
+              "p50Ms": 9.697986,
+              "p95Ms": 10.738798,
+              "maxMs": 11.723407
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 4.222945,
+              "p95Ms": 4.709844,
+              "maxMs": 5.997607
+            }
+          }
+        ],
+        "time": "2026-10-04T13:26:11.590Z",
+        "programaMedidoSha256": "fa2a74ee77261a64286efcf2c15ec09bc22210960cf437e73684aa0c88485840"
+      },
+      "gpu-offscreen": {
+        "platform": "linux",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "gpu",
+        "driver": "offscreen",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": false,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [
+          "vulkan | llvmpipe (LLVM 21.1.8, 256 bits) | llvmpipe",
+          "UPLOAD_BYTES=22744848",
+          "GPU_TIMESTAMPS=available"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.005763,
+              "p95Ms": 0.008636,
+              "maxMs": 0.026351
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.117302,
+              "p95Ms": 0.191746,
+              "maxMs": 0.443632
+            },
+            "transfer": {
+              "p50Ms": 1.974858,
+              "p95Ms": 2.757673,
+              "maxMs": 3.285119
+            },
+            "drawing": {
+              "p50Ms": 5.570373,
+              "p95Ms": 6.365705,
+              "maxMs": 7.242445
+            },
+            "presentation": {
+              "p50Ms": 0.000311,
+              "p95Ms": 0.000628,
+              "maxMs": 0.001029
+            },
+            "frame": {
+              "p50Ms": 7.795015,
+              "p95Ms": 8.982429,
+              "maxMs": 9.771624
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 4.307283,
+              "p95Ms": 4.936077,
+              "maxMs": 5.666548
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.005139,
+              "p95Ms": 0.006961,
+              "maxMs": 0.011545
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.12704,
+              "p95Ms": 0.179211,
+              "maxMs": 0.434911
+            },
+            "transfer": {
+              "p50Ms": 1.835452,
+              "p95Ms": 2.687304,
+              "maxMs": 3.106558
+            },
+            "drawing": {
+              "p50Ms": 5.348049,
+              "p95Ms": 5.755995,
+              "maxMs": 6.000552
+            },
+            "presentation": {
+              "p50Ms": 0.000295,
+              "p95Ms": 0.000463,
+              "maxMs": 0.000801
+            },
+            "frame": {
+              "p50Ms": 7.4982,
+              "p95Ms": 8.283584,
+              "maxMs": 9.160455
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 4.142338,
+              "p95Ms": 4.466043,
+              "maxMs": 4.656695
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.005769,
+              "p95Ms": 0.008007,
+              "maxMs": 0.189194
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.123857,
+              "p95Ms": 0.153687,
+              "maxMs": 0.233238
+            },
+            "transfer": {
+              "p50Ms": 1.804185,
+              "p95Ms": 2.643397,
+              "maxMs": 2.837389
+            },
+            "drawing": {
+              "p50Ms": 5.282373,
+              "p95Ms": 5.783804,
+              "maxMs": 6.378216
+            },
+            "presentation": {
+              "p50Ms": 0.000301,
+              "p95Ms": 0.000494,
+              "maxMs": 0.000823
+            },
+            "frame": {
+              "p50Ms": 7.420608,
+              "p95Ms": 8.283625,
+              "maxMs": 8.718137
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 4.057425,
+              "p95Ms": 4.48088,
+              "maxMs": 5.039804
+            }
+          }
+        ],
+        "time": "2026-10-04T13:25:23.321Z",
+        "programaMedidoSha256": "6ec005ed2fcf8baa95cdafa317fb455705aed70e071b5ef6f50e83b8ad7f7f25"
+      },
+      "gpu-offscreen-stress": {
+        "platform": "linux",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "gpu",
+        "driver": "offscreen",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": true,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [
+          "vulkan | llvmpipe (LLVM 21.1.8, 256 bits) | llvmpipe",
+          "UPLOAD_BYTES=232140912",
+          "GPU_TIMESTAMPS=available"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.015865,
+              "p95Ms": 0.023887,
+              "maxMs": 0.324817
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.383026,
+              "p95Ms": 0.578006,
+              "maxMs": 0.803265
+            },
+            "transfer": {
+              "p50Ms": 2.63084,
+              "p95Ms": 3.042492,
+              "maxMs": 4.080284
+            },
+            "drawing": {
+              "p50Ms": 10.855765,
+              "p95Ms": 13.515063,
+              "maxMs": 16.016674
+            },
+            "presentation": {
+              "p50Ms": 0.000332,
+              "p95Ms": 0.000625,
+              "maxMs": 0.000938
+            },
+            "frame": {
+              "p50Ms": 14.033029,
+              "p95Ms": 16.940718,
+              "maxMs": 19.219049
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 9.600247,
+              "p95Ms": 12.303639,
+              "maxMs": 14.800006
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.015649,
+              "p95Ms": 0.017173,
+              "maxMs": 0.029794
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.378084,
+              "p95Ms": 0.515513,
+              "maxMs": 0.758144
+            },
+            "transfer": {
+              "p50Ms": 2.585518,
+              "p95Ms": 2.959159,
+              "maxMs": 3.217376
+            },
+            "drawing": {
+              "p50Ms": 10.502478,
+              "p95Ms": 13.410267,
+              "maxMs": 15.450801
+            },
+            "presentation": {
+              "p50Ms": 0.000317,
+              "p95Ms": 0.000441,
+              "maxMs": 0.000928
+            },
+            "frame": {
+              "p50Ms": 13.508097,
+              "p95Ms": 16.683918,
+              "maxMs": 18.743566
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 9.242223,
+              "p95Ms": 12.190609,
+              "maxMs": 14.187585
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.015783,
+              "p95Ms": 0.01756,
+              "maxMs": 0.028412
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.382163,
+              "p95Ms": 0.541568,
+              "maxMs": 0.658537
+            },
+            "transfer": {
+              "p50Ms": 2.613789,
+              "p95Ms": 3.070427,
+              "maxMs": 4.95566
+            },
+            "drawing": {
+              "p50Ms": 10.587803,
+              "p95Ms": 13.763477,
+              "maxMs": 15.670903
+            },
+            "presentation": {
+              "p50Ms": 0.000326,
+              "p95Ms": 0.000523,
+              "maxMs": 0.000889
+            },
+            "frame": {
+              "p50Ms": 13.74467,
+              "p95Ms": 16.969528,
+              "maxMs": 20.171974
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 9.366316,
+              "p95Ms": 12.268554,
+              "maxMs": 14.329008
+            }
+          }
+        ],
+        "time": "2026-10-04T13:25:43.221Z",
+        "programaMedidoSha256": "5405a4e4a659ed0e84c2e04c4063884b11dff922f6b6e950f75502777b809d2a"
+      },
+      "sdl-desktop": {
+        "platform": "linux",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "sdl",
+        "driver": "desktop",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": false,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.007255,
+              "p95Ms": 0.010357,
+              "maxMs": 0.088432
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.143459,
+              "p95Ms": 0.175341,
+              "maxMs": 0.334592
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.122431,
+              "p95Ms": 0.142553,
+              "maxMs": 0.19519
+            },
+            "presentation": {
+              "p50Ms": 6.184438,
+              "p95Ms": 7.424838,
+              "maxMs": 9.146012
+            },
+            "frame": {
+              "p50Ms": 6.446152,
+              "p95Ms": 7.661153,
+              "maxMs": 9.435051
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.006389,
+              "p95Ms": 0.008438,
+              "maxMs": 0.018879
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.149316,
+              "p95Ms": 0.19762,
+              "maxMs": 0.439516
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.111713,
+              "p95Ms": 0.133205,
+              "maxMs": 0.214856
+            },
+            "presentation": {
+              "p50Ms": 5.552577,
+              "p95Ms": 7.177867,
+              "maxMs": 7.75017
+            },
+            "frame": {
+              "p50Ms": 5.831332,
+              "p95Ms": 7.480097,
+              "maxMs": 8.023784
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.006671,
+              "p95Ms": 0.009141,
+              "maxMs": 0.020933
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.142363,
+              "p95Ms": 0.18412,
+              "maxMs": 0.376187
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.099194,
+              "p95Ms": 0.128737,
+              "maxMs": 0.298196
+            },
+            "presentation": {
+              "p50Ms": 5.358904,
+              "p95Ms": 7.038756,
+              "maxMs": 8.395785
+            },
+            "frame": {
+              "p50Ms": 5.60804,
+              "p95Ms": 7.308663,
+              "maxMs": 8.67297
+            }
+          }
+        ],
+        "time": "2026-10-04T13:25:54.140Z",
+        "programaMedidoSha256": "dd03bdc04274bb527c8ec43d35a9e58e3053f2b0a14cb3a41ee2c61dc8574af4"
+      },
+      "sdl-offscreen": {
+        "platform": "linux",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "sdl",
+        "driver": "dummy",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": false,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.0061,
+              "p95Ms": 0.008596,
+              "maxMs": 0.077309
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.124689,
+              "p95Ms": 0.152047,
+              "maxMs": 0.193027
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.120243,
+              "p95Ms": 0.139696,
+              "maxMs": 0.44385
+            },
+            "presentation": {
+              "p50Ms": 5.464632,
+              "p95Ms": 7.385552,
+              "maxMs": 9.413543
+            },
+            "frame": {
+              "p50Ms": 5.718738,
+              "p95Ms": 7.643138,
+              "maxMs": 9.675957
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.004951,
+              "p95Ms": 0.007337,
+              "maxMs": 0.008198
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.12942,
+              "p95Ms": 0.166772,
+              "maxMs": 0.39978
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.106624,
+              "p95Ms": 0.119258,
+              "maxMs": 0.181498
+            },
+            "presentation": {
+              "p50Ms": 5.177647,
+              "p95Ms": 6.528527,
+              "maxMs": 8.290399
+            },
+            "frame": {
+              "p50Ms": 5.409889,
+              "p95Ms": 6.920716,
+              "maxMs": 8.518273
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.004205,
+              "p95Ms": 0.006988,
+              "maxMs": 0.024925
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.103567,
+              "p95Ms": 0.138428,
+              "maxMs": 0.386109
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.090815,
+              "p95Ms": 0.115945,
+              "maxMs": 0.243964
+            },
+            "presentation": {
+              "p50Ms": 4.659332,
+              "p95Ms": 6.263635,
+              "maxMs": 8.383127
+            },
+            "frame": {
+              "p50Ms": 4.863012,
+              "p95Ms": 6.467772,
+              "maxMs": 8.582386
+            }
+          }
+        ],
+        "time": "2026-10-04T13:24:39.287Z",
+        "programaMedidoSha256": "dd03bdc04274bb527c8ec43d35a9e58e3053f2b0a14cb3a41ee2c61dc8574af4"
+      },
+      "sdl-offscreen-stress": {
+        "platform": "linux",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "sdl",
+        "driver": "dummy",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": true,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.014938,
+              "p95Ms": 0.017478,
+              "maxMs": 0.036168
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.378626,
+              "p95Ms": 0.545534,
+              "maxMs": 0.732081
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.958799,
+              "p95Ms": 1.735954,
+              "maxMs": 2.289028
+            },
+            "presentation": {
+              "p50Ms": 20.7891,
+              "p95Ms": 58.992642,
+              "maxMs": 73.130613
+            },
+            "frame": {
+              "p50Ms": 22.084591,
+              "p95Ms": 61.125622,
+              "maxMs": 75.37106
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.01484,
+              "p95Ms": 0.017727,
+              "maxMs": 0.135212
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.375482,
+              "p95Ms": 0.499173,
+              "maxMs": 0.753439
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.934824,
+              "p95Ms": 1.754404,
+              "maxMs": 2.086826
+            },
+            "presentation": {
+              "p50Ms": 20.602661,
+              "p95Ms": 58.913588,
+              "maxMs": 72.54209
+            },
+            "frame": {
+              "p50Ms": 21.853157,
+              "p95Ms": 61.206864,
+              "maxMs": 74.821055
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.014702,
+              "p95Ms": 0.017007,
+              "maxMs": 0.219653
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.372214,
+              "p95Ms": 0.488231,
+              "maxMs": 0.618288
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.935167,
+              "p95Ms": 1.720778,
+              "maxMs": 2.073229
+            },
+            "presentation": {
+              "p50Ms": 24.105788,
+              "p95Ms": 74.976222,
+              "maxMs": 92.651978
+            },
+            "frame": {
+              "p50Ms": 25.396899,
+              "p95Ms": 77.007571,
+              "maxMs": 95.098779
+            }
+          }
+        ],
+        "time": "2026-10-04T13:25:08.373Z",
+        "programaMedidoSha256": "be39a61511a53274f8a27bae4865bccb7974ac30fe9d318167e217c0e078358e"
+      }
+    },
+    "windows": {
+      "gpu-desktop": {
+        "platform": "win32",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "gpu",
+        "driver": "desktop",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": false,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [
+          "vulkan | NVIDIA GeForce RTX 5060 Ti | NVIDIA",
+          "UPLOAD_BYTES=22744848",
+          "GPU_TIMESTAMPS=available"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.0058,
+              "p95Ms": 0.0069,
+              "maxMs": 0.1451
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1332,
+              "p95Ms": 0.2415,
+              "maxMs": 0.3764
+            },
+            "transfer": {
+              "p50Ms": 0.7141,
+              "p95Ms": 1.0901,
+              "maxMs": 1.768
+            },
+            "drawing": {
+              "p50Ms": 0.3671,
+              "p95Ms": 0.6062,
+              "maxMs": 1.3262
+            },
+            "presentation": {
+              "p50Ms": 15.3844,
+              "p95Ms": 15.7021,
+              "maxMs": 16.1378
+            },
+            "frame": {
+              "p50Ms": 16.6574,
+              "p95Ms": 16.7801,
+              "maxMs": 17.012
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 0.023712,
+              "p95Ms": 0.03008,
+              "maxMs": 0.187552
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.0053,
+              "p95Ms": 0.0067,
+              "maxMs": 0.2042
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1416,
+              "p95Ms": 0.2294,
+              "maxMs": 0.5172
+            },
+            "transfer": {
+              "p50Ms": 1.0021,
+              "p95Ms": 3.145,
+              "maxMs": 3.5815
+            },
+            "drawing": {
+              "p50Ms": 0.3988,
+              "p95Ms": 1.5181,
+              "maxMs": 3.3257
+            },
+            "presentation": {
+              "p50Ms": 15.0613,
+              "p95Ms": 16.7107,
+              "maxMs": 17.5436
+            },
+            "frame": {
+              "p50Ms": 16.6576,
+              "p95Ms": 18.4383,
+              "maxMs": 21.5931
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 0.02928,
+              "p95Ms": 0.10416,
+              "maxMs": 0.455104
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.0055,
+              "p95Ms": 0.0069,
+              "maxMs": 0.0444
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1362,
+              "p95Ms": 0.1978,
+              "maxMs": 0.5042
+            },
+            "transfer": {
+              "p50Ms": 1.0215,
+              "p95Ms": 2.6469,
+              "maxMs": 7.0027
+            },
+            "drawing": {
+              "p50Ms": 0.4225,
+              "p95Ms": 0.8583,
+              "maxMs": 4.22
+            },
+            "presentation": {
+              "p50Ms": 15.0231,
+              "p95Ms": 17.1619,
+              "maxMs": 20.1791
+            },
+            "frame": {
+              "p50Ms": 16.6433,
+              "p95Ms": 19.0209,
+              "maxMs": 23.2503
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 0.03136,
+              "p95Ms": 0.045184,
+              "maxMs": 1.049056
+            }
+          }
+        ],
+        "time": "2026-10-04T13:28:09.693Z",
+        "programaMedidoSha256": "fa2a74ee77261a64286efcf2c15ec09bc22210960cf437e73684aa0c88485840"
+      },
+      "gpu-offscreen": {
+        "platform": "win32",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "gpu",
+        "driver": "offscreen",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": false,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [
+          "vulkan | NVIDIA GeForce RTX 5060 Ti | NVIDIA",
+          "UPLOAD_BYTES=22744848",
+          "GPU_TIMESTAMPS=available"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.0036,
+              "p95Ms": 0.0046,
+              "maxMs": 0.006
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.0933,
+              "p95Ms": 0.1113,
+              "maxMs": 0.2249
+            },
+            "transfer": {
+              "p50Ms": 0.4505,
+              "p95Ms": 0.6368,
+              "maxMs": 0.7945
+            },
+            "drawing": {
+              "p50Ms": 0.3733,
+              "p95Ms": 0.4705,
+              "maxMs": 1.7696
+            },
+            "presentation": {
+              "p50Ms": 0.0003,
+              "p95Ms": 0.0004,
+              "maxMs": 0.0006
+            },
+            "frame": {
+              "p50Ms": 0.9396,
+              "p95Ms": 1.2387,
+              "maxMs": 2.2309
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 0.026112,
+              "p95Ms": 0.027424,
+              "maxMs": 0.028224
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.0038,
+              "p95Ms": 0.0054,
+              "maxMs": 0.0534
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1226,
+              "p95Ms": 0.1616,
+              "maxMs": 0.2265
+            },
+            "transfer": {
+              "p50Ms": 0.5333,
+              "p95Ms": 0.8168,
+              "maxMs": 1.8673
+            },
+            "drawing": {
+              "p50Ms": 0.4169,
+              "p95Ms": 0.5636,
+              "maxMs": 1.0522
+            },
+            "presentation": {
+              "p50Ms": 0.0003,
+              "p95Ms": 0.0004,
+              "maxMs": 0.0005
+            },
+            "frame": {
+              "p50Ms": 1.0909,
+              "p95Ms": 1.5136,
+              "maxMs": 2.7551
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 0.025504,
+              "p95Ms": 0.02688,
+              "maxMs": 0.027712
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.0035,
+              "p95Ms": 0.0044,
+              "maxMs": 0.0316
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1032,
+              "p95Ms": 0.1245,
+              "maxMs": 0.2639
+            },
+            "transfer": {
+              "p50Ms": 0.4441,
+              "p95Ms": 0.6803,
+              "maxMs": 2.1697
+            },
+            "drawing": {
+              "p50Ms": 0.3812,
+              "p95Ms": 0.4879,
+              "maxMs": 0.6636
+            },
+            "presentation": {
+              "p50Ms": 0.0003,
+              "p95Ms": 0.0004,
+              "maxMs": 0.0005
+            },
+            "frame": {
+              "p50Ms": 0.9425,
+              "p95Ms": 1.2294,
+              "maxMs": 2.8373
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 0.025056,
+              "p95Ms": 0.027008,
+              "maxMs": 0.027968
+            }
+          }
+        ],
+        "time": "2026-10-04T13:27:35.830Z",
+        "programaMedidoSha256": "6ec005ed2fcf8baa95cdafa317fb455705aed70e071b5ef6f50e83b8ad7f7f25"
+      },
+      "gpu-offscreen-stress": {
+        "platform": "win32",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "gpu",
+        "driver": "offscreen",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": true,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [
+          "vulkan | NVIDIA GeForce RTX 5060 Ti | NVIDIA",
+          "UPLOAD_BYTES=232140912",
+          "GPU_TIMESTAMPS=available"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.0145,
+              "p95Ms": 0.0163,
+              "maxMs": 0.0265
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.3713,
+              "p95Ms": 0.5515,
+              "maxMs": 0.8179
+            },
+            "transfer": {
+              "p50Ms": 0.6524,
+              "p95Ms": 0.9804,
+              "maxMs": 3.8676
+            },
+            "drawing": {
+              "p50Ms": 0.4286,
+              "p95Ms": 0.5539,
+              "maxMs": 3.8888
+            },
+            "presentation": {
+              "p50Ms": 0.0003,
+              "p95Ms": 0.0004,
+              "maxMs": 0.0007
+            },
+            "frame": {
+              "p50Ms": 1.4721,
+              "p95Ms": 1.9944,
+              "maxMs": 7.3345
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 0.039232,
+              "p95Ms": 0.074368,
+              "maxMs": 0.164096
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.0144,
+              "p95Ms": 0.0163,
+              "maxMs": 0.0323
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.3719,
+              "p95Ms": 0.5146,
+              "maxMs": 0.5612
+            },
+            "transfer": {
+              "p50Ms": 0.6408,
+              "p95Ms": 0.831,
+              "maxMs": 1.9556
+            },
+            "drawing": {
+              "p50Ms": 0.4209,
+              "p95Ms": 0.573,
+              "maxMs": 2.117
+            },
+            "presentation": {
+              "p50Ms": 0.0003,
+              "p95Ms": 0.0004,
+              "maxMs": 0.0007
+            },
+            "frame": {
+              "p50Ms": 1.487,
+              "p95Ms": 1.8536,
+              "maxMs": 3.279
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 0.03936,
+              "p95Ms": 0.074464,
+              "maxMs": 0.0832
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.0142,
+              "p95Ms": 0.0153,
+              "maxMs": 0.0216
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.3689,
+              "p95Ms": 0.5099,
+              "maxMs": 0.5567
+            },
+            "transfer": {
+              "p50Ms": 0.6134,
+              "p95Ms": 0.8122,
+              "maxMs": 1.8533
+            },
+            "drawing": {
+              "p50Ms": 0.418,
+              "p95Ms": 0.526,
+              "maxMs": 1.8588
+            },
+            "presentation": {
+              "p50Ms": 0.0003,
+              "p95Ms": 0.0004,
+              "maxMs": 0.0005
+            },
+            "frame": {
+              "p50Ms": 1.4297,
+              "p95Ms": 1.7853,
+              "maxMs": 3.1016
+            },
+            "gpuDrawingSubmissions": {
+              "p50Ms": 0.039104,
+              "p95Ms": 0.074592,
+              "maxMs": 0.197408
+            }
+          }
+        ],
+        "time": "2026-10-04T13:27:42.885Z",
+        "programaMedidoSha256": "5405a4e4a659ed0e84c2e04c4063884b11dff922f6b6e950f75502777b809d2a"
+      },
+      "sdl-desktop": {
+        "platform": "win32",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "sdl",
+        "driver": "desktop",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": false,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.0048,
+              "p95Ms": 0.0069,
+              "maxMs": 0.0388
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1261,
+              "p95Ms": 0.151,
+              "maxMs": 1.5369
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.127,
+              "p95Ms": 0.1406,
+              "maxMs": 0.1908
+            },
+            "presentation": {
+              "p50Ms": 5.8588,
+              "p95Ms": 6.9937,
+              "maxMs": 7.9367
+            },
+            "frame": {
+              "p50Ms": 6.1203,
+              "p95Ms": 7.2703,
+              "maxMs": 8.2243
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.0033,
+              "p95Ms": 0.0054,
+              "maxMs": 0.0063
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1249,
+              "p95Ms": 0.1435,
+              "maxMs": 0.1741
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.1147,
+              "p95Ms": 0.1307,
+              "maxMs": 0.1844
+            },
+            "presentation": {
+              "p50Ms": 5.1731,
+              "p95Ms": 6.6963,
+              "maxMs": 6.9866
+            },
+            "frame": {
+              "p50Ms": 5.4272,
+              "p95Ms": 6.9546,
+              "maxMs": 7.2455
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.0034,
+              "p95Ms": 0.0058,
+              "maxMs": 0.0064
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.121,
+              "p95Ms": 0.1391,
+              "maxMs": 0.2002
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.102,
+              "p95Ms": 0.1176,
+              "maxMs": 0.1763
+            },
+            "presentation": {
+              "p50Ms": 5.0156,
+              "p95Ms": 6.4707,
+              "maxMs": 7.4037
+            },
+            "frame": {
+              "p50Ms": 5.2464,
+              "p95Ms": 6.7092,
+              "maxMs": 7.6468
+            }
+          }
+        ],
+        "time": "2026-10-04T13:27:50.142Z",
+        "programaMedidoSha256": "dd03bdc04274bb527c8ec43d35a9e58e3053f2b0a14cb3a41ee2c61dc8574af4"
+      },
+      "sdl-offscreen": {
+        "platform": "win32",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "sdl",
+        "driver": "dummy",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": false,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.0042,
+              "p95Ms": 0.0062,
+              "maxMs": 0.0084
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1061,
+              "p95Ms": 0.1405,
+              "maxMs": 0.4895
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.1214,
+              "p95Ms": 0.1414,
+              "maxMs": 2.6807
+            },
+            "presentation": {
+              "p50Ms": 5.8344,
+              "p95Ms": 7.277,
+              "maxMs": 11.565
+            },
+            "frame": {
+              "p50Ms": 6.0794,
+              "p95Ms": 7.5092,
+              "maxMs": 14.3841
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.0038,
+              "p95Ms": 0.0057,
+              "maxMs": 0.0085
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1166,
+              "p95Ms": 0.1499,
+              "maxMs": 0.5046
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.1122,
+              "p95Ms": 0.1319,
+              "maxMs": 0.3965
+            },
+            "presentation": {
+              "p50Ms": 5.1519,
+              "p95Ms": 6.6709,
+              "maxMs": 7.9268
+            },
+            "frame": {
+              "p50Ms": 5.3988,
+              "p95Ms": 6.8922,
+              "maxMs": 8.129
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.0037,
+              "p95Ms": 0.0055,
+              "maxMs": 0.0064
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.1115,
+              "p95Ms": 0.1339,
+              "maxMs": 0.7016
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 0.0991,
+              "p95Ms": 0.1145,
+              "maxMs": 0.164
+            },
+            "presentation": {
+              "p50Ms": 4.9206,
+              "p95Ms": 6.4924,
+              "maxMs": 7.7616
+            },
+            "frame": {
+              "p50Ms": 5.1404,
+              "p95Ms": 6.7387,
+              "maxMs": 7.9826
+            }
+          }
+        ],
+        "time": "2026-10-04T13:27:03.889Z",
+        "programaMedidoSha256": "dd03bdc04274bb527c8ec43d35a9e58e3053f2b0a14cb3a41ee2c61dc8574af4"
+      },
+      "sdl-offscreen-stress": {
+        "platform": "win32",
+        "cpu": "Intel(R) Core(TM) i5-14400F",
+        "renderer": "sdl",
+        "driver": "dummy",
+        "logical": [
+          320,
+          200
+        ],
+        "optimize": "O2",
+        "stress": true,
+        "warmupPerMap": 20,
+        "framesPerMap": 240,
+        "metadata": [],
+        "levels": [
+          {
+            "level": 0,
+            "simulation": {
+              "p50Ms": 0.0164,
+              "p95Ms": 0.0185,
+              "maxMs": 0.0467
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.394,
+              "p95Ms": 0.519,
+              "maxMs": 0.7902
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 1.054,
+              "p95Ms": 2.0126,
+              "maxMs": 2.223
+            },
+            "presentation": {
+              "p50Ms": 20.892,
+              "p95Ms": 58.0615,
+              "maxMs": 73.7362
+            },
+            "frame": {
+              "p50Ms": 22.292,
+              "p95Ms": 60.5709,
+              "maxMs": 76.5013
+            }
+          },
+          {
+            "level": 1,
+            "simulation": {
+              "p50Ms": 0.0163,
+              "p95Ms": 0.0181,
+              "maxMs": 0.0367
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.3937,
+              "p95Ms": 0.5276,
+              "maxMs": 0.8294
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 1.0558,
+              "p95Ms": 1.9006,
+              "maxMs": 2.2635
+            },
+            "presentation": {
+              "p50Ms": 21.0952,
+              "p95Ms": 56.9186,
+              "maxMs": 70.3574
+            },
+            "frame": {
+              "p50Ms": 22.4773,
+              "p95Ms": 59.5368,
+              "maxMs": 72.728
+            }
+          },
+          {
+            "level": 2,
+            "simulation": {
+              "p50Ms": 0.0163,
+              "p95Ms": 0.0177,
+              "maxMs": 0.0389
+            },
+            "projectionAndLists": {
+              "p50Ms": 0.3925,
+              "p95Ms": 0.513,
+              "maxMs": 0.6883
+            },
+            "transfer": {
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "drawing": {
+              "p50Ms": 1.0457,
+              "p95Ms": 1.9627,
+              "maxMs": 2.4041
+            },
+            "presentation": {
+              "p50Ms": 24.3234,
+              "p95Ms": 74.4262,
+              "maxMs": 93.8194
+            },
+            "frame": {
+              "p50Ms": 25.7812,
+              "p95Ms": 76.9475,
+              "maxMs": 96.3196
+            }
+          }
+        ],
+        "time": "2026-10-04T13:27:29.098Z",
+        "programaMedidoSha256": "be39a61511a53274f8a27bae4865bccb7974ac30fe9d318167e217c0e078358e"
+      }
+    }
+  },
+  "fontesNoFechamentoSha256": {
+    "jogos/fps-tom/src/desenho.tom": "b2a3b62346996d40b1ca7d90e7d7b05844a121ebda90cdb1d9381d1d7f8c6d1b",
+    "jogos/fps-tom/src/entrada-gpu.tom": "eb7aa5f42c8afd0fe821daba075cea82f8d3d16e6c9b42265e5bced57a1b00f5",
+    "jogos/fps-tom/src/entrada.tom": "9d03007e68e062481caaeb3a4121aeb5bfd8a50142cd758604d0a6ad806e3997",
+    "jogos/fps-tom/src/fase.tom": "89a190602ca3e586e7318ce27fc4a0d046714666628617fef09929489c24ff0f",
+    "jogos/fps-tom/src/fps-tom-gpu.tom": "ce47263caead13146cbced94074d0648b53d54f243444ea9783262c652600b46",
+    "jogos/fps-tom/src/fps-tom.tom": "be4d20a4c80290e01495ced3d373506aa881ec2694ccd71a3832c8586ba8b6f5",
+    "jogos/fps-tom/src/hud.tom": "3bfb527998a9ee225b97cb95246abd2335a8c8db4811b0d1d809880424755dd0",
+    "jogos/fps-tom/src/interpolacao.tom": "e752672db3a55405f9aa95d8372e9fa46d1d1e34578160912662d8ef3e9bbaeb",
+    "jogos/fps-tom/src/modelo.tom": "cd4b3b56f34ffb2c7df226267134dd48a2509dd82c14a4aa212beb58dbd5f1f8",
+    "jogos/fps-tom/src/painel.tom": "a17adae0b60b2e2fa9eab58a700992b001eb2e95b61318613af83302211fc5e6",
+    "jogos/fps-tom/src/portas.tom": "1d01844b9d8f4e5c7d0c9bcab9cb47ef41434dd351300526056d80748029a849",
+    "jogos/fps-tom/src/render-gpu.tom": "e4941630eef37c7902a77cbe89975f8017bdeace75199f7d17e759a628f23914",
+    "jogos/fps-tom/src/render.tom": "785e77646fd925c31bb82c8b1907d51c3a85dd89e07485f73ce3fce6a6f2781e",
+    "jogos/fps-tom/src/simulacao.tom": "3db285fdf65db96c359f7b71d11699efe32c53a3b220817fef3d1dc500c00453",
+    "jogos/fps-tom/scripts/benchmark.js": "6d4b7f9c239818482ea9379e19f859e0690608b1887540a4222ea56fa0e5d231",
+    "jogos/fps-tom/scripts/generate-assets.js": "e8ca8a64521a2d80b7ebd6496be30f35dcc7ede9aeab1dc04b00a9d18339d502",
+    "jogos/fps-tom/assets/atlas.png": "b7d10c822728aaacf7d67cec6b8f8fbf199f57375f4ece0e24fc45127e614fae",
+    "tom-lang/core/material-shaders.js": "e0ea1f71b8c1aa77b18fc69e85cf6b7c7991e37c50abeabf042fe3a2d1c1a576",
+    "tom-lang/core/gpu-material-builtins.js": "e62a4e5902eecc3ee5b148ab2ee56b4f499e26c3f79d1ee1d6576082d83c2e2b",
+    "tom-lang/runtime/stable/gpu_material.c": "65f4e4d2d01b9cef254ad20b10ef0f15e3d92de9bb0fd048e65524e59a27df23",
+    "tom-lang/runtime/stable/gpu_render.c": "a7d17d0030e3c539ceeaeef2bcfa44d53d70093af19873df2995c9c295c67262",
+    "tom-lang/runtime/stable/platform.c": "2826e4bb89a8fe4fd66ad982f17a390cf9d6b3c072bee26b266b58bc720862f9",
+    "tom-lang/runtime/stable/ui.c": "25b012f846d5617e53275e8851622477484528689f2af159c1f42df436c57b02",
+    "scripts/toolchain.json": "cf6db2a03651e46b7be40a020194ff8bd8d5049645bc1a7ecb98aef903d2eec3"
+  }
+}

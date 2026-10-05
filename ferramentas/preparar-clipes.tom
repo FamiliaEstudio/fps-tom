@@ -1,0 +1,158 @@
+// Executável offline: nenhuma execução de JavaScript, janela ou GPU.
+Importar[l'./clipe-quadros.tom']
+Importar[l'./clipe-binario.tom']
+Importar[l'./clipe-metadados.tom']
+DefRecursoxArgsyArgumentosCriar[262144]
+DefRecursoxPastayTextoCriar[l'',65536]
+DefRecursoxPrefixoyTextoCriar[l'',65536]
+DefRecursoxAudioCaminhoyTextoCriar[l'',65536]
+DefRecursoxOpcaoyTextoCriar[l'',65536]
+DefRecursoxValoryTextoCriar[l'',65536]
+DefVarBlxTemPastayFalso
+DefVarBlxTemPrefixoyFalso
+DefVarBlxTemAudioyFalso
+DefVarBlxTemTaxayFalso
+DefVarInSd64xTaxay12
+ArgumentosQuantidade[@Args]
+DefVarInUd64xNy@ULTIMO
+CompararIgualxyInUd64x@Ny0
+Sex@ULTIMO
+GerarTxtxl'Use --frames pasta --output prefixo [--audio arquivo.wav] [--fps 12].\n'
+Falhar[4]
+FimSe
+DefVarInUd64xIy0
+EnquantoxVerdadeiro
+CompararIgualxyInUd64x@Iy@N
+Sex@ULTIMO
+Interromper
+FimSe
+DefVarInUd64xProximoy(@I + 1)
+CompararMenorxyInUd64x@Proximoy@N
+Exigir[@ULTIMO]
+ArgumentosLer[@Args,@I,@Opcao]
+ArgumentosLer[@Args,@Proximo,@Valor]
+TextosIguais[@Opcao,l'--frames']
+Sex@ULTIMO
+NaoBlx@TemPasta
+Exigir[@ULTIMO]
+CopiarTxt[@Pasta,@Valor]
+SetVarBlxTemPastayVerdadeiro
+Senao
+TextosIguais[@Opcao,l'--output']
+Sex@ULTIMO
+NaoBlx@TemPrefixo
+Exigir[@ULTIMO]
+CopiarTxt[@Prefixo,@Valor]
+SetVarBlxTemPrefixoyVerdadeiro
+Senao
+TextosIguais[@Opcao,l'--audio']
+Sex@ULTIMO
+NaoBlx@TemAudio
+Exigir[@ULTIMO]
+CopiarTxt[@AudioCaminho,@Valor]
+SetVarBlxTemAudioyVerdadeiro
+Senao
+TextosIguais[@Opcao,l'--fps']
+Exigir[@ULTIMO]
+NaoBlx@TemTaxa
+Exigir[@ULTIMO]
+ChamarxFpsClipeNumero[@Valor]yTaxa
+SetVarBlxTemTaxayVerdadeiro
+FimSe
+FimSe
+FimSe
+SetVarInUd64xIy(@I + 2)
+FimEnquanto
+Exigir[@TemPasta]
+Exigir[@TemPrefixo]
+CompararMaiorIgualxyInSd64x@Taxay1
+Exigir[@ULTIMO]
+CompararMenorIgualxyInSd64x@Taxay30
+Exigir[@ULTIMO]
+DefVarInSd64xRestoy(48000 - 48000 / @Taxa * @Taxa)
+CompararIgualxyInSd64x@Restoy0
+Exigir[@ULTIMO]
+DefRecursoxListayDiretorioListar[@Pasta,4096,1048576]
+DefRecursoxOrdemyBufferInUd64Criar[240,240]
+ChamarxFpsClipeOrdenar[@Lista,@Ordem,(@Taxa * 8)]
+DefVarInSd64xQuadrosy@ULTIMO
+DefVarRegistro<FpsClipe3D>xClipeyPadrao
+SetVarInSd64xClipe.taxay@Taxa
+SetVarInSd64xClipe.quadrosy@Quadros
+SetVarInSd64xClipe.colunasy8
+CompararMenorxyInSd64x@Quadrosy8
+Sex@ULTIMO
+SetVarInSd64xClipe.colunasy@Quadros
+FimSe
+SetVarInSd64xClipe.linhasy((@Quadros + @Clipe.colunas - 1) / @Clipe.colunas)
+SetVarInSd64xClipe.duracaoAmostrasy(@Quadros * 48000 / @Taxa)
+SetVarBlxClipe.audioy@TemAudio
+DefRecursoxCaminhoyTextoCriar[l'',65536]
+DefRecursoxDadosyBufferBytesCriar[68157440,0]
+EscopoInixPrimeiro
+ChamarxFpsClipeCaminho[@Pasta,@Lista,@Ordem,0,@Caminho]
+ArquivoLerBytes[@Caminho,68157440,@Dados]
+ChamarxFpsClipePNGValidar[@Dados]
+DefRecursoxImagemyImagemDecodificarPNG[@Dados]
+ImagemLargura[@Imagem]
+InUd32ParaInSd64[@ULTIMO]yClipe.largura
+ImagemAltura[@Imagem]
+InUd32ParaInSd64[@ULTIMO]yClipe.altura
+EscopoFimxPrimeiro
+InSd64ParaInUd32[(@Clipe.largura * @Clipe.colunas)]
+DefVarInUd32xLarguraAtlasy@ULTIMO
+InSd64ParaInUd32[(@Clipe.altura * @Clipe.linhas)]
+DefVarInUd32xAlturaAtlasy@ULTIMO
+ChamarxFpsClipeValidar[@Clipe,@LarguraAtlas,@AlturaAtlas]
+DefRecursoxAtlasyImagemCriar[@LarguraAtlas,@AlturaAtlas]
+ParaxIndice[0,@Quadros,1]
+ChamarxFpsClipeCaminho[@Pasta,@Lista,@Ordem,@Indice,@Caminho]
+ArquivoLerBytes[@Caminho,68157440,@Dados]
+ChamarxFpsClipePNGValidar[@Dados]
+DefRecursoxImagemyImagemDecodificarPNG[@Dados]
+ImagemLargura[@Imagem]
+DefVarInUd32xLarguray@ULTIMO
+InUd32ParaInSd64[@Largura]
+CompararIgualxyInSd64x@ULTIMOy@Clipe.largura
+Exigir[@ULTIMO]
+ImagemAltura[@Imagem]
+DefVarInUd32xAlturay@ULTIMO
+InUd32ParaInSd64[@Altura]
+CompararIgualxyInSd64x@ULTIMOy@Clipe.altura
+Exigir[@ULTIMO]
+DefVarInSd64xLinhay(@Indice / @Clipe.colunas)
+InSd64ParaInUd32[((@Indice - @Linha * @Clipe.colunas) * @Clipe.largura)]
+DefVarInUd32xXy@ULTIMO
+InSd64ParaInUd32[(@Linha * @Clipe.altura)]
+DefVarInUd32xYy@ULTIMO
+ImagemRegiaoCopiar[@Imagem,0,0,@Largura,@Altura,@Atlas,@X,@Y]
+FimPara
+DefRecursoxAudioBytesyBufferBytesCriar[68157440,0]
+Sex@TemAudio
+ArquivoLerBytes[@AudioCaminho,68157440,@AudioBytes]
+ChamarxFpsClipeWAVAmostras[@AudioBytes]
+CompararIgualxyInSd64x@ULTIMOy@Clipe.duracaoAmostras
+Exigir[@ULTIMO]
+FimSe
+DefRecursoxJSONyTextoCriar[l'',32768]
+DefRecursoxTomyTextoCriar[l'',32768]
+ChamarxFpsClipeJSON[@Clipe,@JSON]
+ChamarxFpsClipeTom[@Clipe,@Tom]
+// Todos os inputs foram validados. Cada arquivo usa publicação individual.
+ChamarxFpsClipePastaDestino[@Prefixo,@Caminho]
+ArquivoDiretorioCriar[@Caminho]
+CopiarTxt[@Caminho,@Prefixo]
+AnexarTxt[@Caminho,l'.png']
+ImagemSalvarPNG[@Atlas,@Caminho]
+CopiarTxt[@Caminho,@Prefixo]
+AnexarTxt[@Caminho,l'.json']
+ArquivoGravarTexto[@Caminho,@JSON]
+CopiarTxt[@Caminho,@Prefixo]
+AnexarTxt[@Caminho,l'.tom']
+ArquivoGravarTexto[@Caminho,@Tom]
+Sex@TemAudio
+CopiarTxt[@Caminho,@Prefixo]
+AnexarTxt[@Caminho,l'.wav']
+ArquivoGravarBytes[@Caminho,@AudioBytes]
+FimSe
+GerarTxtxl'Clipe preparado.\n'

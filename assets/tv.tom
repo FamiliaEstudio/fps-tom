@@ -1,0 +1,13 @@
+Importar[l'../src/clipe3d.tom']
+DefFuncaoxFpsClipePreparado[]yRegistro<FpsClipe3D>
+DefVarRegistro<FpsClipe3D>xRyPadrao
+SetVarInSd64xR.larguray128
+SetVarInSd64xR.alturay96
+SetVarInSd64xR.taxay12
+SetVarInSd64xR.quadrosy96
+SetVarInSd64xR.colunasy8
+SetVarInSd64xR.linhasy12
+SetVarInSd64xR.duracaoAmostrasy384000
+SetVarBlxR.audioyVerdadeiro
+Retornarx@R
+FimFuncao

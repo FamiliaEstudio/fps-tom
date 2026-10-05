@@ -1,0 +1,15 @@
+Importar[l'tom/gpu2d']
+Importar[l'./desenho.tom']
+
+// Fragmento puro compartilhado com CPU; o HUD e composto depois deste efeito.
+DefFuncaoxFpsEfeito[Vec4<Fl32>xPixel,Vec2<Fl32>xUV,BlxAtivo,Fl32xDano]yVec4<Fl32>
+ChamarxGPUSpriteVinhetaTinta[@Pixel,@UV,@Ativo,0.5,[0.75,0.0,0.0],@Dano]
+Retornarx@ULTIMO
+FimFuncao
+
+DefFuncaoxFpsEnviarLista[RefBufferGPUVec4Fl32xDestino,BufferVec4Fl32xOrigem]yVazio
+BufferVec4Fl32Comprimento[@Origem]
+BufferGPUVec4Fl32Redimensionar[@Destino,@ULTIMO]
+DefRecursoxUploadyBufferGPUVec4Fl32Enviar[@Destino,@Origem]
+GPUTrabalhoAguardar[@Upload]
+FimFuncao

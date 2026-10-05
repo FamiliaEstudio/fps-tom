@@ -3,7 +3,7 @@ const test=require('node:test'),assert=require('node:assert/strict'),fs=require(
 const {run,root,game,eq}=require('./helpers');
 for(const optimize of ['-O0','-O2'])test(`FPS application: play, pause, focus, restart, rendering and resource cleanup ${optimize}`,()=>{
   const source=game();
-  const r=run(source,optimize,{file:path.join(root,'src/fps-tom.tom'),events:'key 13\nwait 20\ndown 119 26 0 0\nwait 40\nrelative 480 300 20 -2\nmouse 480 300\nwait 40\nrelease 480 300\nup 119 26\nkey 27\nfocuslost\nfocusgain\nkey 13\nkey 1073741882\nkey 1073741883\nkey 114\nquit\n'});
+  const r=run(source,optimize,{file:path.join(root,'src/fps-tom.tom'),maximumLiveObjects:192,buildTimeout:120000,events:'key 13\nwait 100\ndown 119 26 0 0\nwait 100\nrelative 480 300 20 -2\nmouse 480 300\nwait 100\nrelease 480 300\nup 119 26\nkey 32\nkey 99\nkey 49\nkey 50\nkey 9\nkey 1073741899\nkey 9\nkey 27\nfocuslost\nfocusgain\nkey 13\nkey 1073741882\nkey 1073741883\nkey 114\nquit\n'});
   assert.ok((r.trace.match(/FRAME/g)||[]).length>=5,r.trace);
   assert.doesNotMatch(r.stdout,/Erro|Falha|RESOURCE/);
 });
@@ -18,7 +18,7 @@ DefVarRegistro<FpsEstado>xEstadoyPadrao
 DefVarRegistro<FpsControle>xControleyPadrao
 DefVarRegistro<FpsRelogio>xRelogioyPadrao
 DefArraySoAxMapaxFpsCelulax1024
-DefArraySoAxEntidadesxFpsEntidadex32
+DefArraySoAxEntidadesxFpsEntidadex64
 ChamarxFpsIniciar[@Estado,@Mapa,@Entidades]
 SetVarBlxControle.focoyVerdadeiro
 EventoAguardar[@J,@E]
@@ -61,9 +61,9 @@ Importar[l'../src/render.tom']
 DefRecursoxJyJanelaCriar[l'Oclusao',320,200]
 DefRecursoxAyVisualImagemCarregar[@J,l'atlas.png']
 DefArraySoAxMapaxFpsCelulax1024
-DefArraySoAxEntidadesxFpsEntidadex32
+DefArraySoAxEntidadesxFpsEntidadex64
 DefArraySoAxColunasxFpsColunax320
-DefArraySoAxSpritesxFpsSpritex32
+DefArraySoAxSpritesxFpsSpritex64
 DefVarRegistro<FpsEstado>xEstadoyPadrao
 SetVarFl64xEstado.pxy2.5
 SetVarFl64xEstado.pyy2.5

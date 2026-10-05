@@ -1,0 +1,23 @@
+// Referencia congelada antes da extracao GA004.3.
+DefFuncaoxReferenciaFps3DBillboardCamera[Vec3<Fl64>xP,Fl64xW,Fl64xH,InSd32xTile,Vec4<Fl32>xCor,Registro<FpsCamera3D>xCamera,RefBufferVec4Fl32xLista,RefBufferVec4Fl32xSA,RefBufferVec4Fl32xSB]yVazio
+DefVarFl64xRXy(-@Camera.sy*@W*0.5)
+DefVarFl64xRYy(@Camera.cy*@W*0.5)
+DefVarVec3<Fl64>xAy[(@P.x-@RX),(@P.y-@RY),@P.z]
+DefVarVec3<Fl64>xBy[(@P.x+@RX),(@P.y+@RY),@P.z]
+DefVarVec3<Fl64>xCy[(@P.x+@RX),(@P.y+@RY),(@P.z+@H)]
+DefVarVec3<Fl64>xDy[(@P.x-@RX),(@P.y-@RY),(@P.z+@H)]
+ChamarxFps3DUV[@Tile,0.0,1.0]
+DefVarVec4<Fl32>xUAy@ULTIMO
+ChamarxFps3DUV[@Tile,1.0,1.0]
+DefVarVec4<Fl32>xUBy@ULTIMO
+ChamarxFps3DUV[@Tile,1.0,0.0]
+DefVarVec4<Fl32>xUCy@ULTIMO
+ChamarxFps3DUV[@Tile,0.0,0.0]
+DefVarVec4<Fl32>xUDy@ULTIMO
+ChamarxFps3DEmitirCamera[@A,@B,@C,@UA,@UB,@UC,@Cor,@Cor,@Cor,@Camera,@Lista,@SA,@SB]
+ChamarxFps3DEmitirCamera[@A,@C,@D,@UA,@UC,@UD,@Cor,@Cor,@Cor,@Camera,@Lista,@SA,@SB]
+FimFuncao
+
+DefFuncaoxReferenciaFps3DEfeitoPosicao[SOA<FpsEfeito>xEfeitos,InSd64xI,Fl64xAlpha]yVec3<Fl64>
+Retornarx[(Efeitos@@I.anteriorX+(Efeitos@@I.px-Efeitos@@I.anteriorX)*@Alpha),(Efeitos@@I.anteriorY+(Efeitos@@I.py-Efeitos@@I.anteriorY)*@Alpha),(Efeitos@@I.anteriorZ+(Efeitos@@I.pz-Efeitos@@I.anteriorZ)*@Alpha)]
+FimFuncao

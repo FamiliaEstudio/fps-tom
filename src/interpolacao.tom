@@ -1,0 +1,33 @@
+Importar[l'./modelo.tom']
+
+DefFuncaoxFpsPrepararQuadro[SOA<FpsCelula>xMapa,SOA<FpsEntidade>xEntidades,Registro<FpsEstado>xEstado,Fl32xAlpha,RefSOA<FpsCelula>xMapaVisual,RefSOA<FpsEntidade>xEntidadesVisual]yRegistro<FpsEstado>
+Fl32ParaFl64[@Alpha]
+DefVarFl64xAy@ULTIMO
+DefVarRegistro<FpsEstado>xVisualy@Estado
+SetVarFl64xVisual.pxy(@Estado.anteriorX + (@Estado.px - @Estado.anteriorX) * @A)
+SetVarFl64xVisual.pyy(@Estado.anteriorY + (@Estado.py - @Estado.anteriorY) * @A)
+DefVarFl64xDeltaYy(@Estado.angulo - @Estado.anteriorAngulo)
+CompararMaiorxyFl64x@DeltaYy@FPS_PI
+Sex@ULTIMO
+SetVarFl64xDeltaYy(@DeltaY - @FPS_VOLTA)
+FimSe
+CompararMenorxyFl64x@DeltaYy-3.141592653589793
+Sex@ULTIMO
+SetVarFl64xDeltaYy(@DeltaY + @FPS_VOLTA)
+FimSe
+SetVarFl64xVisual.anguloy(@Estado.anteriorAngulo + @DeltaY * @A)
+ParaIndiceSOAxI[@Mapa]
+SetVarInSd32xMapaVisual@@I.materialyMapa@@I.material
+SetVarBlxMapaVisual@@I.portayMapa@@I.porta
+SetVarInSd32xMapaVisual@@I.eixoyMapa@@I.eixo
+SetVarInSd32xMapaVisual@@I.chaveyMapa@@I.chave
+SetVarFl64xMapaVisual@@I.aberturay(Mapa@@I.anterior + (Mapa@@I.abertura - Mapa@@I.anterior) * @A)
+FimPara
+ParaIndiceSOAxI[@Entidades]
+SetVarBlxEntidadesVisual@@I.ativayEntidades@@I.ativa
+SetVarInSd32xEntidadesVisual@@I.tipoyEntidades@@I.tipo
+SetVarFl64xEntidadesVisual@@I.pxy(Entidades@@I.anteriorX + (Entidades@@I.px - Entidades@@I.anteriorX) * @A)
+SetVarFl64xEntidadesVisual@@I.pyy(Entidades@@I.anteriorY + (Entidades@@I.py - Entidades@@I.anteriorY) * @A)
+FimPara
+Retornarx@Visual
+FimFuncao

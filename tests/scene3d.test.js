@@ -1,0 +1,105 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {run}=require('./helpers');
+const eq=(type,a,b)=>`CompararIgualxy${type}x${a}y${b}\nExigir[@ULTIMO]`;
+for(const optimize of ['-O0','-O2'])test(`preparacao 3D: camera Z-up e oito luzes por prioridade e distancia ${optimize}`,()=>{
+ const source=`Importar[l'../src/cena3d.tom']
+Importar[l'../src/hud3d.tom']
+DefVarRegistro<FpsEstado>xEyPadrao
+SetVarFl64xE.pxy2.0
+SetVarFl64xE.pyy3.0
+SetVarFl64xE.pzy1.0
+SetVarFl64xE.alturaCorpoy1.0
+SetVarFl64xE.anguloy0.0
+SetVarFl64xE.inclinacaoy0.0
+ChamarxFps3DProjetarPonto[[4.0,4.0,1.85],@E]
+DefVarVec4<Fl32>xPy@ULTIMO
+${eq('Fl32','@P.w','2.0')}
+${eq('Fl32','@P.y','0.0')}
+CompararMaiorxyFl32x@P.xy0.95
+Exigir[@ULTIMO]
+CompararMenorxyFl32x@P.xy0.96
+Exigir[@ULTIMO]
+ChamarxFps3DClipVisivel[[-2.0,0.0,0.5,1.0],[-3.0,0.2,0.5,1.0],[-2.0,-0.2,0.5,1.0]]
+${eq('Bl','@ULTIMO','Falso')}
+ChamarxFps3DClipVisivel[[-2.0,0.0,0.5,1.0],[0.0,0.2,0.5,1.0],[0.0,-0.2,0.5,1.0]]
+${eq('Bl','@ULTIMO','Verdadeiro')}
+DefArraySoAxLuzesxLuz3Dx32
+DefVarRegistro<Luzes3DSelecao>xListayPadrao
+ChamarxFps3DLuzesSelecionar[[0.0,0.0,0.0],0.0,@Luzes]yLista
+${eq('InSd32','@Lista.quantidade','0')}
+ParaxI[0,16,1]
+SetVarBlxLuzes@@I.ativayVerdadeiro
+SetVarInSd32xLuzes@@I.prioridadey1
+SetVarFl64xLuzes@@I.raioy100.0
+InSd64ParaFl64[@I]
+SetVarFl64xLuzes@@I.pxy@ULTIMO
+FimPara
+SetVarInSd32xLuzes@12.prioridadey10
+SetVarInSd32xLuzes@15.prioridadey10
+SetVarBlxLuzes@31.ativayVerdadeiro
+SetVarInSd32xLuzes@31.prioridadey100
+SetVarFl64xLuzes@31.raioy1.0
+SetVarFl64xLuzes@31.pxy1000.0
+ChamarxFps3DLuzesSelecionar[[0.0,0.0,0.0],0.0,@Luzes]yLista
+${eq('InSd32','@Lista.quantidade','8')}
+${eq('InSd64','@Lista.id0','12')}
+${eq('InSd64','@Lista.id1','15')}
+${eq('InSd64','@Lista.id2','0')}
+${eq('InSd64','@Lista.id7','5')}
+SetVarFl64xLuzes@15.pxy12.0
+ChamarxFps3DLuzesSelecionar[[0.0,0.0,0.0],0.0,@Luzes]yLista
+${eq('InSd64','@Lista.id0','12')}
+${eq('InSd64','@Lista.id1','15')}
+// A margem considera vertices distantes do centro da regiao visivel.
+SetVarFl64xLuzes@31.pxy2.0
+ChamarxFps3DLuzesSelecionar[[0.0,0.0,0.0],2.0,@Luzes]yLista
+${eq('InSd64','@Lista.id0','31')}
+ChamarxFps3DHudPontoVisivel[[0.0,0.0,-0.1,1.0]]
+${eq('Bl','@ULTIMO','Falso')}
+ChamarxFps3DHudPontoVisivel[[0.0,0.0,1.1,1.0]]
+${eq('Bl','@ULTIMO','Falso')}
+ChamarxFps3DHudPontoVisivel[[0.0,0.0,0.0,0.0]]
+${eq('Bl','@ULTIMO','Falso')}
+ChamarxFps3DHudPontoVisivel[[0.5,0.5,0.5,1.0]]
+${eq('Bl','@ULTIMO','Verdadeiro')}
+// O mapa so seleciona andares que o jogador ja descobriu.
+DefArraySoAxRegioesxFpsRegiaox4
+DefVarRegistro<Fps3DMundo>xMundoyPadrao
+SetVarInSd64xMundo.regioesy4
+SetVarInSd32xRegioes@0.andary0
+SetVarInSd32xRegioes@1.andary1
+SetVarBlxRegioes@1.descobertayVerdadeiro
+SetVarInSd32xRegioes@2.andary3
+SetVarBlxRegioes@2.descobertayVerdadeiro
+SetVarInSd32xRegioes@3.andary99
+ChamarxFps3DAndarSelecionar[@Regioes,@Mundo,99,1]
+${eq('InSd32','@ULTIMO','3')}
+ChamarxFps3DAndarSelecionar[@Regioes,@Mundo,0,1]
+${eq('InSd32','@ULTIMO','1')}
+SetVarBlxRegioes@1.descobertayFalso
+SetVarBlxRegioes@2.descobertayFalso
+ChamarxFps3DAndarSelecionar[@Regioes,@Mundo,0,2]
+${eq('InSd32','@ULTIMO','2')}
+// Tremor modifica apenas a copia visual; os dois controles o desativam.
+SetVarInSd32xE.danoTelay20
+SetVarInSd64xE.passosy7
+SetVarFl64xE.anguloy0.45
+SetVarFl64xE.inclinacaoy1.483529864
+DefVarRegistro<FpsEstado>xVisualyPadrao
+ChamarxFps3DEfeitosVisuais[@E,0.5,Falso,Verdadeiro]yVisual
+${eq('Fl64','@Visual.angulo','0.45')}
+${eq('Fl64','@Visual.inclinacao','1.483529864')}
+ChamarxFps3DEfeitosVisuais[@E,0.5,Verdadeiro,Falso]yVisual
+${eq('Fl64','@Visual.angulo','0.45')}
+ChamarxFps3DEfeitosVisuais[@E,0.5,Verdadeiro,Verdadeiro]yVisual
+CompararDiferentexyFl64x@Visual.anguloy@E.angulo
+Exigir[@ULTIMO]
+CompararMenorIgualxyFl64x@Visual.inclinacaoy1.483529864
+Exigir[@ULTIMO]
+${eq('Fl64','@E.angulo','0.45')}
+${eq('Fl64','@E.inclinacao','1.483529864')}
+${eq('InSd32','@E.danoTela','20')}
+GerarTxtxl'cena3d-ok'`;
+ assert.equal(run(source,optimize,{buildTimeout:120000}).stdout,'cena3d-ok');
+});

@@ -1,0 +1,120 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {run,eq}=require('./helpers'),{gpuReady}=require('../../../scripts/setup-gpu');
+for(const optimize of ['-O0','-O2'])test(`Packed frame preserves offsets, empty lists and shrinking capacity ${optimize}`,()=>{
+  const source="Importar[l'../src/lotes3d.tom']\n"+`DefRecursoxAyBufferVec4Fl32Criar[18,18]
+DefRecursoxByBufferVec4Fl32Criar[9,9]
+DefRecursoxCyBufferVec4Fl32Criar[9,0]
+DefRecursoxDyBufferVec4Fl32Criar[18,18]
+DefRecursoxHyBufferVec4Fl32Criar[3,3]
+DefRecursoxRyBufferVec4Fl32Criar[57,0]
+BufferVec4Fl32Gravar[@A,17,[1.0,2.0,3.0,4.0]]
+BufferVec4Fl32Gravar[@B,0,[5.0,6.0,7.0,8.0]]
+BufferVec4Fl32Gravar[@D,17,[9.0,10.0,11.0,12.0]]
+BufferVec4Fl32Gravar[@H,0,[13.0,14.0,15.0,16.0]]
+ChamarxFps3DLotesPreparar[@A,@B,@C,@D,@H,@R]
+DefVarRegistro<Fps3DLotes>xLy@ULTIMO
+${eq('@L.tv',18,'InUd64')}${eq('@L.mascara',27,'InUd64')}${eq('@L.mistura',27,'InUd64')}${eq('@L.hud',45,'InUd64')}${eq('@L.total',48,'InUd64')}
+BufferVec4Fl32Ler[@R,17]
+DefVarVec4<Fl32>xVy@ULTIMO
+${eq('@V.x',1.0,'Fl32')}
+BufferVec4Fl32Ler[@R,@L.tv]yV
+${eq('@V.x',5.0,'Fl32')}
+BufferVec4Fl32Ler[@R,44]yV
+${eq('@V.x',9.0,'Fl32')}
+BufferVec4Fl32Ler[@R,@L.hud]yV
+${eq('@V.x',13.0,'Fl32')}
+BufferVec4Fl32Redimensionar[@A,0]
+BufferVec4Fl32Redimensionar[@B,0]
+BufferVec4Fl32Redimensionar[@D,0]
+ChamarxFps3DLotesPreparar[@A,@B,@C,@D,@H,@R]yL
+${eq('@L.hud',0,'InUd64')}${eq('@L.total',3,'InUd64')}
+BufferVec4Fl32Comprimento[@R]
+${eq('@ULTIMO',3,'InUd64')}
+BufferVec4Fl32Ler[@R,0]yV
+${eq('@V.x',13.0,'Fl32')}
+GerarTxtxl'lotes'
+`;
+  assert.equal(run(source,optimize).stdout,'lotes');
+});
+const skip=!gpuReady()&&'Toolchain GPU opcional nao preparada.';
+for(const optimize of ['-O0','-O2'])test(`One GPU upload serves 3D geometry and HUD views without stale pixels ${optimize}`,{skip},()=>{
+  const source="Importar[l'../src/lotes3d.tom']\nImportar[l'tom/gpu2d']\nImportar[l'tom/perfilgpu']\n"+`DefRecursoxGyGPUCriar[Falso]
+DefRecursoxTyGPUAlvoCriar[@G,1,1]
+DefRecursoxPixelyBufferInUd32Criar[1,1]
+BufferInUd32Gravar[@Pixel,0,4294967295]
+EscopoInixTextura
+DefRecursoxEyGPUAlvoEnviar[@T,@Pixel]
+GPUTrabalhoAguardar[@E]
+EscopoFimxTextura
+DefRecursoxMyMaterialGPU3DxGPUSpriteOriginal[@G,@T,0,Falso,[0.0,0.0,1.0,1.0]]
+DefRecursoxMHyMaterialGPUxGPUSpriteOriginal[@G,@T,0,Falso,[0.0,0.0,1.0,1.0]]
+DefRecursoxCenayGPUAlvo3DCriar[@G,4,4]
+DefRecursoxAyBufferVec4Fl32Criar[18,18]
+DefRecursoxVazioyBufferVec4Fl32Criar[0,0]
+DefRecursoxHyBufferVec4Fl32Criar[3,3]
+DefRecursoxRyBufferVec4Fl32Criar[21,0]
+DefRecursoxDadosyBufferGPUVec4Fl32Criar[@G,21,0]
+DefRecursoxSaidayBufferInUd32Criar[16,16]
+BufferVec4Fl32Gravar[@A,0,[-1.0,-1.0,0.5,1.0]]
+BufferVec4Fl32Gravar[@A,3,[1.0,-1.0,0.5,1.0]]
+BufferVec4Fl32Gravar[@A,6,[1.0,1.0,0.5,1.0]]
+BufferVec4Fl32Gravar[@A,9,[-1.0,-1.0,0.5,1.0]]
+BufferVec4Fl32Gravar[@A,12,[1.0,1.0,0.5,1.0]]
+BufferVec4Fl32Gravar[@A,15,[-1.0,1.0,0.5,1.0]]
+ParaxI[0,18,3]
+InSd64ParaInUd64[(@I+1)]
+BufferVec4Fl32Gravar[@A,@ULTIMO,[0.5,0.5,0.0,0.0]]
+InSd64ParaInUd64[(@I+2)]
+BufferVec4Fl32Gravar[@A,@ULTIMO,[1.0,0.0,0.0,1.0]]
+FimPara
+BufferVec4Fl32Gravar[@H,0,[0.5,0.5,1.0,1.0]]
+BufferVec4Fl32Gravar[@H,1,[0.0,0.0,1.0,1.0]]
+BufferVec4Fl32Gravar[@H,2,[0.0,1.0,0.0,1.0]]
+DefVarRegistro<PerfilGPU>xAntesyPadrao
+DefVarRegistro<PerfilGPU>xDepoisyPadrao
+ParaxQuadro[0,2,1]
+EscopoInixQuadroGPU
+CompararIgualxyInSd64x@Quadroy1
+Sex@ULTIMO
+BufferVec4Fl32Redimensionar[@H,0]
+FimSe
+ChamarxFps3DLotesPreparar[@A,@Vazio,@Vazio,@Vazio,@H,@R]
+DefVarRegistro<Fps3DLotes>xLy@ULTIMO
+BufferGPUVec4Fl32Redimensionar[@Dados,@L.total]
+GPUObterPerfil[@G,@Antes]
+DefRecursoxUyBufferGPUVec4Fl32Enviar[@Dados,@R]
+GPUTrabalhoAguardar[@U]
+GPUObterPerfil[@G,@Depois]
+DefVarInUd64xEnviadosy(@Depois.enviadosBytes-@Antes.enviadosBytes)
+DefVarInUd64xBytesEsperadosy(@L.total*16)
+${eq('@Enviados','@BytesEsperados','InUd64')}
+DefRecursoxClear yGPUAlvo3DLimpar[@Cena,[0.0,0.0,0.0,1.0],1.0]
+GPUTrabalhoAguardar[@Clear]
+DefRecursoxVistyBufferGPUVec4Fl32Vista[@Dados,@L.opaco,@L.nOpaco]
+DefRecursoxDyGPUDesenharTriangulos[@Cena,@Vist,@M]
+GPUTrabalhoAguardar[@D]
+CompararMaiorxyInUd64x@L.nHudy0
+Sex@ULTIMO
+DefRecursoxHVistyBufferGPUVec4Fl32Vista[@Dados,@L.hud,@L.nHud]
+DefRecursoxHDyGPUDesenharSpritesAtlas[@Cena,@HVist,@MH]
+GPUTrabalhoAguardar[@HD]
+FimSe
+DefRecursoxRead yGPUAlvoReceber[@Cena,@Saida]
+GPUTrabalhoAguardar[@Read]
+BufferInUd32Ler[@Saida,0]
+DefVarInUd32xCorPixely@ULTIMO
+DefVarInUd32xEsperadoy4278190335
+CompararIgualxyInSd64x@Quadroy0
+Sex@ULTIMO
+SetVarInUd32xEsperadoy4278255360
+FimSe
+${eq('@CorPixel','@Esperado','InUd32')}
+BufferInUd32Ler[@Saida,15]
+${eq('@ULTIMO',4278190335,'InUd32')}
+EscopoFimxQuadroGPU
+FimPara
+GerarTxtxl'lotes-gpu'
+`.replace('xClear y','xCleary').replace('xRead y','xReady');
+  assert.equal(run(source,optimize,{environment:{SDL_VIDEODRIVER:'offscreen'},maximumLiveObjects:96,buildTimeout:120000}).stdout,'lotes-gpu');
+});

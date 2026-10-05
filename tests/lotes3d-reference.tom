@@ -1,0 +1,36 @@
+// Referencia congelada antes da extracao GA004.5.
+// Listas comuns mantem a ordem; o adaptador GPU envia um unico buffer por quadro.
+DefRegistroxReferenciaFps3DLotes
+PropInUd64xopaco
+PropInUd64xtv
+PropInUd64xmascara
+PropInUd64xmistura
+PropInUd64xhud
+PropInUd64xnOpaco
+PropInUd64xnTV
+PropInUd64xnMascara
+PropInUd64xnMistura
+PropInUd64xnHud
+PropInUd64xtotal
+FimDef
+
+DefFuncaoxReferenciaFps3DLotesPreparar[BufferVec4Fl32xOpaco,BufferVec4Fl32xTV,BufferVec4Fl32xMascara,BufferVec4Fl32xMistura,BufferVec4Fl32xHud,RefBufferVec4Fl32xDestino]yRegistro<ReferenciaFps3DLotes>
+DefVarRegistro<ReferenciaFps3DLotes>xRyPadrao
+BufferVec4Fl32Comprimento[@Opaco]yR.nOpaco
+BufferVec4Fl32Comprimento[@TV]yR.nTV
+BufferVec4Fl32Comprimento[@Mascara]yR.nMascara
+BufferVec4Fl32Comprimento[@Mistura]yR.nMistura
+BufferVec4Fl32Comprimento[@Hud]yR.nHud
+SetVarInUd64xR.tvy@R.nOpaco
+SetVarInUd64xR.mascaray(@R.tv+@R.nTV)
+SetVarInUd64xR.misturay(@R.mascara+@R.nMascara)
+SetVarInUd64xR.hudy(@R.mistura+@R.nMistura)
+SetVarInUd64xR.totaly(@R.hud+@R.nHud)
+BufferVec4Fl32Redimensionar[@Destino,@R.total]
+BufferVec4Fl32Copiar[@Opaco,0,@Destino,@R.opaco,@R.nOpaco]
+BufferVec4Fl32Copiar[@TV,0,@Destino,@R.tv,@R.nTV]
+BufferVec4Fl32Copiar[@Mascara,0,@Destino,@R.mascara,@R.nMascara]
+BufferVec4Fl32Copiar[@Mistura,0,@Destino,@R.mistura,@R.nMistura]
+BufferVec4Fl32Copiar[@Hud,0,@Destino,@R.hud,@R.nHud]
+Retornarx@R
+FimFuncao

@@ -1,0 +1,123 @@
+Importar[l'./desenho.tom']
+
+DefFuncaoxFpsTextoLista[RefBufferVec4Fl32xLista,RefRegistro<FpsLista>xL,TxtxTexto,Fl64xX,Fl64xY,Fl64xEscala,Vec4<Fl32>xCor]yVazio
+DefStkFB256CxCopiayl''
+CopiarTxt[@Copia,@Texto]
+ComprimentoTxt[@Copia]
+InUd64ParaInSd64[@ULTIMO]
+DefVarInSd64xFimy@ULTIMO
+ParaxI[0,@Fim,1]
+InSd64ParaInUd64[@I]
+CodigoCaractereTxt[@Texto,@ULTIMO]
+DefVarInSd32xTiley@ULTIMO
+CompararMenorxyInSd32x@Tiley32
+DefVarBlxInvalidoy@ULTIMO
+CompararMaiorxyInSd32x@Tiley126
+OuxyBlx@Invalidoy@ULTIMO
+Sex@ULTIMO
+SetVarInSd32xTiley63
+FimSe
+InSd64ParaFl64[@I]
+DefVarFl64xPXy(@X + @ULTIMO * 6.0 * @Escala)
+ChamarxFpsQuad[@Lista,@L,@Tile,@PX,@Y,(6.0 * @Escala),(8.0 * @Escala),0.0,0.0,1.0,1.0,@Cor]
+FimPara
+FimFuncao
+
+DefFuncaoxFpsNumeroLista[RefBufferVec4Fl32xLista,RefRegistro<FpsLista>xL,InSd32xNumero,Fl64xX,Fl64xY]yVazio
+DefStkFB32CxTextoyl''
+InSd32ParaInSd64[@Numero]
+InSd64ParaTexto[@ULTIMO,@Texto]
+ChamarxFpsTextoLista[@Lista,@L,@Texto,@X,@Y,1.0,[1.0,0.85,0.5,1.0]]
+FimFuncao
+
+DefFuncaoxFpsHudLista[RefBufferVec4Fl32xLista,SOA<FpsCelula>xMapa,Registro<FpsEstado>xEstado,BlxMedir,InSd64xCalculoNs,InSd64xDesenhoNs]yVazio
+ChamarxFpsHudListaBase[@Lista,@Mapa,@Estado,@Medir,@CalculoNs,@DesenhoNs,Verdadeiro]
+FimFuncao
+
+DefFuncaoxFpsHudListaBase[RefBufferVec4Fl32xLista,SOA<FpsCelula>xMapa,Registro<FpsEstado>xEstado,BlxMedir,InSd64xCalculoNs,InSd64xDesenhoNs,BlxInteracao]yVazio
+DefVarRegistro<FpsLista>xLyPadrao
+ChamarxFpsListaAbrir[@Lista,@L]
+ChamarxFpsQuad[@Lista,@L,14,0.0,176.0,320.0,24.0,0.0,0.0,1.0,1.0,[0.04,0.06,0.07,1.0]]
+ChamarxFpsTextoLista[@Lista,@L,l'VIDA    CARGAS    ALVOS    SETOR',5.0,180.0,1.0,[0.75,0.8,0.8,1.0]]
+ChamarxFpsNumeroLista[@Lista,@L,@Estado.vida,5.0,190.0]
+ChamarxFpsNumeroLista[@Lista,@L,@Estado.municao,53.0,190.0]
+ChamarxFpsNumeroLista[@Lista,@L,(@Estado.totalInimigos - @Estado.abatidos),107.0,190.0]
+ChamarxFpsNumeroLista[@Lista,@L,(@Estado.nivel + 1),161.0,190.0]
+Sex@Estado.chaveAzul
+ChamarxFpsQuad[@Lista,@L,11,216.0,179.0,18.0,18.0,0.0,0.0,1.0,1.0,[1.0,1.0,1.0,1.0]]
+FimSe
+Sex@Estado.chaveVermelha
+ChamarxFpsQuad[@Lista,@L,12,240.0,179.0,18.0,18.0,0.0,0.0,1.0,1.0,[1.0,1.0,1.0,1.0]]
+FimSe
+CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.Jogando
+Sex@ULTIMO
+Sex@Interacao
+ChamarxFpsPortaAlvo[@Mapa,@Estado]
+DefVarInSd64xPortay@ULTIMO
+CompararMaiorIgualxyInSd64x@Portay0
+Sex@ULTIMO
+ChamarxFpsQuad[@Lista,@L,14,74.0,157.0,172.0,14.0,0.0,0.0,1.0,1.0,[0.02,0.03,0.04,1.0]]
+ChamarxFpsTemChave[@Estado,Mapa@@Porta.chave]
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'E  ABRIR / FECHAR',104.0,160.0,1.0,[1.0,1.0,0.7,1.0]]
+Senao
+CompararIgualxyInSd32xMapa@@Porta.chavey1
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'PRECISA DA CHAVE AZUL',92.0,160.0,1.0,[0.4,0.8,1.0,1.0]]
+Senao
+ChamarxFpsTextoLista[@Lista,@L,l'PRECISA DA CHAVE VERMELHA',80.0,160.0,1.0,[1.0,0.4,0.3,1.0]]
+FimSe
+FimSe
+FimSe
+FimSe
+Senao
+ChamarxFpsQuad[@Lista,@L,14,16.0,32.0,288.0,116.0,0.0,0.0,1.0,1.0,[0.02,0.03,0.04,0.9]]
+ChamarxFpsTextoLista[@Lista,@L,l'BASTIAO',118.0,41.0,2.0,[0.9,0.8,0.5,1.0]]
+CompararIgualxyInSd32x@Estado.nively0
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'SETOR 01 - BASTIAO',103.0,62.0,1.0,[0.7,0.9,0.8,1.0]]
+FimSe
+CompararIgualxyInSd32x@Estado.nively1
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'SETOR 02 - FUNDICAO',103.0,62.0,1.0,[0.9,0.6,0.3,1.0]]
+FimSe
+CompararIgualxyInSd32x@Estado.nively2
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'SETOR 03 - NUCLEO',109.0,62.0,1.0,[0.3,0.8,1.0,1.0]]
+FimSe
+CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.Inicio
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'ELIMINE AS SENTINELAS E ACHE A SAIDA',52.0,80.0,1.0,[1.0,1.0,1.0,1.0]]
+ChamarxFpsTextoLista[@Lista,@L,l'ENTER INICIAR  WASD MOVER  E PORTAS',58.0,96.0,1.0,[0.8,0.85,0.9,1.0]]
+ChamarxFpsTextoLista[@Lista,@L,l'MOUSE/SETAS GIRAR  CLIQUE/CTRL TIRO',58.0,110.0,1.0,[0.8,0.85,0.9,1.0]]
+FimSe
+CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.Pausa
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'PAUSA - ENTER RETOMAR',100.0,90.0,1.0,[1.0,1.0,1.0,1.0]]
+FimSe
+CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.SetorConcluido
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'SETOR LIVRE - ENTER PROXIMO',82.0,90.0,1.0,[0.5,1.0,0.7,1.0]]
+FimSe
+CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.Vitoria
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'CAMPANHA CONCLUIDA!',106.0,90.0,1.0,[0.5,1.0,0.7,1.0]]
+FimSe
+CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.Derrota
+Sex@ULTIMO
+ChamarxFpsTextoLista[@Lista,@L,l'SINAL PERDIDO - R REINICIAR',82.0,90.0,1.0,[1.0,0.4,0.3,1.0]]
+FimSe
+ChamarxFpsTextoLista[@Lista,@L,l'R REINICIAR  Q SAIR  F1/F2/F3 VIDEO',58.0,132.0,1.0,[0.7,0.75,0.8,1.0]]
+FimSe
+Sex@Medir
+ChamarxFpsQuad[@Lista,@L,14,0.0,0.0,180.0,12.0,0.0,0.0,1.0,1.0,[0.0,0.0,0.0,0.8]]
+ChamarxFpsTextoLista[@Lista,@L,l'CPU MS      DESENHO MS',3.0,2.0,1.0,[0.5,1.0,0.6,1.0]]
+DividxyInSd64x@CalculoNsy1000000
+InSd64ParaInSd32[@ULTIMO]
+ChamarxFpsNumeroLista[@Lista,@L,@ULTIMO,45.0,2.0]
+DividxyInSd64x@DesenhoNsy1000000
+InSd64ParaInSd32[@ULTIMO]
+ChamarxFpsNumeroLista[@Lista,@L,@ULTIMO,132.0,2.0]
+FimSe
+ChamarxFpsListaFechar[@Lista,@L]
+FimFuncao

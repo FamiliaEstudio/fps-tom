@@ -1,0 +1,132 @@
+// Formatos offline do clipe. Regras do jogo ficam em Tom, não no codec nativo.
+DefFuncaoxFpsClipeU32LE[BufferBytesxDados,InUd64xPosicao]yInUd64
+BufferBytesLerInUd32LE[@Dados,@Posicao]
+InUd32ParaInSd64[@ULTIMO]
+InSd64ParaInUd64[@ULTIMO]
+Retornarx@ULTIMO
+FimFuncao
+
+DefFuncaoxFpsClipePNGValidar[BufferBytesxDados]yVazio
+BufferBytesComprimento[@Dados]
+CompararMaiorIgualxyInUd64x@ULTIMOy29
+Exigir[@ULTIMO]
+BufferBytesLerInUd32BE[@Dados,16]
+DefVarInUd32xLarguray@ULTIMO
+CompararMaiorIgualxyInUd32x@Larguray1
+Exigir[@ULTIMO]
+CompararMenorIgualxyInUd32x@Larguray128
+Exigir[@ULTIMO]
+BufferBytesLerInUd32BE[@Dados,20]
+DefVarInUd32xAlturay@ULTIMO
+CompararMaiorIgualxyInUd32x@Alturay1
+Exigir[@ULTIMO]
+CompararMenorIgualxyInUd32x@Alturay96
+Exigir[@ULTIMO]
+BufferBytesLer[@Dados,24]
+CompararIgualxyInUd32x@ULTIMOy8
+Exigir[@ULTIMO]
+BufferBytesLer[@Dados,25]
+DefVarInUd32xCory@ULTIMO
+CompararIgualxyInUd32x@Cory2
+DefVarBlxRGBy@ULTIMO
+CompararIgualxyInUd32x@Cory6
+OuxyBlx@RGBy@ULTIMO
+Exigir[@ULTIMO]
+BufferBytesLer[@Dados,26]
+CompararIgualxyInUd32x@ULTIMOy0
+Exigir[@ULTIMO]
+BufferBytesLer[@Dados,27]
+CompararIgualxyInUd32x@ULTIMOy0
+Exigir[@ULTIMO]
+BufferBytesLer[@Dados,28]
+CompararIgualxyInUd32x@ULTIMOy0
+Exigir[@ULTIMO]
+FimFuncao
+
+DefFuncaoxFpsClipeWAVAmostras[BufferBytesxDados]yInSd64
+BufferBytesComprimento[@Dados]
+DefVarInUd64xNy@ULTIMO
+CompararMaiorIgualxyInUd64x@Ny44
+Exigir[@ULTIMO]
+BufferBytesLerInUd32LE[@Dados,0]
+CompararIgualxyInUd32x@ULTIMOy1179011410
+Exigir[@ULTIMO]
+BufferBytesLerInUd32LE[@Dados,8]
+CompararIgualxyInUd32x@ULTIMOy1163280727
+Exigir[@ULTIMO]
+ChamarxFpsClipeU32LE[@Dados,4]
+DefVarInUd64xTamanhoy(@ULTIMO + 8)
+CompararIgualxyInUd64x@Tamanhoy@N
+Exigir[@ULTIMO]
+DefVarInUd64xPosy12
+DefVarInUd64xFormatoy0
+DefVarInUd64xBytesPCMy0
+DefVarBlxTemFormatoyFalso
+DefVarBlxTemPCMyFalso
+EnquantoxVerdadeiro
+CompararIgualxyInUd64x@Posy@N
+Sex@ULTIMO
+Interromper
+FimSe
+DefVarInUd64xRestantey(@N - @Pos)
+CompararMaiorIgualxyInUd64x@Restantey8
+Exigir[@ULTIMO]
+BufferBytesLerInUd32LE[@Dados,@Pos]
+DefVarInUd32xTipoy@ULTIMO
+ChamarxFpsClipeU32LE[@Dados,(@Pos + 4)]
+DefVarInUd64xBytesy@ULTIMO
+DefVarInUd64xPassoy(8 + @Bytes + (@Bytes - @Bytes / 2 * 2))
+CompararMenorIgualxyInUd64x@Passoy@Restante
+Exigir[@ULTIMO]
+CompararIgualxyInUd32x@Tipoy544501094
+Sex@ULTIMO
+NaoBlx@TemFormato
+Exigir[@ULTIMO]
+CompararMaiorIgualxyInUd64x@Bytesy16
+Exigir[@ULTIMO]
+SetVarInUd64xFormatoy(@Pos + 8)
+SetVarBlxTemFormatoyVerdadeiro
+FimSe
+CompararIgualxyInUd32x@Tipoy1635017060
+Sex@ULTIMO
+NaoBlx@TemPCM
+Exigir[@ULTIMO]
+SetVarInUd64xBytesPCMy@Bytes
+SetVarBlxTemPCMyVerdadeiro
+FimSe
+SetVarInUd64xPosy(@Pos + @Passo)
+FimEnquanto
+Exigir[@TemFormato]
+Exigir[@TemPCM]
+BufferBytesLerInUd16LE[@Dados,@Formato]
+CompararIgualxyInUd32x@ULTIMOy1
+Exigir[@ULTIMO]
+BufferBytesLerInUd32LE[@Dados,(@Formato + 4)]
+CompararIgualxyInUd32x@ULTIMOy48000
+Exigir[@ULTIMO]
+BufferBytesLerInUd16LE[@Dados,(@Formato + 14)]
+CompararIgualxyInUd32x@ULTIMOy16
+Exigir[@ULTIMO]
+BufferBytesLerInUd16LE[@Dados,(@Formato + 2)]
+DefVarInUd32xCanaisy@ULTIMO
+CompararMaiorIgualxyInUd32x@Canaisy1
+Exigir[@ULTIMO]
+CompararMenorIgualxyInUd32x@Canaisy2
+Exigir[@ULTIMO]
+DefVarInUd32xAlinhamentoy(@Canais * 2)
+BufferBytesLerInUd16LE[@Dados,(@Formato + 12)]
+CompararIgualxyInUd32x@ULTIMOy@Alinhamento
+Exigir[@ULTIMO]
+DefVarInUd32xTaxay(48000 * @Alinhamento)
+BufferBytesLerInUd32LE[@Dados,(@Formato + 8)]
+CompararIgualxyInUd32x@ULTIMOy@Taxa
+Exigir[@ULTIMO]
+InUd32ParaInSd64[@Alinhamento]
+InSd64ParaInUd64[@ULTIMO]
+DefVarInUd64xPassoy@ULTIMO
+DefVarInUd64xRestoy(@BytesPCM - @BytesPCM / @Passo * @Passo)
+CompararIgualxyInUd64x@Restoy0
+Exigir[@ULTIMO]
+InUd64ParaInSd64[(@BytesPCM / @Passo)]
+Retornarx@ULTIMO
+FimFuncao

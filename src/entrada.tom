@@ -5,6 +5,8 @@ DefRegistroxFpsControle
 PropBlxexecutar
 PropBlxfoco
 PropBlxmouseTiro
+PropBlxpulsoInteragir
+PropBlxefeitos
 PropBlxpulsoTiro
 PropBlxtexturas
 PropBlxmedir
@@ -33,6 +35,7 @@ Sex@ULTIMO
 SetVarBlxControle.focoyFalso
 SetVarBlxControle.mouseTiroyFalso
 SetVarBlxControle.pulsoTiroyFalso
+SetVarBlxControle.pulsoInteragiryFalso
 SetVarInSd64xRelogio.acumuladoy0
 JanelaMouseRelativo[@Janela,Falso]
 CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.Jogando
@@ -96,6 +99,19 @@ Retornar
 FimSe
 EventoCampo[@Evento,@CAMPO_TECLA]
 DefVarInSd32xTeclay@ULTIMO
+CompararIgualxyInSd32x@Teclay101
+Sex@ULTIMO
+CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.Jogando
+Sex@ULTIMO
+SetVarBlxControle.pulsoInteragiryVerdadeiro
+FimSe
+FimSe
+CompararIgualxyInSd32x@Teclay1073741884
+Sex@ULTIMO
+NaoBlx@Controle.efeitos
+SetVarBlxControle.efeitosy@ULTIMO
+SetVarBlxControle.redesenharyVerdadeiro
+FimSe
 CompararIgualxyInSd32x@Teclay1073741882
 Sex@ULTIMO
 NaoBlx@Controle.texturas
@@ -122,6 +138,7 @@ Sex@ULTIMO
 SetVarEnum<FpsFase>xEstado.fasey@FpsFase.Pausa
 SetVarBlxControle.mouseTiroyFalso
 SetVarBlxControle.pulsoTiroyFalso
+SetVarBlxControle.pulsoInteragiryFalso
 JanelaMouseRelativo[@Janela,Falso]
 SetVarBlxControle.redesenharyVerdadeiro
 FimSe
@@ -136,6 +153,7 @@ Sex@ULTIMO
 ChamarxFpsIniciar[@Estado,@Mapa,@Entidades]
 SetVarBlxControle.mouseTiroyFalso
 SetVarBlxControle.pulsoTiroyFalso
+SetVarBlxControle.pulsoInteragiryFalso
 JanelaEventosCompletos[@Janela,Verdadeiro]
 ChamarxFpsCapturar[@Janela]
 TempoAgoraNs[]
@@ -146,6 +164,14 @@ Retornar
 FimSe
 CompararIgualxyInSd32x@Teclay@TECLA_ENTER
 Sex@ULTIMO
+CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.SetorConcluido
+Sex@ULTIMO
+ChamarxFpsNivelCarregar[(@Estado.nivel + 1),@Estado,@Mapa,@Entidades]
+SetVarEnum<FpsFase>xEstado.fasey@FpsFase.Inicio
+SetVarBlxControle.pulsoInteragiryFalso
+SetVarBlxControle.pulsoTiroyFalso
+SetVarBlxControle.mouseTiroyFalso
+FimSe
 CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.Inicio
 DefVarBlxInicioy@ULTIMO
 CompararIgualxyEnum<FpsFase>x@Estado.fasey@FpsFase.Pausa
@@ -195,5 +221,6 @@ SetVarBlxComando.atirary@ULTIMO
 TeclaMantida[@Janela,@FISICA_CTRL_ESQUERDO]
 OuxyBlx@ULTIMOy@Comando.atirar
 SetVarBlxComando.atirary@ULTIMO
+SetVarBlxComando.interagiry@Controle.pulsoInteragir
 Retornarx@Comando
 FimFuncao

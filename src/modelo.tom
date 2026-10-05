@@ -1,15 +1,18 @@
 // Estado e capacidades do motor. Nenhuma regra depende de janela ou relógio nativo.
-DefConstInSd64xFPS_MAPA_Ly16
-DefConstInSd64xFPS_MAPA_Ay16
+Importar[l'tom/simulacao']
+DefConstInSd64xFPS_MAPA_Ly32
+DefConstInSd64xFPS_MAPA_Ay32
 DefConstInSd64xFPS_PASSO_NSy16666667
 DefConstFl64xFPS_PIy3.141592653589793
 DefConstFl64xFPS_VOLTAy6.283185307179586
-DefConstInSd32xFPS_TOTAL_INIMIGOSy6
+DefConstInSd64xFPS_MAX_ENTIDADESy64
+DefConstInSd64xFPS_MAX_PORTASy32
 
 DefEnumxFpsFase
 ItemxInicio
 ItemxJogando
 ItemxPausa
+ItemxSetorConcluido
 ItemxVitoria
 ItemxDerrota
 FimDef
@@ -18,6 +21,37 @@ PropEnum<FpsFase>xfase
 PropFl64xpx
 PropFl64xpy
 PropFl64xangulo
+PropInSd32xnivel
+PropInSd32xtotalInimigos
+PropInSd64xlargura
+PropInSd64xaltura
+PropBlxchaveAzul
+PropBlxchaveVermelha
+PropFl64xanteriorX
+PropFl64xanteriorY
+PropFl64xanteriorAngulo
+// Movimento tridimensional: pz e a altura dos pes; XY legacy preservado.
+PropFl64xpz
+PropFl64xanteriorZ
+// VX/VY medem o deslocamento aceito por segundo; VZ integra gravidade e salto.
+PropFl64xvx
+PropFl64xvy
+PropFl64xvz
+// Impulso horizontal residual passa pelas mesmas consultas de colisao do comando.
+PropFl64ximpulsoX
+PropFl64ximpulsoY
+PropFl64xinclinacao
+PropFl64xanteriorInclinacao
+PropFl64xalturaCorpo
+PropBlxnoChao
+PropBlxlancador
+PropInSd32xarma
+PropInSd32xfoguetes
+PropInSd32xandar
+PropFl64xsomX
+PropFl64xsomY
+PropFl64xsomZ
+PropBlxsomExplosao
 PropInSd32xvida
 PropInSd32xmunicao
 PropInSd32xabatidos
@@ -28,28 +62,65 @@ PropInSd64xpassos
 PropBlxsomTiro
 PropBlxsomDano
 PropBlxsomItem
+PropBlxsomAbrir
+PropBlxsomFechar
 FimDef
 DefRegistroxFpsComando
 PropFl64xfrente
 PropFl64xlado
 PropFl64xgiro
 PropBlxatirar
+PropBlxinteragir
 FimDef
 DefRegistroxFpsRelogio
 PropInSd64xanterior
 PropInSd64xacumulado
+PropFl32xinterpolacao
 FimDef
 DefStructSOAxFpsCelula
 PropIn32xmaterial
+// Porta ocupa uma celula livre; eixo 0: painel vertical, eixo 1: horizontal.
+PropBlxporta
+PropIn32xeixo
+PropIn32xchave
+PropIn32xmovimento
+PropIn32xespera
+PropIn32xpasso
+PropFl64xabertura
+PropFl64xanterior
 FimDef
 DefStructSOAxFpsEntidade
 PropBlxativa
-// 1 sentinela, 2 saúde, 3 munição, 4 saída. Slots 0..15 reservados aos inimigos.
+// 1 sentinela, 2 saude, 3 municao, 4 saida, 5/6 chaves, 7 decoracao.
 PropIn32xtipo
 PropIn32xvida
 PropIn32xataque
 PropFl64xpx
 PropFl64xpy
+PropFl64xanteriorX
+PropFl64xanteriorY
+PropFl64xpz
+PropFl64xanteriorZ
+PropFl64xvx
+PropFl64xvy
+PropFl64xvz
+PropFl64ximpulsoX
+PropFl64ximpulsoY
+PropFl64xalturaCorpo
+PropFl64xpostoX
+PropFl64xpostoY
+PropIn32xai
+PropIn32xtipoAtaque
+PropIn32xandar
+// Cache de apoio somente para entidades imoveis fora do curso dos moveis.
+PropBlxandarCacheValido
+PropFl64xandarCacheX
+PropFl64xandarCacheY
+PropFl64xandarCacheZ
+PropInSd64xandarConsultas
+PropInUd64xidPool
+PropInUd32xidIndice
+PropInUd32xidGeracao
 FimDef
 DefRegistroxFpsRaio
 PropFl64xdistancia
@@ -104,50 +175,212 @@ DefVarInSd64xIndicey@ULTIMO
 RetornarxMapa@@Indice.material
 FimFuncao
 
-DefFuncaoxFpsLivre[SOA<FpsCelula>xMapa,Fl64xX,Fl64xY]yBl
-CompararMenorxyFl64x@Xy0.0
+DefRegistroxFpsCaixa
+PropFl64xesquerda
+PropFl64xcima
+PropFl64xdireita
+PropFl64xbaixo
+PropInSd32xmaterial
+PropInSd32xeixo
+PropFl64xdeslocamento
+FimDef
+
+// A mesma caixa e usada por colisao, visibilidade, tiro e desenho.
+DefFuncaoxFpsCaixaPorta[SOA<FpsCelula>xMapa,InSd64xIndice,Fl64xAbertura]yRegistro<FpsCaixa>
+DefVarRegistro<FpsCaixa>xCyPadrao
+DividxyInSd64x@Indicey32
+DefVarInSd64xIYy@ULTIMO
+DefVarInSd64xIXy(@Indice - @IY * 32)
+InSd64ParaFl64[@IX]yC.esquerda
+InSd64ParaFl64[@IY]yC.cima
+SetVarFl64xC.direitay(@C.esquerda + 1.0)
+SetVarFl64xC.baixoy(@C.cima + 1.0)
+SetVarInSd32xC.eixoyMapa@@Indice.eixo
+SetVarFl64xC.deslocamentoy@Abertura
+CompararMenorxyFl64x@Aberturay1.0
+Sex@ULTIMO
+SetVarInSd32xC.materialy(4 + Mapa@@Indice.chave)
+FimSe
+CompararIgualxyInSd32x@C.eixoy0
+Sex@ULTIMO
+SetVarFl64xC.direitay(@C.esquerda + 0.5625)
+SetVarFl64xC.esquerday(@C.esquerda + 0.4375)
+SetVarFl64xC.cimay(@C.cima + @Abertura)
+Senao
+SetVarFl64xC.baixoy(@C.cima + 0.5625)
+SetVarFl64xC.cimay(@C.cima + 0.4375)
+SetVarFl64xC.esquerday(@C.esquerda + @Abertura)
+FimSe
+Retornarx@C
+FimFuncao
+
+DefFuncaoxFpsCaixaEm[SOA<FpsCelula>xMapa,InSd64xX,InSd64xY]yRegistro<FpsCaixa>
+DefVarRegistro<FpsCaixa>xCyPadrao
+InSd64ParaFl64[@X]yC.esquerda
+InSd64ParaFl64[@Y]yC.cima
+SetVarFl64xC.direitay(@C.esquerda + 1.0)
+SetVarFl64xC.baixoy(@C.cima + 1.0)
+ChamarxFpsCelulaEm[@Mapa,@X,@Y]yC.material
+CompararDiferentexyInSd32x@C.materialy0
+Sex@ULTIMO
+Retornarx@C
+FimSe
+DefVarInSd64xIndicey(@Y * 32 + @X)
+SexMapa@@Indice.porta
+ChamarxFpsCaixaPorta[@Mapa,@Indice,Mapa@@Indice.abertura]yC
+FimSe
+Retornarx@C
+FimFuncao
+
+DefFuncaoxFpsSobrepoe[Registro<FpsCaixa>xC,Fl64xX,Fl64xY,Fl64xRaio]yBl
+CompararIgualxyInSd32x@C.materialy0
 Sex@ULTIMO
 RetornarxFalso
 FimSe
-CompararMenorxyFl64x@Yy0.0
+DefVarFl64xBorday(@X + @Raio)
+CompararMenorxyFl64x@Borday@C.esquerda
 Sex@ULTIMO
 RetornarxFalso
 FimSe
-Fl64ParaInSd64[@X]
-DefVarInSd64xIXy@ULTIMO
-Fl64ParaInSd64[@Y]
-ChamarxFpsCelulaEm[@Mapa,@IX,@ULTIMO]
-CompararIgualxyInSd32x@ULTIMOy0
+SetVarFl64xBorday(@X - @Raio)
+CompararMaiorxyFl64x@Borday@C.direita
+Sex@ULTIMO
+RetornarxFalso
+FimSe
+SetVarFl64xBorday(@Y + @Raio)
+CompararMenorxyFl64x@Borday@C.cima
+Sex@ULTIMO
+RetornarxFalso
+FimSe
+SetVarFl64xBorday(@Y - @Raio)
+CompararMaiorxyFl64x@Borday@C.baixo
+NaoBlx@ULTIMO
 Retornarx@ULTIMO
 FimFuncao
 
-// Caixa de colisão de 0,4 unidade; passos curtos e eixos separados permitem deslizar.
-DefFuncaoxFpsCabe[SOA<FpsCelula>xMapa,Fl64xX,Fl64xY]yBl
-SubtrxyFl64x@Xy0.2
-DefVarFl64xEsquerdoy@ULTIMO
-SomarxyFl64x@Xy0.2
-DefVarFl64xDireitoy@ULTIMO
-SubtrxyFl64x@Yy0.2
-DefVarFl64xCimay@ULTIMO
-SomarxyFl64x@Yy0.2
-DefVarFl64xBaixoy@ULTIMO
-ChamarxFpsLivre[@Mapa,@Esquerdo,@Cima]
-NaoBlx@ULTIMO
+DefFuncaoxFpsCabeRaio[SOA<FpsCelula>xMapa,Fl64xX,Fl64xY,Fl64xRaio]yBl
+DefVarFl64xBorday(@X - @Raio)
+CompararMenorxyFl64x@Borday0.0
 Sex@ULTIMO
 RetornarxFalso
 FimSe
-ChamarxFpsLivre[@Mapa,@Direito,@Cima]
-NaoBlx@ULTIMO
+SetVarFl64xBorday(@Y - @Raio)
+CompararMenorxyFl64x@Borday0.0
 Sex@ULTIMO
 RetornarxFalso
 FimSe
-ChamarxFpsLivre[@Mapa,@Esquerdo,@Baixo]
-NaoBlx@ULTIMO
+Fl64ParaInSd64[(@X - @Raio)]
+DefVarInSd64xInicioXy@ULTIMO
+Fl64ParaInSd64[(@Y - @Raio)]
+DefVarInSd64xInicioYy@ULTIMO
+Fl64ParaInSd64[(@X + @Raio)]
+DefVarInSd64xFimXy(@ULTIMO + 1)
+Fl64ParaInSd64[(@Y + @Raio)]
+DefVarInSd64xFimYy(@ULTIMO + 1)
+ParaxCY[@InicioY,@FimY,1]
+ParaxCX[@InicioX,@FimX,1]
+ChamarxFpsCaixaEm[@Mapa,@CX,@CY]
+DefVarRegistro<FpsCaixa>xCaixay@ULTIMO
+ChamarxFpsSobrepoe[@Caixa,@X,@Y,@Raio]
 Sex@ULTIMO
 RetornarxFalso
 FimSe
-ChamarxFpsLivre[@Mapa,@Direito,@Baixo]
+FimPara
+FimPara
+RetornarxVerdadeiro
+FimFuncao
+
+DefFuncaoxFpsLivre[SOA<FpsCelula>xMapa,Fl64xX,Fl64xY]yBl
+ChamarxFpsCabeRaio[@Mapa,@X,@Y,0.0]
 Retornarx@ULTIMO
+FimFuncao
+DefFuncaoxFpsCabe[SOA<FpsCelula>xMapa,Fl64xX,Fl64xY]yBl
+ChamarxFpsCabeRaio[@Mapa,@X,@Y,0.2]
+Retornarx@ULTIMO
+FimFuncao
+
+// Intersecao por slabs, inclusive origem dentro da celula e direcoes nos eixos.
+DefFuncaoxFpsRaioCaixa[Registro<FpsCaixa>xC,Fl64xX,Fl64xY,Fl64xDX,Fl64xDY]yRegistro<FpsRaio>
+DefVarRegistro<FpsRaio>xRyPadrao
+SetVarFl64xR.distanciay-1.0
+CompararIgualxyInSd32x@C.materialy0
+Sex@ULTIMO
+Retornarx@R
+FimSe
+DefVarFl64xEntraday0.0
+DefVarFl64xSaiday1.0e30
+DefVarInSd32xFacey0
+ParaxEixo[0,2,1]
+DefVarFl64xOrigemy@X
+DefVarFl64xDirecaoy@DX
+DefVarFl64xMinimoy@C.esquerda
+DefVarFl64xMaximoy@C.direita
+CompararIgualxyInSd64x@Eixoy1
+Sex@ULTIMO
+SetVarFl64xOrigemy@Y
+SetVarFl64xDirecaoy@DY
+SetVarFl64xMinimoy@C.cima
+SetVarFl64xMaximoy@C.baixo
+FimSe
+CompararIgualxyFl64x@Direcaoy0.0
+Sex@ULTIMO
+CompararMenorxyFl64x@Origemy@Minimo
+DefVarBlxForay@ULTIMO
+CompararMaiorxyFl64x@Origemy@Maximo
+OuxyBlx@Foray@ULTIMO
+Sex@ULTIMO
+Retornarx@R
+FimSe
+Senao
+DefVarFl64xAy((@Minimo - @Origem) / @Direcao)
+DefVarFl64xBy((@Maximo - @Origem) / @Direcao)
+CompararMaiorxyFl64x@Ay@B
+Sex@ULTIMO
+DefVarFl64xAuxy@A
+SetVarFl64xAy@B
+SetVarFl64xBy@Aux
+FimSe
+CompararMaiorxyFl64x@Ay@Entrada
+Sex@ULTIMO
+SetVarFl64xEntraday@A
+InSd64ParaInSd32[@Eixo]yFace
+FimSe
+CompararMenorxyFl64x@By@Saida
+Sex@ULTIMO
+SetVarFl64xSaiday@B
+FimSe
+CompararMenorxyFl64x@Saiday@Entrada
+Sex@ULTIMO
+Retornarx@R
+FimSe
+FimSe
+FimPara
+SetVarFl64xR.distanciay@Entrada
+SetVarInSd32xR.materialy@C.material
+SetVarInSd32xR.facey@Face
+CompararIgualxyInSd32x@C.eixoy0
+Sex@ULTIMO
+SetVarFl64xR.uy(@Y + @Entrada * @DY - @C.cima)
+Senao
+SetVarFl64xR.uy(@X + @Entrada * @DX - @C.esquerda)
+FimSe
+Retornarx@R
+FimFuncao
+
+DefFuncaoxFpsPortaRaio[SOA<FpsCelula>xMapa,InSd64xMX,InSd64xMY,Fl64xX,Fl64xY,Fl64xDX,Fl64xDY]yRegistro<FpsRaio>
+DefVarRegistro<FpsRaio>xRyPadrao
+ChamarxFpsCelulaEm[@Mapa,@MX,@MY]
+CompararDiferentexyInSd32x@ULTIMOy0
+Sex@ULTIMO
+Retornarx@R
+FimSe
+DefVarInSd64xIndicey(@MY * 32 + @MX)
+SexMapa@@Indice.porta
+ChamarxFpsCaixaPorta[@Mapa,@Indice,Mapa@@Indice.abertura]
+DefVarRegistro<FpsCaixa>xCy@ULTIMO
+ChamarxFpsRaioCaixa[@C,@X,@Y,@DX,@DY]yR
+FimSe
+Retornarx@R
 FimFuncao
 
 // DDA: t mede distância perpendicular quando o raio vem do plano da câmera.
@@ -213,6 +446,12 @@ MultixyFl64x@ULTIMOy@DeltaY
 SetVarFl64xLadoYy@ULTIMO
 FimSe
 FimSe
+ChamarxFpsPortaRaio[@Mapa,@MX,@MY,@X,@Y,@DX,@DY]
+DefVarRegistro<FpsRaio>xPortay@ULTIMO
+CompararMaiorxyInSd32x@Porta.materialy0
+Sex@ULTIMO
+Retornarx@Porta
+FimSe
 // Em empate verificamos também o vizinho Y antes de avançar na diagonal.
 ParaxTentativa[0,128,1]
 CompararMenorIgualxyFl64x@LadoXy@LadoY
@@ -240,6 +479,11 @@ SetVarFl64xLadoYy@ULTIMO
 SomarxyInSd64x@MYy@PassoY
 SetVarInSd64xMYy@ULTIMO
 SetVarInSd32xResult.facey1
+FimSe
+ChamarxFpsPortaRaio[@Mapa,@MX,@MY,@X,@Y,@DX,@DY]yPorta
+CompararMaiorxyInSd32x@Porta.materialy0
+Sex@ULTIMO
+Retornarx@Porta
 FimSe
 ChamarxFpsCelulaEm[@Mapa,@MX,@MY]
 SetVarInSd32xResult.materialy@ULTIMO
@@ -298,30 +542,24 @@ FimFuncao
 
 // No máximo seis passos por quadro; atraso excessivo é descartado, sem teleporte.
 DefFuncaoxFpsRelogioAvancar[RefRegistro<FpsRelogio>xRelogio,InSd64xAgora,BlxAtivo]yInSd64
-CompararMaiorIgualxyInSd64x@Agoray0
-Exigir[@ULTIMO]
-DefVarInSd64xDecorridoy0
-CompararMaiorIgualxyInSd64x@Agoray@Relogio.anterior
-Sex@ULTIMO
-SubtrxyInSd64x@Agoray@Relogio.anterior
-SetVarInSd64xDecorridoy@ULTIMO
-FimSe
-SetVarInSd64xRelogio.anteriory@Agora
-NaoBlx@Ativo
-Sex@ULTIMO
-SetVarInSd64xRelogio.acumuladoy0
-Retornarx0
-FimSe
-CompararMaiorxyInSd64x@Decorridoy100000002
-Sex@ULTIMO
-SetVarInSd64xDecorridoy100000002
-FimSe
-SomarxyInSd64x@Relogio.acumuladoy@Decorrido
-SetVarInSd64xRelogio.acumuladoy@ULTIMO
-DividxyInSd64x@Relogio.acumuladoy@FPS_PASSO_NS
-DefVarInSd64xPassosy@ULTIMO
-MultixyInSd64x@Passosy@FPS_PASSO_NS
-SubtrxyInSd64x@Relogio.acumuladoy@ULTIMO
-SetVarInSd64xRelogio.acumuladoy@ULTIMO
-Retornarx@Passos
+ChamarxPassoFixoCalcular[@Relogio.anterior,@Relogio.acumulado,@Agora,@Ativo,@FPS_PASSO_NS,6]
+DefVarRegistro<QuadroPassoFixo>xQuadroy@ULTIMO
+SetVarInSd64xRelogio.anteriory@Quadro.anteriorNs
+SetVarInSd64xRelogio.acumuladoy@Quadro.acumuladoNs
+SetVarFl32xRelogio.interpolacaoy@Quadro.interpolacao
+Retornarx@Quadro.passos
 FimFuncao
+
+// Pulsos e deltas angulares sao consumidos uma vez pelo adaptador do quadro.
+DefRegistroxFps3DComando
+PropFl64xfrente
+PropFl64xlado
+PropFl64xgiro
+PropFl64xpitchDelta
+PropBlxcorrer
+PropBlxagachar
+PropBlxpular
+PropBlxatirar
+PropBlxinteragir
+PropInSd32xarma
+FimDef

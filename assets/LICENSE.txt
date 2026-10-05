@@ -1,8 +1,12 @@
-FPS Tom: atlas.png, tiro.wav, dano.wav e item.wav
+FPS Tom: atlas.png, atlas3d.png (incluindo glifos), tiro.wav, dano.wav,
+item.wav, abrir.wav, fechar.wav, explosao.wav, musica0.wav, musica1.wav,
+musica2.wav, ambiente.wav, tv.png, tv.wav, tv.json e tv.tom.
 
-Pixel art procedural e áudio sintetizado originalmente para este projeto.
-Não contêm imagens, gravações ou recursos do Doom ou de terceiros.
-Gerador reproduzível: ../scripts/generate-assets.js
+Pixel art procedural, animacao e audio sintetizados originalmente para este projeto.
+Nao contem imagens, gravacoes ou recursos do Doom, Duke Nukem ou de terceiros.
+Geradores reproduziveis: ../ferramentas/gerar-recursos.tom e
+../ferramentas/gerar-recursos-3d.tom; atlas/metadados: ../ferramentas/preparar-clipes.tom.
+Os geradores JavaScript em ../scripts/ permanecem referencias de equivalencia.
 
-Dedicados ao domínio público sob CC0 1.0 Universal.
+Dedicados ao dominio publico sob CC0 1.0 Universal.
 https://creativecommons.org/publicdomain/zero/1.0/

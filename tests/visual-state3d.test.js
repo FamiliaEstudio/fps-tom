@@ -1,0 +1,194 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {run,eq}=require('./helpers');
+const close=(a,b,type='Fl64',epsilon='0.000001')=>`ChamarxFpsAbsoluto[(${a}-${b})]\nCompararMenorxyFl64x@ULTIMOy${epsilon}\nExigir[@ULTIMO]\n`;
+const sceneSetup=`DefArraySoAxMapaxFpsCelulax1024
+DefArraySoAxMalhaxFpsTriangulox16
+DefArraySoAxElevadoresxFpsElevadorx1
+DefArraySoAxCoresxFpsCor3Dx16
+DefArraySoAxEntidadesxFpsEntidadex1
+DefArraySoAxProjeteisxFpsProjetilx40
+DefArraySoAxEfeitosxFpsEfeitox8
+DefArraySoAxLuzesxFpsLuzx32
+DefVarRegistro<Fps3DMundo>xMundoyPadrao
+DefVarRegistro<FpsEstado>xEyPadrao
+SetVarFl64xE.alturaCorpoy1.0
+DefRecursoxOpacoyBufferVec4Fl32Criar[512,0]
+DefRecursoxMascarayBufferVec4Fl32Criar[512,0]
+DefRecursoxAlphayBufferVec4Fl32Criar[512,0]
+DefRecursoxAddyBufferVec4Fl32Criar[1024,0]
+DefRecursoxTVyBufferVec4Fl32Criar[64,0]
+DefRecursoxSAyBufferVec4Fl32Criar[60,0]
+DefRecursoxSByBufferVec4Fl32Criar[60,0]
+`;
+const draw=(alpha)=>`ChamarxFps3DCena[@Mapa,@Mundo,@Malha,@Elevadores,@Cores,@Entidades,@Projeteis,@Efeitos,@Luzes,@E,${alpha},0,Verdadeiro,@Opaco,@Mascara,@Alpha,@Add,@TV,@SA,@SB]\n`;
+const particle=`Importar[l'../src/cena3d.tom']
+Importar[l'../src/simulacao3d.tom']
+${sceneSetup}
+DefRecursoxPoolyPoolEntidadesCriar[8]
+ChamarxFps3DEfeitoAdicionar[@Efeitos,3,[4.0,0.0,0.8],[6.0,12.0,18.0],40,0.1,@Pool]
+${eq('Efeitos@0.anteriorX',4.0,'Fl64')}${eq('Efeitos@0.anteriorY',0.0,'Fl64')}${eq('Efeitos@0.anteriorZ',0.8,'Fl64')}
+ChamarxFps3DEfeitosPasso[@Efeitos,@Luzes,@Pool]
+ChamarxFps3DEfeitosPasso[@Efeitos,@Luzes,@Pool]
+${close('Efeitos@0.anteriorX','4.1')}${close('Efeitos@0.px','4.2')}
+${close('Efeitos@0.anteriorY','0.2')}${close('Efeitos@0.py','0.4')}
+DefVarFl64xAntesZyEfeitos@0.anteriorZ
+DefVarFl64xAtualZyEfeitos@0.pz
+ChamarxFps3DEfeitoPosicao[@Efeitos,0,0.5]
+DefVarVec3<Fl64>xPy@ULTIMO
+${close('@P.z','((@AntesZ+@AtualZ)*0.5)')}
+// A gravidade já alterou a velocidade; a pose deve usar os estados armazenados.
+${draw('0.0')}
+BufferVec4Fl32Comprimento[@Add]
+${eq('@ULTIMO',18,'InUd64')}
+BufferVec4Fl32Ler[@Add,0]
+DefVarVec4<Fl32>xVerticey@ULTIMO
+Fl32ParaFl64[@Vertice.w]
+${close('@ULTIMO','4.1')}
+${draw('0.5')}
+BufferVec4Fl32Ler[@Add,0]yVertice
+Fl32ParaFl64[@Vertice.w]
+${close('@ULTIMO','4.15')}
+${draw('1.0')}
+BufferVec4Fl32Ler[@Add,0]yVertice
+Fl32ParaFl64[@Vertice.w]
+${close('@ULTIMO','4.2')}
+PoolEntidadesComprimento[@Pool]
+${eq('@ULTIMO',1,'InUd32')}
+${close('Efeitos@0.px','4.2')}
+GerarTxtxl'particulas-interpoladas'`;
+const lights=`Importar[l'../src/cena3d.tom']
+${sceneSetup}
+DefArraySoAxVisuaisxLuz3Dx32
+SetVarBlxLuzes@0.ativayVerdadeiro
+SetVarInSd32xLuzes@0.prioridadey10
+SetVarFl64xLuzes@0.pxy1.0
+SetVarFl64xLuzes@0.raioy4.0
+SetVarBlxLuzes@1.ativayVerdadeiro
+SetVarInSd32xLuzes@1.prioridadey1
+SetVarFl64xLuzes@1.pxy0.1
+SetVarFl64xLuzes@1.raioy4.0
+ParaxI[0,40,1]
+SetVarBlxProjeteis@@I.ativayVerdadeiro
+InSd64ParaFl64[@I]
+DefVarFl64xIndicey@ULTIMO
+SetVarFl64xProjeteis@@I.anteriorXy(@Indice+2.0)
+SetVarFl64xProjeteis@@I.pxy(@Indice+6.0)
+FimPara
+ChamarxFps3DLuzesVisuaisPreparar[@Luzes,@Projeteis,[0.0,0.0,0.0],0.5,@Visuais]
+DefVarInSd32xAtivasy0
+ParaIndiceSOAxI[@Visuais]
+SexVisuais@@I.ativa
+SetVarInSd32xAtivasy(@Ativas+1)
+FimSe
+FimPara
+${eq('@Ativas',32)}${eq('Visuais@0.prioridade',10)}
+${eq('Visuais@1.px',4.0,'Fl64')}${eq('Visuais@31.px',34.0,'Fl64')}
+ChamarxFps3DLuzesSelecionar[[4.0,0.0,0.0],100.0,@Visuais]
+DefVarRegistro<Luzes3DSelecao>xSelecaoy@ULTIMO
+${eq('@Selecao.quantidade',8)}
+// A mesma prioridade usa distância; IDs crescentes resolvem os empates.
+SetVarFl64xProjeteis@0.anteriorYy1.0
+SetVarFl64xProjeteis@0.pyy1.0
+SetVarFl64xProjeteis@1.anteriorXy2.0
+SetVarFl64xProjeteis@1.pxy6.0
+SetVarFl64xProjeteis@1.anteriorYy-1.0
+SetVarFl64xProjeteis@1.pyy-1.0
+ChamarxFps3DLuzesVisuaisPreparar[@Luzes,@Projeteis,[0.0,0.0,0.0],0.5,@Visuais]
+${eq('Visuais@1.py',1.0,'Fl64')}${eq('Visuais@2.py',-1.0,'Fl64')}
+ChamarxFps3DLuzesVisuaisPreparar[@Luzes,@Projeteis,[100.0,0.0,0.0],0.5,@Visuais]
+${eq('Visuais@1.px',43.0,'Fl64')}
+// Uma luz acompanha o projétil interpolado, sem alterar os estados da simulação.
+ParaIndiceSOAxI[@Luzes]
+SetVarBlxLuzes@@I.ativayFalso
+FimPara
+ParaIndiceSOAxI[@Projeteis]
+SetVarBlxProjeteis@@I.ativayFalso
+FimPara
+SetVarBlxProjeteis@0.ativayVerdadeiro
+SetVarFl64xProjeteis@0.anteriorXy2.0
+SetVarFl64xProjeteis@0.pxy6.0
+SetVarFl64xProjeteis@0.anteriorYy0.0
+SetVarFl64xProjeteis@0.pyy0.0
+SetVarFl64xProjeteis@0.anteriorZy1.0
+SetVarFl64xProjeteis@0.pzy1.0
+ChamarxFps3DTriAdicionar[@Mundo,@Malha,[2.0,-0.5,0.5],[2.0,0.5,0.5],[2.0,0.0,1.5],[0.0,0.0],[1.0,0.0],[0.5,1.0],14,0,0,0,Verdadeiro]
+${draw('0.0')}
+BufferVec4Fl32Ler[@Opaco,2]
+DefVarVec4<Fl32>xCory@ULTIMO
+CompararMaiorxyFl32x@Cor.xy0.5
+Exigir[@ULTIMO]
+${draw('1.0')}
+BufferVec4Fl32Ler[@Opaco,2]yCor
+${eq('@Cor.x',0.0,'Fl32')}
+${eq('Projeteis@0.px',6.0,'Fl64')}${eq('Projeteis@0.anteriorX',2.0,'Fl64')}
+GerarTxtxl'luzes-projeteis-limitadas'`;
+const known=`Importar[l'../src/hud3d.tom']
+DefArraySoAxMapaxFpsCelulax1024
+DefArraySoAxMalhaxFpsTriangulox1
+DefArraySoAxElevadoresxFpsElevadorx1
+DefArraySoAxRegioesxFpsRegiaox2
+DefArraySoAxEntidadesxFpsEntidadex2
+DefVarRegistro<Fps3DMundo>xMundoyPadrao
+DefVarRegistro<FpsEstado>xEyPadrao
+DefVarRegistro<Fps3DControle>xCyPadrao
+DefRecursoxListayBufferVec4Fl32Criar[16384,0]
+SetVarInSd64xMundo.regioesy2
+SetVarInSd32xE.nively0
+SetVarEnum<FpsFase>xE.fasey@FpsFase.Jogando
+SetVarFl64xE.pxy2.5
+SetVarFl64xE.pyy2.5
+SetVarFl64xE.alturaCorpoy1.0
+SetVarFl64xE.anguloy3.141592653589793
+SetVarBlxC.mapayVerdadeiro
+ParaxI[0,2,1]
+SetVarBlxEntidades@@I.ativayVerdadeiro
+SetVarFl64xEntidades@@I.pxy6.5
+SetVarFl64xEntidades@@I.pyy2.5
+SetVarFl64xRegioes@@I.pxy6.5
+SetVarFl64xRegioes@@I.pyy2.5
+FimPara
+SetVarInSd32xEntidades@0.tipoy2
+SetVarInSd32xEntidades@1.tipoy4
+SetVarInSd32xRegioes@1.andary1
+DefFuncaoxContarCor[BufferVec4Fl32xLista,Vec4<Fl32>xCor]yInSd32
+BufferVec4Fl32Comprimento[@Lista]
+InUd64ParaInSd64[@ULTIMO]
+DefVarInSd64xNy@ULTIMO
+DefVarInSd32xContagemy0
+ParaxI[2,@N,3]
+InSd64ParaInUd64[@I]
+BufferVec4Fl32Ler[@Lista,@ULTIMO]
+CompararIgualxyVec4<Fl32>x@ULTIMOy@Cor
+Sex@ULTIMO
+SetVarInSd32xContagemy(@Contagem+1)
+FimSe
+FimPara
+Retornarx@Contagem
+FimFuncao
+ChamarxFps3DHud[@Lista,@Mapa,@Mundo,@Regioes,@Malha,@Elevadores,@Entidades,@E,@C,0,0]
+ChamarxContarCor[@Lista,[0.9,0.8,0.3,1.0]]
+${eq('@ULTIMO',0)}
+ChamarxContarCor[@Lista,[0.2,1.0,0.4,1.0]]
+${eq('@ULTIMO',0)}
+// Descobrir o mesmo XY no outro andar não revela seus itens.
+SetVarBlxRegioes@1.descobertayVerdadeiro
+SetVarBlxC.mapayFalso
+SetVarBlxC.minimapayVerdadeiro
+ChamarxFps3DHud[@Lista,@Mapa,@Mundo,@Regioes,@Malha,@Elevadores,@Entidades,@E,@C,0,0]
+ChamarxContarCor[@Lista,[0.9,0.8,0.3,1.0]]
+${eq('@ULTIMO',0)}
+// Uma vez conhecidos, aparecem mesmo fora do FOV da câmera.
+SetVarBlxRegioes@0.descobertayVerdadeiro
+SetVarInSd32xC.andarMapay0
+ChamarxFps3DHud[@Lista,@Mapa,@Mundo,@Regioes,@Malha,@Elevadores,@Entidades,@E,@C,0,0]
+ChamarxContarCor[@Lista,[0.9,0.8,0.3,1.0]]
+${eq('@ULTIMO',1)}
+ChamarxContarCor[@Lista,[0.2,1.0,0.4,1.0]]
+${eq('@ULTIMO',1)}
+GerarTxtxl'elementos-conhecidos'`;
+for(const optimize of ['-O0','-O2']) {
+ test(`partículas: estados anteriores e apresentação interpolada ${optimize}`,()=>assert.equal(run(particle,optimize,{buildTimeout:120000}).stdout,'particulas-interpoladas'));
+ test(`luzes: projétil móvel, limite32, prioridade, distância e empates ${optimize}`,()=>assert.equal(run(lights,optimize,{buildTimeout:120000}).stdout,'luzes-projeteis-limitadas'));
+ test(`minimapa: itens/saída conhecidos por célula e andar ${optimize}`,()=>assert.equal(run(known,optimize,{buildTimeout:120000}).stdout,'elementos-conhecidos'));
+}

@@ -1,0 +1,3619 @@
+{
+  "descricao": "Medições 3D SDL/GPU da mesma árvore em Linux/Windows; campanha, estresse e janela real.",
+  "protocolo": {
+    "quadrosPorMapa": 240,
+    "aquecimentoPorMapa": 20,
+    "mapas": [
+      "Bastião",
+      "Fundição",
+      "Núcleo"
+    ],
+    "passosPorQuadro": 1,
+    "passoNs": 16666667,
+    "cena": [
+      320,
+      176
+    ],
+    "resolucaoLogica": [
+      320,
+      200
+    ],
+    "janelaDesktop": [
+      960,
+      600
+    ],
+    "audio": "dummy",
+    "execucao": "Sequencial, sem suítes concorrentes. Carga e iluminação estática medidas separadamente.",
+    "estresse": "128 sentinelas ativas; vida do jogador e dos atores restaurada antes da amostra para preservar a carga. Regras do jogo permanecem intactas.",
+    "limites": "A câmera e os comandos são controlados; estas amostras não garantem desempenho em todo percurso. Tempos de consultas estão incluídos nos grupos que as executam.",
+    "memoria": "Linux: pico RSS por /usr/bin/time. Windows: pico WorkingSet do processo, amostrado em intervalos de 20 ms.",
+    "metaQuadroMs": 16.666666666666668
+  },
+  "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+  "sources": {
+    "jogos/fps-tom/assets/abrir.wav": "15b571abc1ffd5aa8e8b30c912c9074c0eee2187f3e7803b08633c46ebb9c743",
+    "jogos/fps-tom/assets/ambiente.wav": "1a1fdf382500b74dae0d8c0682e9b6b94b1431dc791e6da49f379076dadf3861",
+    "jogos/fps-tom/assets/atlas.png": "b7d10c822728aaacf7d67cec6b8f8fbf199f57375f4ece0e24fc45127e614fae",
+    "jogos/fps-tom/assets/atlas3d.png": "de6f0831738f4ad57cd8ac76b729a63c3c5adb91e70fed7529ccf2df922648ce",
+    "jogos/fps-tom/assets/dano.wav": "8e2c620610dca6dd468b912dc195af53244a1de197cf363162edd6e9901b3d91",
+    "jogos/fps-tom/assets/explosao.wav": "783a83eced1d0f283a6e70b1dbba70e6ebfac338c036f50e7ad27f12311d0bc2",
+    "jogos/fps-tom/assets/fechar.wav": "49592bf570603826be3920adfbfabdff32c3c5e1e2287891c7101ac2955a54ce",
+    "jogos/fps-tom/assets/item.wav": "82624d2e15bb74b52c642d3456a2098d133d62dfef88204a1d522b59a7c8ecf6",
+    "jogos/fps-tom/assets/musica0.wav": "baff7df350e725d5dac73eb81a58664c26249ecd82b5319fa0366d50e37a0fd2",
+    "jogos/fps-tom/assets/musica1.wav": "87c5e66c359600cac8fd3619db0af0d6930f82a7af9261db75e3711ee943d0a3",
+    "jogos/fps-tom/assets/musica2.wav": "889e524a7b35f09c14271499578bca552d9640e19b826cdacae0e6c669f7276f",
+    "jogos/fps-tom/assets/tiro.wav": "1071cb5c2b3e04358925fbb430f6b360e661af50ee016647330ce841aab888d0",
+    "jogos/fps-tom/assets/tv.json": "8995674a91058da27a836909f90085062df7e07110cdb2d42b404f11964230bd",
+    "jogos/fps-tom/assets/tv.png": "20094afbdcf99af259b6887fb22fff0cb41dc13591f9a22c7e594a92aafd3d06",
+    "jogos/fps-tom/assets/tv.tom": "9cc889d1e354e536fe678f8a96d89f340d89402ff076c363ca5d03037330bf21",
+    "jogos/fps-tom/assets/tv.wav": "fdc96294baa48c98dee1379fae6f45d3773360df1acb0d98d4ede1fbb105702e",
+    "jogos/fps-tom/scripts/benchmark-memory.ps1": "e526d43b3f6f7613914a009527d5a4514fc50800cd06a17ddfdd26afabd4b8d9",
+    "jogos/fps-tom/scripts/benchmark.js": "9cc8fcfccdbf5252cd214fbec954924bd52caaf7f89c424b00a5490df4d01eca",
+    "jogos/fps-tom/src/audio3d.tom": "0040a9f443573769b39c8cf4ab13c8a084b7c2489f7d9ab10a96b0a1d4e3b795",
+    "jogos/fps-tom/src/cena3d.tom": "1571be0ce040fc6e82e77faeb3916aadbd090c32b79e8707fc49a3854f7ac393",
+    "jogos/fps-tom/src/clipe3d.tom": "8fbbba406a0e4bc452c874e5d7af9aa7cebb60295a67ea4cd412f520593344ea",
+    "jogos/fps-tom/src/desenho.tom": "b2a3b62346996d40b1ca7d90e7d7b05844a121ebda90cdb1d9381d1d7f8c6d1b",
+    "jogos/fps-tom/src/entrada-gpu.tom": "eb7aa5f42c8afd0fe821daba075cea82f8d3d16e6c9b42265e5bced57a1b00f5",
+    "jogos/fps-tom/src/entrada.tom": "9d03007e68e062481caaeb3a4121aeb5bfd8a50142cd758604d0a6ad806e3997",
+    "jogos/fps-tom/src/entrada3d.tom": "478ccb01c2854aab861def41e4a4d2a4c8d81c6ef72b97e25337f1ca39010b4d",
+    "jogos/fps-tom/src/fase.tom": "ac21c435885331fe3761186f39b51b8128d14cb73db3f71e390e07ef20c80fc4",
+    "jogos/fps-tom/src/fps-raycaster-gpu.tom": "ce47263caead13146cbced94074d0648b53d54f243444ea9783262c652600b46",
+    "jogos/fps-tom/src/fps-raycaster.tom": "be4d20a4c80290e01495ced3d373506aa881ec2694ccd71a3832c8586ba8b6f5",
+    "jogos/fps-tom/src/fps-tom-gpu.tom": "fd22279bca9480fc0eff0e2d65009429c2849cd8784ca6e27d49fe6481bdc870",
+    "jogos/fps-tom/src/fps-tom.tom": "c0d473030696fbba244dc8a31a01b3921ecd1cef8b023a2be70bfc90b5eeb651",
+    "jogos/fps-tom/src/hud.tom": "e7a449d21b5d2b00eac526ebf624969e80caed9e36bbadc090293c1d99162cc2",
+    "jogos/fps-tom/src/hud3d.tom": "8f894d454da7fbb3141c215a7170de0e4ef783cfaa2b80e36bd5e8a1ba60af76",
+    "jogos/fps-tom/src/interpolacao.tom": "e752672db3a55405f9aa95d8372e9fa46d1d1e34578160912662d8ef3e9bbaeb",
+    "jogos/fps-tom/src/lotes3d.tom": "84f78d1f8cb8521272c52d65095f8aa7b84434b71c835b37c15740b167790ce9",
+    "jogos/fps-tom/src/malha-visual3d.tom": "773fd2a1ef52b25651be35330644adc9059c1c9b25b4557d06fc55b24970a8b7",
+    "jogos/fps-tom/src/minimapa3d.tom": "e11d8da6b6e3cf3fbbfbff97d10b367a3d1e804f59a4041383856fd8624d4cec",
+    "jogos/fps-tom/src/modelo.tom": "ce0b2ed15a91d374fcf9fae2bd3242653e3c0490bef3e997e4317b60abcb4a03",
+    "jogos/fps-tom/src/mundo3d.tom": "dcfca26a2895a4995998d1b61158b5cb4972a88110543982d6ae4fa969c166df",
+    "jogos/fps-tom/src/painel.tom": "a17adae0b60b2e2fa9eab58a700992b001eb2e95b61318613af83302211fc5e6",
+    "jogos/fps-tom/src/portas.tom": "1d01844b9d8f4e5c7d0c9bcab9cb47ef41434dd351300526056d80748029a849",
+    "jogos/fps-tom/src/render-gpu.tom": "e4941630eef37c7902a77cbe89975f8017bdeace75199f7d17e759a628f23914",
+    "jogos/fps-tom/src/render.tom": "785e77646fd925c31bb82c8b1907d51c3a85dd89e07485f73ce3fce6a6f2781e",
+    "jogos/fps-tom/src/simulacao.tom": "3db285fdf65db96c359f7b71d11699efe32c53a3b220817fef3d1dc500c00453",
+    "jogos/fps-tom/src/simulacao3d.tom": "269d4dd548a79ec0d027119b036bfdfb88435611f88828ad72911ee807468531",
+    "jogos/fps-tom/src/tecnico3d.tom": "3c9519d250d9f700be7a764418c332c5f6fa366c8f0e46e3f7588abc7332204b",
+    "jogos/fps-tom/src/transparencias3d-gpu.tom": "2bad46cc2ca2242cf0bac8beaa428085fe4e098fb9899243be669634009eadb4",
+    "jogos/fps-tom/src/transparencias3d.tom": "c4273690071b657010084ece5d002f915ea0f80c8051375f9c1734538c6f0130",
+    "scripts/toolchain.json": "cf6db2a03651e46b7be40a020194ff8bd8d5049645bc1a7ecb98aef903d2eec3",
+    "tom-lang/core/analysis.js": "69c78d7bc1db7013b726f4a91808f0bc6971ecbf8caadef6b3d0ee2e5e286187",
+    "tom-lang/core/arguments.js": "c96360e7a0daa54076cfdae8779290b7aa92b5769f9747ae3f387f6a24979309",
+    "tom-lang/core/atomic-builtins.js": "8329f043e402cc133cbf9ca941488212825c22a3e52c23547d0ff13ff62d3476",
+    "tom-lang/core/atomic-effects.js": "4c89a95673fa9aa7e09574f302e98df4d316d6b873c1e48c724f41036c31c1a8",
+    "tom-lang/core/atomic-emitter.js": "d459eaaa1076a58291e81ff38c8d705bf825c7ca17daab570be9b471ca71fdae",
+    "tom-lang/core/atomic-shader.js": "1020c7ee154aa7adfaff1ffac8e75d795da55ca6ce62b0289dc780f0e5032bca",
+    "tom-lang/core/auto-builtins.js": "deadaf26803a6b1a6a8fc90105dacadaae7b41c1f66e71828c07ebf9b30b7045",
+    "tom-lang/core/auto-emitter.js": "6acdd1c1cb832740856c613c249c8e80ebd40a2e2256bed7571bff98e466b422",
+    "tom-lang/core/builtins.js": "862bfeed1865010954e99ba2e4c7c253fa0109cc2069b73660f0e39c3b4bf3c2",
+    "tom-lang/core/compiler.js": "361005350e7f44618d9c3234ee872d77a827081899b398f828f940fbf2dd6c47",
+    "tom-lang/core/decimal.js": "a26e4472b2750027f381987f54a9f0af7266afbc6d9481f35cee103b61815ab1",
+    "tom-lang/core/emitter.js": "d269a77d81c91a6134f7abc49968b278e791a276005ac6c71e1fa9cda8335ab0",
+    "tom-lang/core/entity-pool-builtins.js": "d2aefb8e3af4ca0890f7a1c498ad23aa573e2c1d43220f57766b11959e7e9d28",
+    "tom-lang/core/expressions.js": "3e6c86a988ce7fadecf1cc1f94f7d5ffebdbdcbb3249ca525204a785113daa1e",
+    "tom-lang/core/frame-profile-builtins.js": "463e52bdad64652bb21ef047ed22dd5f609069d487966d81f4b5a00f04dcee9d",
+    "tom-lang/core/gpu-analysis.js": "6d2def9eeb2bd61b443f9020e4cfcb401c328c11e5d3156195b17c357f3b739f",
+    "tom-lang/core/gpu-buffer-types.js": "4b459fbf6c711279b35fca0c6c2b3efca087db418a5bcab8f7cc443b9dc5ed34",
+    "tom-lang/core/gpu-material-builtins.js": "7fa586aeaa18800e1bdc25d14ce39cc892a200ce6602f67f88ee9de7e170974a",
+    "tom-lang/core/gpu-profile-builtins.js": "789af8295122b6fefc0e3536a9dd6ec4fb408a11c872b6c344192f8350488071",
+    "tom-lang/core/gpu-window-builtins.js": "883be551634f3a98bb0162d2c8b23c1088c7c01bfef9e657598427ad3f969291",
+    "tom-lang/core/graphics-shaders.js": "82eeba758c18ff69fd93d6d9f436cc2188c54e51104ec1f47ddff204bed64668",
+    "tom-lang/core/group-effects.js": "ec6840a4fd7f4f142f99db177501a41b4a429b9715b43908bd050462957d80ad",
+    "tom-lang/core/group-emitter.js": "33d601ec7ceb58fa42f4461aa3dab6a50fb8794a78917c2698aa46d7a4022086",
+    "tom-lang/core/group-shader.js": "bfd61df88428c78898e0dd34ebd031ec95f4965acc97e5eb1281728dea96a4d4",
+    "tom-lang/core/group-types.js": "54a79c68e62414ada6d991e26cf387df9a4dfcfd195b2909a930bfe5d2bbcf9c",
+    "tom-lang/core/input-ir.js": "43841853156c9a522ad985e37dbcf6b853f91f1c8f5701fd8c791ea4a6986eab",
+    "tom-lang/core/kernel-effects.js": "82793b7babb7cb11c451c166cc31b5f4a8efa2c6a05cc937dc72eb28a015bdde",
+    "tom-lang/core/kernel-ir.js": "6e04b38d58b369ab5a76c0e261469c4f31184c1ee6eccf922dc0003084c25028",
+    "tom-lang/core/kernel-llvm.js": "38092c163d294543aa4f2afd619107cc1e89dd8f7fd8c2a2a0edd55ff46dfda0",
+    "tom-lang/core/kernel-simd.js": "fcc5701961d2521b40b3728bda8bf6424ce11aec9d4e0694dd58b572695d3986",
+    "tom-lang/core/material-emitter.js": "3a6a5d104c10e02c8249fc454e5fcfc3c2837db4861bf20304855bae86fed579",
+    "tom-lang/core/material-shaders.js": "f6caf985d71647e2a3e7c0ce5135f7fc57a9785e9c6a02895e3550a6601d6944",
+    "tom-lang/core/module-loader.js": "1112f2d294416fd365b4d1c91327d9ab107a327e04f4f93b3021072121ee3272",
+    "tom-lang/core/modules.js": "602e4fcf611fc0b23ae3df1d0564673500b96aef615f925a14d4b4ecb7541886",
+    "tom-lang/core/native-build.js": "c1b4b3a671095b773b8206411238722e62abe0b981bbdfe909254186ffee32f2",
+    "tom-lang/core/nominal-types.js": "bf495c6855cda0b9d68262c317c48627ef02ea394df346a8e0802d10a2510cdb",
+    "tom-lang/core/numeric-buffer-types.js": "a0007b5a7ef0736be42bcf82d1fe2f2111d344489eff802345132ef871ba6cf1",
+    "tom-lang/core/parallel-emitter.js": "998aa40338e501dd5680324c0898c2c65b22f084217ee3c6960b831126d6e85a",
+    "tom-lang/core/parallel.js": "69c902786c038a310782daf8e9bd6e209e9ac14f2222495db89b6840b669f477",
+    "tom-lang/core/parser.js": "1a34150e40b6778e5a5f1959226893b02681cda079c598957d8c988946ac5f14",
+    "tom-lang/core/project-analysis.js": "4773c0bef7efc4f0c13e101701b1df0220171d9bfd88788ea0666075b0ae63e3",
+    "tom-lang/core/records.js": "ca5350225dd4613f7ab4bdc6fa53efe93f6e5b0f50d34611f47bd57b0c1679fb",
+    "tom-lang/core/recovery.js": "a48c6a571c993387572e2da7040752b7b759bdbaa76c6ba0c21fb9b62e519c4c",
+    "tom-lang/core/reduction-emitter.js": "726c4ee012a1f575f8a66b1e584382ed20cebffaa3e1ee7181198f1ecd92cc00",
+    "tom-lang/core/reduction-shader.js": "a677fab9cccbca7ade3fb11913eb2b6122596e887ecaf46dfa26cc5cb3a3a86a",
+    "tom-lang/core/resources.js": "39dca60b61752b790703b8cc2016e410deed2e962ea78d34fef6a29b1e367585",
+    "tom-lang/core/scalar-emitter.js": "5ba5635a31b47b131eebe1574086ad4d706c56e886e4b9502ae0e5edb603f12e",
+    "tom-lang/core/semantic.js": "354b9fe3768bb4220cc309ebb239697ff4e6f9b205adba18215388fafed02286",
+    "tom-lang/core/shader-emitter.js": "f40b594f5e38d112202cf3abf4cb9ec9cc94e08c02720c89c9c97cab55f12513",
+    "tom-lang/core/shader-integers.js": "85d7f688c32570ab6eb110ec87935df5e685be1d804a29046d4f3ebb68e19c2a",
+    "tom-lang/core/soa-access.js": "4ea35504fa392b5e9d7df41b181edcfdb20b470bc1457962a2af4fea383e88a6",
+    "tom-lang/core/source.js": "4bc2bd1ef54745054fe88fb85916f3288a4ce9fffb138c03f304c4694123b1ac",
+    "tom-lang/core/types.js": "485ed91f3493cb9306fd1be00ebe97a15c44ba7c1bc96065cce4e12c9721ef6c",
+    "tom-lang/runtime/stable/atomic_buffer_abi.h": "d91fa01e604c62fefd17b1df00cb4cf0f95e3183cbc7c4c165f787df31dbca96",
+    "tom-lang/runtime/stable/audio.c": "460ae7e210d06ffcf8f14f788f063eb4deae663e2b8c6a3e6eacc2811627e7e5",
+    "tom-lang/runtime/stable/auto.c": "fb78e0ab04e26c30329f33df7f6d0a53d89603ee6ca6537334f8ffa747c71dca",
+    "tom-lang/runtime/stable/catalog.h": "67021515f3989467d096f6db14086034f745f5773f9af110df5e0ec859731505",
+    "tom-lang/runtime/stable/channel.c": "5fa7cbdb2df760db9585e97b9041365418306813220f2a4215e1d07aa35a1970",
+    "tom-lang/runtime/stable/common.c": "aa026df3e16828d2cb24def47519d178dd79ee8197c460265a3b78ea9b355610",
+    "tom-lang/runtime/stable/data.c": "ac92be1151737e307c0441f68b3c5a8c8221a642bea40840d6933335d57dbba9",
+    "tom-lang/runtime/stable/decimal.c": "105f48a67bdafdc608851250bef4f82e7c5c70647ca3b414ccbe0b56df80cd2b",
+    "tom-lang/runtime/stable/document.c": "a6d104fb69244859af610fc3166c325b969f46b773ad4ad9805568257bff3f6a",
+    "tom-lang/runtime/stable/document.h": "b32d2c26de12cc9a6dac143729164b3616a8c0e90af685bf41d573f5e8ed1307",
+    "tom-lang/runtime/stable/docx.c": "bd9037577a5529d9abb155d6a60d96cf6e1b9d6f21e474014c5d452da16bbf16",
+    "tom-lang/runtime/stable/docx.h": "9ac5e39b6607067a3298f04924863ae18c7a37657c8dbd8385a78180fd935b16",
+    "tom-lang/runtime/stable/editor.c": "b7b498375ce3ef1455be18dc9fa2d082620de9eb195d3fe943f5659886055593",
+    "tom-lang/runtime/stable/editor_sqlite.c": "1f72de2639688da23bf6a116fd78fb7d12cac50ec1b6244c3e80396c6d9f0cda",
+    "tom-lang/runtime/stable/entity_pool.c": "fb9b0f5df79bd362db7380bb6cf117f2ba692522e800f35f1e7ddfcd5be43852",
+    "tom-lang/runtime/stable/entity_pool_internal.h": "6ea7c495caee46309544b8c1c9ed6a94f558695ee9e13b2f7871869004bb3213",
+    "tom-lang/runtime/stable/file_dialog.c": "0d398b3a2a9395fef88bd152616a921ccadfc606c7dc1342ae7d0d54cfea88df",
+    "tom-lang/runtime/stable/file_io.h": "8e1d4736a325926b4272b468c0ac71ca343dbe0ff04fb108063b935dc1a66717",
+    "tom-lang/runtime/stable/file_jobs.c": "b4e4ab5ae9e0fa9d40d213105f9e6587d82966ea4973f36e729b0edce154c8ea",
+    "tom-lang/runtime/stable/files.c": "2bb02cc51346fe3d7520d682dac8b37aa92a18efeaa0043993df263dd44c5172",
+    "tom-lang/runtime/stable/form.c": "bf7fbbf1cb0bad397e6b00abca5e13c026ce7cb961dfa989bc02011f4fdce137",
+    "tom-lang/runtime/stable/frame_profile.c": "3dc43a82587dd5b72734bb04068bbf73f32fb2972aeb1ca1caf48feef98ae570",
+    "tom-lang/runtime/stable/gpu.c": "39241db1cdd25a11a5a2b087b853399914221b1d3c01c55e9c17db80542d7eaa",
+    "tom-lang/runtime/stable/gpu_buffer_abi.h": "c46946676cad7b8162e79427e4e527c7c7ceca21c36a9fffe016523a3ee6114c",
+    "tom-lang/runtime/stable/gpu_compute.c": "573e25b9923e0e49d230c3c6e5c96c5b1d6acc9642bad8baa09874bda70a7565",
+    "tom-lang/runtime/stable/gpu_internal.h": "439596182cdcd1bbcbd11acbb503f0e5c39307350f0ae7e728ca6146a9e1612f",
+    "tom-lang/runtime/stable/gpu_material.c": "95504d3c66bb337cbd8cd6123caca27d563028b2960595413f5addb47e1d2b46",
+    "tom-lang/runtime/stable/gpu_present.c": "d959bdb312f47623558b4b60039fed1710e703113a9070fea89fbe1003f20f23",
+    "tom-lang/runtime/stable/gpu_reduce.c": "11321733a97a87d8479a376ce8b412d48e4d71a8036b7171e5c3007fcc433c30",
+    "tom-lang/runtime/stable/gpu_render.c": "062f21615b2c96b4620b4dd3365df66e5075a52e4086fe66a8e0f25243e55685",
+    "tom-lang/runtime/stable/gpu_timestamp_bridge.h": "ad476eea2473328cfd69eb139f7dfb56d6a1c23960c95d473a404570cd07e120",
+    "tom-lang/runtime/stable/group_abi.h": "65e42bf8f8bea0994ef7085833d81d5e195772fa087e68583316dd9c48377f73",
+    "tom-lang/runtime/stable/image.c": "1971edc48e5521d54b79402890097c14a81fb393307427a14de20fb3e21ba5a6",
+    "tom-lang/runtime/stable/json.c": "cae35f68d4f57896044d8b249a5e3551c9ea6b6038ee7695815bb18aea4181e2",
+    "tom-lang/runtime/stable/math.c": "40a2b4d3f72e6ab69e8b78d60df7bd633c3b8d477f4610929d36c0cad3c784b5",
+    "tom-lang/runtime/stable/numeric_buffer.c": "7222c43d61b4c5de018b05d0e67043df3806e910c192cdd7bb5a288c0684dc14",
+    "tom-lang/runtime/stable/numeric_buffer_abi.h": "2c3f4685892bc87a1723b5e68e17b65f495579aa16c664c48caa66f5466825a2",
+    "tom-lang/runtime/stable/numeric_buffer_internal.h": "847473f97c7c5e61261f9a38b468a6b24e3c47252f17289bec14db963857c980",
+    "tom-lang/runtime/stable/platform.c": "2826e4bb89a8fe4fd66ad982f17a390cf9d6b3c072bee26b266b58bc720862f9",
+    "tom-lang/runtime/stable/platform.h": "8aa48ae7881696dcd56849c4c4f3e8fe0f0953f108b4639ac8529f2ce7300bf5",
+    "tom-lang/runtime/stable/sqlite.c": "e02b2d94ff0c23c72a8c50dd3009bb2626e325638cee808210d9461884554811",
+    "tom-lang/runtime/stable/text.c": "4abf10c8dcb7ab4b707ba0f8364c14922266bd2cfafdd357ae7e1ba44754af98",
+    "tom-lang/runtime/stable/tom_runtime.h": "732f9bff88778d9b3de302070b1a35566a2ef5ebc0fed24c961de80800e11fa7",
+    "tom-lang/runtime/stable/ui.c": "714c82909b436147a58fed3d003518ac0eccb7d26c60ebc9e72f23fe111000a6",
+    "tom-lang/runtime/stable/ui_internal.h": "8a2c25491cb7d6ae2118433fc1f04e6dad7bc64c5e617b5d0f89786f35505e79",
+    "tom-lang/runtime/stable/xlsx.c": "efa4a65e42d0245f4883ff7d451b6ca869be8f9eed84962b938812c3192a1e68",
+    "tom-lang/runtime/stable/xlsx.h": "18102fe14ff09710b8d51f03bd6af7adfff6649e980cc77bcb025b22bd7699a8",
+    "tom-lang/stdlib/animacao.tom": "85fdce75758f23248bc819038adf7a8b294618b63e85cbe15ce99482fbf45c85",
+    "tom-lang/stdlib/arquivos.tom": "a7b1d83888856a7cc59937d06ea91d69f5b180c29055efd7e32fe40e1231cb0d",
+    "tom-lang/stdlib/camera3d.tom": "32c54101f4c998311f222ab02161092ff22d4f322d775aab306264b087292ee2",
+    "tom-lang/stdlib/canvas.tom": "522a07a00a3a9b19a259940cb44813d78cb61c25b72b1165f19835fd91f62e32",
+    "tom-lang/stdlib/cores.tom": "1a2abafb12e540071aed6cfc96df11bdfd41d938b8fba4c5bf96886c2c15d815",
+    "tom-lang/stdlib/dados.tom": "fcc38ef968e7af4b46755bdf89080ea925fdeb46fd4a89cf38bdfc116f2e6176",
+    "tom-lang/stdlib/despacho.tom": "8a0457ca4d590db85be72530597beafc9ee3e55ccf33124a0a7fd131c6935cc2",
+    "tom-lang/stdlib/docx.tom": "c8976a6ba163994367ef59f4ba5a411a881aadb1816b9efbc54c2fc169f706f9",
+    "tom-lang/stdlib/ecs.tom": "bc8fb992a83adc94ee74bdbf1b0fea07d2715b789eab967a42350b3d991edca6",
+    "tom-lang/stdlib/editor.tom": "4d7f62021a7ed502de0f1ef774f868c7eb62d2332c4b55784a93478a72485d1c",
+    "tom-lang/stdlib/editor_sqlite.tom": "8b7a13a5e322f0aa0f94b630c0e0549814af2dd17470eec8f764e3e67bf06ab3",
+    "tom-lang/stdlib/efeitos.tom": "7a1202d26b2d223b8bf645bd8ccb083292e91924c373ac4bf250ae2baff2bd5c",
+    "tom-lang/stdlib/entidades.tom": "b47ec03e9d7d6138bee3c39a26aef6ec45b6da376e2081929e13ca9c4198f7a2",
+    "tom-lang/stdlib/entrada.tom": "72e81895685b21237315769f38944ebf1b79b8407512db7b493066e6535e38e2",
+    "tom-lang/stdlib/formulario.tom": "f66a0b42b76bb92c9ad1e0fa07177b876e7056258c21b2f640da669372c9b388",
+    "tom-lang/stdlib/geometria.tom": "17dc1c40fb2c75728f4b57a5387df90905f5c99a95f3925404d9209487399b9a",
+    "tom-lang/stdlib/geometria3d.tom": "94547417e447653530a2359592fbc0a0642e3c193b3ba123d6ef94e6f3f93c5f",
+    "tom-lang/stdlib/gpu2d.tom": "078386f6b8fec1d37cc8f92a83396b8b06166032ed6c4a98baf9148e27fab8b8",
+    "tom-lang/stdlib/grafos.tom": "8c1610a8d3be174cf059184ab1305532d4f6fe17ec590ea30783b96cb6f7e210",
+    "tom-lang/stdlib/grafosmodelo.tom": "79372e04590ea81c6c10a3ad6b5dcf88444703e3b2b8c2e5bd1f037859c76828",
+    "tom-lang/stdlib/grupos.tom": "69c8c715a4cf3ca1e1acee91cc9de0c612980c88919dacbf0b904e666e270a49",
+    "tom-lang/stdlib/matrizes.tom": "e7cec01cfa298d4a317d315cae50dc658712e54ac26b54482c4fcc7e75b8560d",
+    "tom-lang/stdlib/musica.tom": "27d5bc1049cda0b5300a6fe9f67b7eb35751c759d08e98fd64ac6bb23378167b",
+    "tom-lang/stdlib/perfil.tom": "bb85b00e964ada045921ba5dac37470cbf3d12d9d10d495c0bef67a764ac0393",
+    "tom-lang/stdlib/perfilgpu.tom": "08a3a04510571302ffa7bc89afcd2f3933c5080b39b6174fadea46d1597a4054",
+    "tom-lang/stdlib/raster3d.tom": "7d4ca730754547d8815bbac7e6eb0a821cd0bea9c20aa95cce533484a4bf365e",
+    "tom-lang/stdlib/reducoes.tom": "1ebb9eb30d04b1c9bfa46a77c573fcac9387ce91de26249f1434d0ad21c2885b",
+    "tom-lang/stdlib/replay.tom": "1ef17b7e6f5a81c1eb6aacede2bccf93c10f6c40f98bfeadb50656c00908fe48",
+    "tom-lang/stdlib/sessao.tom": "b626af4f1d26f85624d9d9e2bc07c8888b2dbcfb271ba2b0df699fd7e1f409ca",
+    "tom-lang/stdlib/simulacao.tom": "c51a9f84b27697adb1a74835b9dfa4362ab49b5671d0fc8fa31d470021f29a18",
+    "tom-lang/stdlib/sqlite.tom": "ea88ae65b9a1de2780f1ba1518db02e59b048c9def12e3428de88f90a3e5c484",
+    "tom-lang/stdlib/teclado.tom": "20b9884fe4b1244b84f13a1ccbf90ac4034bfb2711cf8e279ba1804c23eeebc4",
+    "tom-lang/stdlib/ui.tom": "1f388f11570405e486dbb9644e15c313890d133d89100c1c69b4c85bf51c8800",
+    "tom-lang/stdlib/vetores.tom": "53e7bca17c5f84e2615a4eb87bd26fb731bdfabcf4ccb7e172ed8ab4dabe69e9"
+  },
+  "resultados": [
+    {
+      "version": "3d",
+      "platform": "linux",
+      "osRelease": "6.18.40.1-microsoft-standard-WSL2",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "sdl",
+      "driver": "dummy",
+      "window": [
+        320,
+        200
+      ],
+      "optimize": "O2",
+      "stress": false,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": 49901568,
+      "peakWorkingSetBytes": null,
+      "compiler": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "72a6e6cbf0f687f6d723ca82f5594b26031bf0f7843bee2fec1e029a63d095b6",
+      "metadata": [
+        "PREPARE=0,2155095,89679583,1082,191,1620",
+        "PREPARE=1,1683296,317672484,2214,455,3008",
+        "PREPARE=2,5454047,1021011971,4008,846,5356"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 0.360211,
+            "p95Ms": 0.728682,
+            "maxMs": 3.785832
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.038359,
+            "p95Ms": 0.080687,
+            "maxMs": 0.241179
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.211244,
+            "p95Ms": 0.389172,
+            "maxMs": 3.635324
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.090341,
+            "p95Ms": 0.174636,
+            "maxMs": 0.397246
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002039,
+            "p95Ms": 0.00301,
+            "maxMs": 0.022676
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.406082,
+            "p95Ms": 0.635689,
+            "maxMs": 0.965176
+          },
+          "hud": {
+            "p50Ms": 0.202077,
+            "p95Ms": 0.306064,
+            "maxMs": 0.568428
+          },
+          "audio": {
+            "p50Ms": 0.030268,
+            "p95Ms": 0.060809,
+            "maxMs": 0.224236
+          },
+          "transfer": {
+            "p50Ms": 0.045193,
+            "p95Ms": 0.08835,
+            "maxMs": 0.285625
+          },
+          "drawing": {
+            "p50Ms": 8.079722,
+            "p95Ms": 8.96857,
+            "maxMs": 9.474893
+          },
+          "presentation": {
+            "p50Ms": 0.335899,
+            "p95Ms": 0.50074,
+            "maxMs": 0.749848
+          },
+          "frame": {
+            "p50Ms": 9.568624,
+            "p95Ms": 10.648789,
+            "maxMs": 13.539972
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 1.076934,
+            "p95Ms": 1.648519,
+            "maxMs": 9.383177
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.064888,
+            "p95Ms": 0.128613,
+            "maxMs": 0.189276
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.692144,
+            "p95Ms": 1.142801,
+            "maxMs": 8.973979
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.291265,
+            "p95Ms": 0.431221,
+            "maxMs": 0.819583
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.00196,
+            "p95Ms": 0.00274,
+            "maxMs": 0.030516
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.683307,
+            "p95Ms": 1.104367,
+            "maxMs": 1.649837
+          },
+          "hud": {
+            "p50Ms": 0.21891,
+            "p95Ms": 0.336393,
+            "maxMs": 0.561829
+          },
+          "audio": {
+            "p50Ms": 0.143148,
+            "p95Ms": 0.273923,
+            "maxMs": 0.52975
+          },
+          "transfer": {
+            "p50Ms": 0.044066,
+            "p95Ms": 0.085159,
+            "maxMs": 0.174982
+          },
+          "drawing": {
+            "p50Ms": 7.468024,
+            "p95Ms": 8.33873,
+            "maxMs": 9.237122
+          },
+          "presentation": {
+            "p50Ms": 0.337674,
+            "p95Ms": 0.51977,
+            "maxMs": 0.68497
+          },
+          "frame": {
+            "p50Ms": 10.162794,
+            "p95Ms": 11.351534,
+            "maxMs": 18.751719
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 2.928859,
+            "p95Ms": 3.93793,
+            "maxMs": 20.53444
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.109485,
+            "p95Ms": 0.204602,
+            "maxMs": 0.780524
+          },
+          "navigationAndAI": {
+            "p50Ms": 1.981865,
+            "p95Ms": 2.905894,
+            "maxMs": 19.570162
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.787068,
+            "p95Ms": 1.099058,
+            "maxMs": 1.433083
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002017,
+            "p95Ms": 0.002988,
+            "maxMs": 0.017089
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.201698,
+            "p95Ms": 1.674778,
+            "maxMs": 2.321714
+          },
+          "hud": {
+            "p50Ms": 0.240623,
+            "p95Ms": 0.408727,
+            "maxMs": 0.574616
+          },
+          "audio": {
+            "p50Ms": 0.14118,
+            "p95Ms": 0.26105,
+            "maxMs": 0.40412
+          },
+          "transfer": {
+            "p50Ms": 0.044835,
+            "p95Ms": 0.084003,
+            "maxMs": 0.173867
+          },
+          "drawing": {
+            "p50Ms": 8.109157,
+            "p95Ms": 9.014709,
+            "maxMs": 9.948649
+          },
+          "presentation": {
+            "p50Ms": 0.337876,
+            "p95Ms": 0.498613,
+            "maxMs": 0.821675
+          },
+          "frame": {
+            "p50Ms": 13.182573,
+            "p95Ms": 14.562689,
+            "maxMs": 31.728831
+          }
+        }
+      ],
+      "time": "2026-10-05T00:06:47.605Z",
+      "sdlRenderer": "software",
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 2155095,
+          "visualAndBakeNs": 89679583,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 1683296,
+          "visualAndBakeNs": 317672484,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 5454047,
+          "visualAndBakeNs": 1021011971,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "bc8211464bfdc13695590820a2e24f59b9f124f0880feb58b664b7243dcdc235",
+      "stressProtocol": null,
+      "rawReport": "build/benchmark/linux/3d-sdl-offscreen/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": true
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": true
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": true
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "linux",
+      "osRelease": "6.18.40.1-microsoft-standard-WSL2",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "sdl",
+      "driver": "dummy",
+      "window": [
+        320,
+        200
+      ],
+      "optimize": "O2",
+      "stress": true,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": 50053120,
+      "peakWorkingSetBytes": null,
+      "compiler": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "fa6492812a0f5ef8da511b2b09108372a27be9a37275621147817c9c0b8cb71f",
+      "metadata": [
+        "PREPARE=0,3985696,85510486,1082,191,1620",
+        "STRESS_ACTORS=128",
+        "PREPARE=1,1765408,316130683,2214,455,3008",
+        "STRESS_ACTORS=128",
+        "PREPARE=2,5131538,975107302,4008,846,5356",
+        "STRESS_ACTORS=128"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 9.178184,
+            "p95Ms": 10.624447,
+            "maxMs": 195.462539
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.074674,
+            "p95Ms": 0.139796,
+            "maxMs": 0.276288
+          },
+          "navigationAndAI": {
+            "p50Ms": 7.417425,
+            "p95Ms": 8.685052,
+            "maxMs": 11.221335
+          },
+          "combatAndQueries": {
+            "p50Ms": 1.642203,
+            "p95Ms": 2.072981,
+            "maxMs": 189.560947
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002521,
+            "p95Ms": 0.009275,
+            "maxMs": 0.074999
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.646278,
+            "p95Ms": 2.596884,
+            "maxMs": 3.383004
+          },
+          "hud": {
+            "p50Ms": 1.113858,
+            "p95Ms": 1.599611,
+            "maxMs": 1.853757
+          },
+          "audio": {
+            "p50Ms": 0.005483,
+            "p95Ms": 0.467127,
+            "maxMs": 1.229991
+          },
+          "transfer": {
+            "p50Ms": 0.05062,
+            "p95Ms": 0.089243,
+            "maxMs": 0.202055
+          },
+          "drawing": {
+            "p50Ms": 18.56845,
+            "p95Ms": 52.686768,
+            "maxMs": 81.890421
+          },
+          "presentation": {
+            "p50Ms": 0.349707,
+            "p95Ms": 0.529673,
+            "maxMs": 0.853913
+          },
+          "frame": {
+            "p50Ms": 28.997343,
+            "p95Ms": 69.188653,
+            "maxMs": 226.788345
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 18.522924,
+            "p95Ms": 26.409543,
+            "maxMs": 594.19945
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.14471,
+            "p95Ms": 0.25217,
+            "maxMs": 0.510678
+          },
+          "navigationAndAI": {
+            "p50Ms": 14.997261,
+            "p95Ms": 22.771327,
+            "maxMs": 28.167811
+          },
+          "combatAndQueries": {
+            "p50Ms": 3.237035,
+            "p95Ms": 3.990071,
+            "maxMs": 581.794134
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.00253,
+            "p95Ms": 0.007988,
+            "maxMs": 0.033602
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.985065,
+            "p95Ms": 2.777939,
+            "maxMs": 3.255605
+          },
+          "hud": {
+            "p50Ms": 2.320152,
+            "p95Ms": 2.920599,
+            "maxMs": 3.625241
+          },
+          "audio": {
+            "p50Ms": 0.03462,
+            "p95Ms": 0.775362,
+            "maxMs": 2.394287
+          },
+          "transfer": {
+            "p50Ms": 0.04835,
+            "p95Ms": 0.105498,
+            "maxMs": 0.307738
+          },
+          "drawing": {
+            "p50Ms": 15.338005,
+            "p95Ms": 60.550081,
+            "maxMs": 63.903291
+          },
+          "presentation": {
+            "p50Ms": 0.356697,
+            "p95Ms": 0.518764,
+            "maxMs": 0.728602
+          },
+          "frame": {
+            "p50Ms": 36.877942,
+            "p95Ms": 91.230339,
+            "maxMs": 629.792292
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 32.71535,
+            "p95Ms": 46.100922,
+            "maxMs": 1056.681006
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.248639,
+            "p95Ms": 0.439937,
+            "maxMs": 0.713249
+          },
+          "navigationAndAI": {
+            "p50Ms": 26.404937,
+            "p95Ms": 39.579088,
+            "maxMs": 54.641113
+          },
+          "combatAndQueries": {
+            "p50Ms": 5.835914,
+            "p95Ms": 6.805756,
+            "maxMs": 1035.613202
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002569,
+            "p95Ms": 0.009612,
+            "maxMs": 0.044845
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.523499,
+            "p95Ms": 3.586557,
+            "maxMs": 4.852299
+          },
+          "hud": {
+            "p50Ms": 4.092384,
+            "p95Ms": 4.914218,
+            "maxMs": 5.465454
+          },
+          "audio": {
+            "p50Ms": 0.060423,
+            "p95Ms": 1.375694,
+            "maxMs": 4.362207
+          },
+          "transfer": {
+            "p50Ms": 0.047436,
+            "p95Ms": 0.092337,
+            "maxMs": 0.187659
+          },
+          "drawing": {
+            "p50Ms": 16.07177,
+            "p95Ms": 59.200676,
+            "maxMs": 61.991484
+          },
+          "presentation": {
+            "p50Ms": 0.365933,
+            "p95Ms": 0.516203,
+            "maxMs": 0.825422
+          },
+          "frame": {
+            "p50Ms": 54.50033,
+            "p95Ms": 110.901623,
+            "maxMs": 1094.263057
+          }
+        }
+      ],
+      "time": "2026-10-05T00:07:53.116Z",
+      "sdlRenderer": "software",
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 3985696,
+          "visualAndBakeNs": 85510486,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 1765408,
+          "visualAndBakeNs": 316130683,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 5131538,
+          "visualAndBakeNs": 975107302,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "6652e882fbbec07af953e3af067c2de50b73ed2481bd5b803600ae2350221db4",
+      "stressProtocol": "128 armed actors remain active; player and actor health restored before each timed step; collision, projectiles, damage, navigation and effects enabled",
+      "rawReport": "build/benchmark/linux/3d-sdl-offscreen-stress/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": false
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "linux",
+      "osRelease": "6.18.40.1-microsoft-standard-WSL2",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "sdl",
+      "driver": "desktop",
+      "window": [
+        960,
+        600
+      ],
+      "optimize": "O2",
+      "stress": false,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": 54276096,
+      "peakWorkingSetBytes": null,
+      "compiler": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "32490d9c26b664a4df5068779969f94030491242ae2f3085838f5d4808aaac76",
+      "metadata": [
+        "PREPARE=0,2145845,86030049,1082,191,1620",
+        "PREPARE=1,1719832,302338028,2214,455,3008",
+        "PREPARE=2,4509361,969118728,4008,846,5356"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 0.372692,
+            "p95Ms": 0.756008,
+            "maxMs": 3.610993
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.04163,
+            "p95Ms": 0.093975,
+            "maxMs": 0.242526
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.223664,
+            "p95Ms": 0.471421,
+            "maxMs": 3.485247
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.091152,
+            "p95Ms": 0.154066,
+            "maxMs": 0.272463
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002167,
+            "p95Ms": 0.003324,
+            "maxMs": 0.011145
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.403019,
+            "p95Ms": 0.627572,
+            "maxMs": 1.184674
+          },
+          "hud": {
+            "p50Ms": 0.200197,
+            "p95Ms": 0.339623,
+            "maxMs": 0.970711
+          },
+          "audio": {
+            "p50Ms": 0.029934,
+            "p95Ms": 0.058234,
+            "maxMs": 0.257723
+          },
+          "transfer": {
+            "p50Ms": 0.049811,
+            "p95Ms": 0.096065,
+            "maxMs": 0.290844
+          },
+          "drawing": {
+            "p50Ms": 8.022719,
+            "p95Ms": 8.87816,
+            "maxMs": 9.480623
+          },
+          "presentation": {
+            "p50Ms": 4.566203,
+            "p95Ms": 5.533898,
+            "maxMs": 6.803068
+          },
+          "frame": {
+            "p50Ms": 13.962161,
+            "p95Ms": 15.433883,
+            "maxMs": 17.153021
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 1.056697,
+            "p95Ms": 1.584157,
+            "maxMs": 8.950104
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.069718,
+            "p95Ms": 0.152574,
+            "maxMs": 0.295339
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.686114,
+            "p95Ms": 1.18847,
+            "maxMs": 8.66098
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.265971,
+            "p95Ms": 0.416479,
+            "maxMs": 0.760102
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002215,
+            "p95Ms": 0.003436,
+            "maxMs": 0.031788
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.681401,
+            "p95Ms": 1.019672,
+            "maxMs": 1.497226
+          },
+          "hud": {
+            "p50Ms": 0.214192,
+            "p95Ms": 0.372506,
+            "maxMs": 0.700414
+          },
+          "audio": {
+            "p50Ms": 0.131101,
+            "p95Ms": 0.265711,
+            "maxMs": 0.440728
+          },
+          "transfer": {
+            "p50Ms": 0.045731,
+            "p95Ms": 0.088206,
+            "maxMs": 0.224375
+          },
+          "drawing": {
+            "p50Ms": 7.379581,
+            "p95Ms": 8.22486,
+            "maxMs": 8.779172
+          },
+          "presentation": {
+            "p50Ms": 4.518701,
+            "p95Ms": 5.566416,
+            "maxMs": 6.71336
+          },
+          "frame": {
+            "p50Ms": 14.173881,
+            "p95Ms": 15.905189,
+            "maxMs": 23.520168
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 2.865684,
+            "p95Ms": 4.18027,
+            "maxMs": 19.523036
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.115578,
+            "p95Ms": 0.242699,
+            "maxMs": 0.409835
+          },
+          "navigationAndAI": {
+            "p50Ms": 1.920292,
+            "p95Ms": 2.893542,
+            "maxMs": 18.57112
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.747446,
+            "p95Ms": 1.077193,
+            "maxMs": 1.412652
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002266,
+            "p95Ms": 0.003428,
+            "maxMs": 0.026078
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.123345,
+            "p95Ms": 1.654642,
+            "maxMs": 2.28
+          },
+          "hud": {
+            "p50Ms": 0.238847,
+            "p95Ms": 0.350849,
+            "maxMs": 0.714211
+          },
+          "audio": {
+            "p50Ms": 0.094966,
+            "p95Ms": 0.240431,
+            "maxMs": 0.410181
+          },
+          "transfer": {
+            "p50Ms": 0.047254,
+            "p95Ms": 0.093762,
+            "maxMs": 0.343308
+          },
+          "drawing": {
+            "p50Ms": 8.021494,
+            "p95Ms": 8.969176,
+            "maxMs": 9.840691
+          },
+          "presentation": {
+            "p50Ms": 4.436177,
+            "p95Ms": 5.463329,
+            "maxMs": 7.042768
+          },
+          "frame": {
+            "p50Ms": 17.074429,
+            "p95Ms": 19.678308,
+            "maxMs": 34.422453
+          }
+        }
+      ],
+      "time": "2026-10-05T00:08:26.627Z",
+      "sdlRenderer": "platform default",
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 2145845,
+          "visualAndBakeNs": 86030049,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 1719832,
+          "visualAndBakeNs": 302338028,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 4509361,
+          "visualAndBakeNs": 969118728,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "c6b9eb182f73d7cbf80196c6b472447c2387065a6ec054155203e18b9a45ae61",
+      "stressProtocol": null,
+      "rawReport": "build/benchmark/linux/3d-sdl-desktop/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": true
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": true
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": false
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "linux",
+      "osRelease": "6.18.40.1-microsoft-standard-WSL2",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "gpu",
+      "driver": "offscreen",
+      "window": null,
+      "optimize": "O2",
+      "stress": false,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": 144072704,
+      "peakWorkingSetBytes": null,
+      "compiler": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "128b98499b80cc8bdc34948a48a175ebc63bd4a4e86b7161e96de1843f716e16",
+      "metadata": [
+        "vulkan | llvmpipe (LLVM 21.1.8, 256 bits) | llvmpipe",
+        "PREPARE=0,2057168,84578150,1082,191,1620",
+        "PREPARE=1,2009441,322619258,2214,455,3008",
+        "PREPARE=2,4711618,976276304,4008,846,5356",
+        "GPU_enviadosBytes=260869824",
+        "GPU_recebidosBytes=0",
+        "GPU_buffersBytes=8388624",
+        "GPU_texturasBytes=7747584",
+        "GPU_stagingBytes=0",
+        "GPU_scratchBytes=0",
+        "GPU_frameUploadBytes=245665440",
+        "GPU_TIMESTAMPS=available"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 0.388032,
+            "p95Ms": 0.700185,
+            "maxMs": 4.65971
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.046316,
+            "p95Ms": 0.074171,
+            "maxMs": 0.126215
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.229585,
+            "p95Ms": 0.508283,
+            "maxMs": 4.520677
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.104141,
+            "p95Ms": 0.163458,
+            "maxMs": 0.23153
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.00203,
+            "p95Ms": 0.002633,
+            "maxMs": 0.003763
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.416423,
+            "p95Ms": 0.672788,
+            "maxMs": 0.79848
+          },
+          "hud": {
+            "p50Ms": 0.212183,
+            "p95Ms": 0.411167,
+            "maxMs": 0.583368
+          },
+          "audio": {
+            "p50Ms": 0.006333,
+            "p95Ms": 0.084919,
+            "maxMs": 0.247843
+          },
+          "transfer": {
+            "p50Ms": 1.414755,
+            "p95Ms": 2.765133,
+            "maxMs": 3.134833
+          },
+          "drawing": {
+            "p50Ms": 12.929618,
+            "p95Ms": 14.458163,
+            "maxMs": 15.843391
+          },
+          "presentation": {
+            "p50Ms": 0.00092,
+            "p95Ms": 0.001631,
+            "maxMs": 0.003469
+          },
+          "frame": {
+            "p50Ms": 15.759502,
+            "p95Ms": 18.424563,
+            "maxMs": 20.612255
+          },
+          "gpuSubmissions": {
+            "p50Ms": 9.689277,
+            "p95Ms": 10.897595,
+            "maxMs": 11.93684
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 1.196354,
+            "p95Ms": 1.919353,
+            "maxMs": 10.051583
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.079173,
+            "p95Ms": 0.134461,
+            "maxMs": 0.194569
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.788952,
+            "p95Ms": 1.405476,
+            "maxMs": 9.709284
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.291857,
+            "p95Ms": 0.437264,
+            "maxMs": 0.497073
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.001942,
+            "p95Ms": 0.002622,
+            "maxMs": 0.004784
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.719264,
+            "p95Ms": 0.995035,
+            "maxMs": 1.306857
+          },
+          "hud": {
+            "p50Ms": 0.213483,
+            "p95Ms": 0.328718,
+            "maxMs": 0.46224
+          },
+          "audio": {
+            "p50Ms": 0.055604,
+            "p95Ms": 0.216321,
+            "maxMs": 0.409411
+          },
+          "transfer": {
+            "p50Ms": 1.600156,
+            "p95Ms": 2.926019,
+            "maxMs": 3.293481
+          },
+          "drawing": {
+            "p50Ms": 15.076639,
+            "p95Ms": 16.662473,
+            "maxMs": 18.976282
+          },
+          "presentation": {
+            "p50Ms": 0.001012,
+            "p95Ms": 0.001598,
+            "maxMs": 0.004642
+          },
+          "frame": {
+            "p50Ms": 19.296818,
+            "p95Ms": 21.958434,
+            "maxMs": 29.195686
+          },
+          "gpuSubmissions": {
+            "p50Ms": 11.371925,
+            "p95Ms": 12.594791,
+            "maxMs": 13.782751
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 2.921778,
+            "p95Ms": 3.976357,
+            "maxMs": 20.455745
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.122582,
+            "p95Ms": 0.197317,
+            "maxMs": 0.274607
+          },
+          "navigationAndAI": {
+            "p50Ms": 2.002706,
+            "p95Ms": 2.907295,
+            "maxMs": 19.506883
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.770124,
+            "p95Ms": 0.971604,
+            "maxMs": 1.154874
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002042,
+            "p95Ms": 0.002963,
+            "maxMs": 0.044004
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.215579,
+            "p95Ms": 1.717675,
+            "maxMs": 2.444862
+          },
+          "hud": {
+            "p50Ms": 0.23736,
+            "p95Ms": 0.373997,
+            "maxMs": 0.474126
+          },
+          "audio": {
+            "p50Ms": 0.077424,
+            "p95Ms": 0.24946,
+            "maxMs": 0.297031
+          },
+          "transfer": {
+            "p50Ms": 1.72622,
+            "p95Ms": 3.143123,
+            "maxMs": 3.659124
+          },
+          "drawing": {
+            "p50Ms": 15.494414,
+            "p95Ms": 17.020525,
+            "maxMs": 18.485098
+          },
+          "presentation": {
+            "p50Ms": 0.000956,
+            "p95Ms": 0.001598,
+            "maxMs": 0.004812
+          },
+          "frame": {
+            "p50Ms": 22.269601,
+            "p95Ms": 24.745087,
+            "maxMs": 40.537035
+          },
+          "gpuSubmissions": {
+            "p50Ms": 11.78074,
+            "p95Ms": 13.211727,
+            "maxMs": 14.770093
+          }
+        }
+      ],
+      "time": "2026-10-05T00:09:07.501Z",
+      "sdlRenderer": null,
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 2057168,
+          "visualAndBakeNs": 84578150,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 2009441,
+          "visualAndBakeNs": 322619258,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 4711618,
+          "visualAndBakeNs": 976276304,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "aaeaa6562e8335219e25e4d239cd8ccb0d612811d1cc454de0dab0ebf5d36d45",
+      "stressProtocol": null,
+      "rawReport": "build/benchmark/linux/3d-gpu-offscreen/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": false
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "linux",
+      "osRelease": "6.18.40.1-microsoft-standard-WSL2",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "gpu",
+      "driver": "offscreen",
+      "window": null,
+      "optimize": "O2",
+      "stress": true,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": 145850368,
+      "peakWorkingSetBytes": null,
+      "compiler": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "69d13767740b1bb30a65f60290b5641b7eb5c8f8dc373ac26f7f3f49089bd496",
+      "metadata": [
+        "vulkan | llvmpipe (LLVM 21.1.8, 256 bits) | llvmpipe",
+        "PREPARE=0,1751116,82734955,1082,191,1620",
+        "STRESS_ACTORS=128",
+        "PREPARE=1,1860337,306924924,2214,455,3008",
+        "STRESS_ACTORS=128",
+        "PREPARE=2,4805757,960971726,4008,846,5356",
+        "STRESS_ACTORS=128",
+        "GPU_enviadosBytes=359264160",
+        "GPU_recebidosBytes=0",
+        "GPU_buffersBytes=8388624",
+        "GPU_texturasBytes=7747584",
+        "GPU_stagingBytes=0",
+        "GPU_scratchBytes=0",
+        "GPU_frameUploadBytes=344059776",
+        "GPU_TIMESTAMPS=available"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 9.008503,
+            "p95Ms": 10.98941,
+            "maxMs": 187.926515
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.084106,
+            "p95Ms": 0.161203,
+            "maxMs": 0.235079
+          },
+          "navigationAndAI": {
+            "p50Ms": 7.215093,
+            "p95Ms": 8.851052,
+            "maxMs": 11.465324
+          },
+          "combatAndQueries": {
+            "p50Ms": 1.669801,
+            "p95Ms": 2.210831,
+            "maxMs": 182.592779
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002724,
+            "p95Ms": 0.027369,
+            "maxMs": 0.039918
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.650783,
+            "p95Ms": 2.476554,
+            "maxMs": 4.835441
+          },
+          "hud": {
+            "p50Ms": 1.133548,
+            "p95Ms": 1.549604,
+            "maxMs": 1.979528
+          },
+          "audio": {
+            "p50Ms": 0.005867,
+            "p95Ms": 0.535802,
+            "maxMs": 1.187385
+          },
+          "transfer": {
+            "p50Ms": 1.737073,
+            "p95Ms": 3.041983,
+            "maxMs": 3.719322
+          },
+          "drawing": {
+            "p50Ms": 13.971842,
+            "p95Ms": 17.058633,
+            "maxMs": 18.784523
+          },
+          "presentation": {
+            "p50Ms": 0.000974,
+            "p95Ms": 0.001666,
+            "maxMs": 0.004364
+          },
+          "frame": {
+            "p50Ms": 27.179921,
+            "p95Ms": 31.95595,
+            "maxMs": 213.133253
+          },
+          "gpuSubmissions": {
+            "p50Ms": 10.507996,
+            "p95Ms": 12.984517,
+            "maxMs": 14.817851
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 18.281227,
+            "p95Ms": 25.537883,
+            "maxMs": 568.275643
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.166129,
+            "p95Ms": 0.312745,
+            "maxMs": 0.401762
+          },
+          "navigationAndAI": {
+            "p50Ms": 14.677516,
+            "p95Ms": 21.987655,
+            "maxMs": 28.378159
+          },
+          "combatAndQueries": {
+            "p50Ms": 3.335181,
+            "p95Ms": 3.988415,
+            "maxMs": 556.275778
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002539,
+            "p95Ms": 0.025969,
+            "maxMs": 0.096154
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.951257,
+            "p95Ms": 2.635581,
+            "maxMs": 3.256124
+          },
+          "hud": {
+            "p50Ms": 2.240698,
+            "p95Ms": 2.734785,
+            "maxMs": 3.164117
+          },
+          "audio": {
+            "p50Ms": 0.037797,
+            "p95Ms": 0.794911,
+            "maxMs": 2.609191
+          },
+          "transfer": {
+            "p50Ms": 1.764979,
+            "p95Ms": 3.212306,
+            "maxMs": 3.876227
+          },
+          "drawing": {
+            "p50Ms": 15.679365,
+            "p95Ms": 20.549061,
+            "maxMs": 24.465754
+          },
+          "presentation": {
+            "p50Ms": 0.000975,
+            "p95Ms": 0.001598,
+            "maxMs": 0.003138
+          },
+          "frame": {
+            "p50Ms": 39.830344,
+            "p95Ms": 51.526938,
+            "maxMs": 599.682873
+          },
+          "gpuSubmissions": {
+            "p50Ms": 12.001876,
+            "p95Ms": 16.205739,
+            "maxMs": 19.04842
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 32.533707,
+            "p95Ms": 45.626963,
+            "maxMs": 1016.811415
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.297103,
+            "p95Ms": 0.566329,
+            "maxMs": 0.671716
+          },
+          "navigationAndAI": {
+            "p50Ms": 26.349009,
+            "p95Ms": 39.56438,
+            "maxMs": 55.933469
+          },
+          "combatAndQueries": {
+            "p50Ms": 5.704995,
+            "p95Ms": 6.61347,
+            "maxMs": 995.528356
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002763,
+            "p95Ms": 0.0268,
+            "maxMs": 0.038644
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.437114,
+            "p95Ms": 3.497959,
+            "maxMs": 4.111362
+          },
+          "hud": {
+            "p50Ms": 4.022744,
+            "p95Ms": 4.913038,
+            "maxMs": 5.9571
+          },
+          "audio": {
+            "p50Ms": 0.059278,
+            "p95Ms": 1.469999,
+            "maxMs": 4.630818
+          },
+          "transfer": {
+            "p50Ms": 1.898919,
+            "p95Ms": 3.224357,
+            "maxMs": 3.821505
+          },
+          "drawing": {
+            "p50Ms": 16.344197,
+            "p95Ms": 20.60179,
+            "maxMs": 25.080542
+          },
+          "presentation": {
+            "p50Ms": 0.000982,
+            "p95Ms": 0.001552,
+            "maxMs": 0.002381
+          },
+          "frame": {
+            "p50Ms": 57.489484,
+            "p95Ms": 74.539013,
+            "maxMs": 1050.41821
+          },
+          "gpuSubmissions": {
+            "p50Ms": 12.474385,
+            "p95Ms": 16.263611,
+            "maxMs": 19.696891
+          }
+        }
+      ],
+      "time": "2026-10-05T00:10:11.258Z",
+      "sdlRenderer": null,
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 1751116,
+          "visualAndBakeNs": 82734955,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 1860337,
+          "visualAndBakeNs": 306924924,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 4805757,
+          "visualAndBakeNs": 960971726,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "0afcf811eea66e79538e05908c8debacd587142098943422ddf1d3613e9a46fb",
+      "stressProtocol": "128 armed actors remain active; player and actor health restored before each timed step; collision, projectiles, damage, navigation and effects enabled",
+      "rawReport": "build/benchmark/linux/3d-gpu-offscreen-stress/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": false
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "linux",
+      "osRelease": "6.18.40.1-microsoft-standard-WSL2",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "gpu",
+      "driver": "desktop",
+      "window": [
+        960,
+        600
+      ],
+      "optimize": "O2",
+      "stress": false,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": 165093376,
+      "peakWorkingSetBytes": null,
+      "compiler": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "9170ceb20a27e5b22536c9da7ff6b2d8b89d5cc3b5d20116abb45b1485805ab8",
+      "metadata": [
+        "vulkan | llvmpipe (LLVM 21.1.8, 256 bits) | llvmpipe",
+        "PREPARE=0,1758163,85496794,1082,191,1620",
+        "PREPARE=1,1626367,311861076,2214,455,3008",
+        "PREPARE=2,5357381,968548367,4008,846,5356",
+        "GPU_enviadosBytes=260869824",
+        "GPU_recebidosBytes=0",
+        "GPU_buffersBytes=8388624",
+        "GPU_texturasBytes=7747584",
+        "GPU_stagingBytes=0",
+        "GPU_scratchBytes=0",
+        "GPU_frameUploadBytes=245665440",
+        "GPU_TIMESTAMPS=available"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 0.370396,
+            "p95Ms": 0.817529,
+            "maxMs": 4.478861
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.043426,
+            "p95Ms": 0.080891,
+            "maxMs": 0.17158
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.220268,
+            "p95Ms": 0.469136,
+            "maxMs": 4.322142
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.097613,
+            "p95Ms": 0.173136,
+            "maxMs": 0.350137
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002457,
+            "p95Ms": 0.003691,
+            "maxMs": 0.033826
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.41653,
+            "p95Ms": 0.646333,
+            "maxMs": 1.00748
+          },
+          "hud": {
+            "p50Ms": 0.21909,
+            "p95Ms": 0.40777,
+            "maxMs": 0.488423
+          },
+          "audio": {
+            "p50Ms": 0.006295,
+            "p95Ms": 0.059872,
+            "maxMs": 0.183801
+          },
+          "transfer": {
+            "p50Ms": 1.566621,
+            "p95Ms": 2.978554,
+            "maxMs": 3.447173
+          },
+          "drawing": {
+            "p50Ms": 13.453135,
+            "p95Ms": 14.933085,
+            "maxMs": 16.893735
+          },
+          "presentation": {
+            "p50Ms": 2.627695,
+            "p95Ms": 3.345169,
+            "maxMs": 4.182105
+          },
+          "frame": {
+            "p50Ms": 19.036835,
+            "p95Ms": 21.589605,
+            "maxMs": 24.136514
+          },
+          "gpuSubmissions": {
+            "p50Ms": 10.033242,
+            "p95Ms": 11.298033,
+            "maxMs": 12.528758
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 1.132073,
+            "p95Ms": 2.005686,
+            "maxMs": 9.164128
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.078089,
+            "p95Ms": 0.160269,
+            "maxMs": 0.322053
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.726991,
+            "p95Ms": 1.407571,
+            "maxMs": 8.775887
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.292267,
+            "p95Ms": 0.436704,
+            "maxMs": 1.553012
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002379,
+            "p95Ms": 0.003505,
+            "maxMs": 0.02222
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.702673,
+            "p95Ms": 1.010285,
+            "maxMs": 1.398351
+          },
+          "hud": {
+            "p50Ms": 0.217505,
+            "p95Ms": 0.341991,
+            "maxMs": 0.957985
+          },
+          "audio": {
+            "p50Ms": 0.050616,
+            "p95Ms": 0.232486,
+            "maxMs": 0.431967
+          },
+          "transfer": {
+            "p50Ms": 1.676347,
+            "p95Ms": 3.176491,
+            "maxMs": 3.887993
+          },
+          "drawing": {
+            "p50Ms": 15.776675,
+            "p95Ms": 17.194371,
+            "maxMs": 20.175929
+          },
+          "presentation": {
+            "p50Ms": 2.646441,
+            "p95Ms": 3.181652,
+            "maxMs": 3.648851
+          },
+          "frame": {
+            "p50Ms": 22.679432,
+            "p95Ms": 25.83719,
+            "maxMs": 31.362051
+          },
+          "gpuSubmissions": {
+            "p50Ms": 11.894289,
+            "p95Ms": 13.333251,
+            "maxMs": 15.995892
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 2.907966,
+            "p95Ms": 4.372892,
+            "maxMs": 20.399097
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.127647,
+            "p95Ms": 0.232608,
+            "maxMs": 0.366113
+          },
+          "navigationAndAI": {
+            "p50Ms": 1.978806,
+            "p95Ms": 3.223123,
+            "maxMs": 19.577137
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.760971,
+            "p95Ms": 1.000385,
+            "maxMs": 1.334355
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002423,
+            "p95Ms": 0.003481,
+            "maxMs": 0.009132
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.138043,
+            "p95Ms": 1.618758,
+            "maxMs": 2.379565
+          },
+          "hud": {
+            "p50Ms": 0.235523,
+            "p95Ms": 0.368876,
+            "maxMs": 0.678871
+          },
+          "audio": {
+            "p50Ms": 0.075403,
+            "p95Ms": 0.270784,
+            "maxMs": 0.443127
+          },
+          "transfer": {
+            "p50Ms": 1.779243,
+            "p95Ms": 3.191361,
+            "maxMs": 4.118724
+          },
+          "drawing": {
+            "p50Ms": 15.891379,
+            "p95Ms": 17.24899,
+            "maxMs": 18.782406
+          },
+          "presentation": {
+            "p50Ms": 2.692692,
+            "p95Ms": 3.319056,
+            "maxMs": 3.806084
+          },
+          "frame": {
+            "p50Ms": 25.335767,
+            "p95Ms": 28.101075,
+            "maxMs": 43.925774
+          },
+          "gpuSubmissions": {
+            "p50Ms": 11.977981,
+            "p95Ms": 13.356984,
+            "maxMs": 14.61557
+          }
+        }
+      ],
+      "time": "2026-10-05T00:10:54.978Z",
+      "sdlRenderer": null,
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 1758163,
+          "visualAndBakeNs": 85496794,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 1626367,
+          "visualAndBakeNs": 311861076,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 5357381,
+          "visualAndBakeNs": 968548367,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "b01b5da31931d7f196cf1ceae0a19c445e1f8d134c0978ba868c3c4e0ad6099f",
+      "stressProtocol": null,
+      "rawReport": "build/benchmark/linux/3d-gpu-desktop/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": false
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "win32",
+      "osRelease": "10.0.26200",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "sdl",
+      "driver": "dummy",
+      "window": [
+        320,
+        200
+      ],
+      "optimize": "O2",
+      "stress": false,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": null,
+      "peakWorkingSetBytes": 53297152,
+      "compiler": "clang version 21.1.8 (https://github.com/llvm/llvm-project.git 2078da43e25a4623cab2d0d60decddf709aaea28)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "72a6e6cbf0f687f6d723ca82f5594b26031bf0f7843bee2fec1e029a63d095b6",
+      "metadata": [
+        "PREPARE=0,689800,105057300,1082,191,1620",
+        "PREPARE=1,3489300,775242100,2214,455,3008",
+        "PREPARE=2,8405800,2489612200,4008,846,5356"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 0.4178,
+            "p95Ms": 0.7448,
+            "maxMs": 4.6331
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.0425,
+            "p95Ms": 0.0858,
+            "maxMs": 0.2446
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.2526,
+            "p95Ms": 0.4956,
+            "maxMs": 4.4523
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.1081,
+            "p95Ms": 0.1859,
+            "maxMs": 0.3143
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0018,
+            "p95Ms": 0.0029,
+            "maxMs": 0.0197
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.4907,
+            "p95Ms": 0.8316,
+            "maxMs": 3.5541
+          },
+          "hud": {
+            "p50Ms": 0.2355,
+            "p95Ms": 0.3664,
+            "maxMs": 0.5804
+          },
+          "audio": {
+            "p50Ms": 0.0354,
+            "p95Ms": 0.0862,
+            "maxMs": 0.243
+          },
+          "transfer": {
+            "p50Ms": 0.04,
+            "p95Ms": 0.0799,
+            "maxMs": 0.1848
+          },
+          "drawing": {
+            "p50Ms": 8.635,
+            "p95Ms": 9.4802,
+            "maxMs": 14.1726
+          },
+          "presentation": {
+            "p50Ms": 0.3413,
+            "p95Ms": 0.536,
+            "maxMs": 0.7538
+          },
+          "frame": {
+            "p50Ms": 10.3495,
+            "p95Ms": 13.8162,
+            "maxMs": 16.5984
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 2.1178,
+            "p95Ms": 3.4025,
+            "maxMs": 22.9698
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.1016,
+            "p95Ms": 0.195,
+            "maxMs": 2.2623
+          },
+          "navigationAndAI": {
+            "p50Ms": 1.478,
+            "p95Ms": 2.483,
+            "maxMs": 20.2362
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.4835,
+            "p95Ms": 0.751,
+            "maxMs": 7.0187
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0022,
+            "p95Ms": 0.0027,
+            "maxMs": 0.0223
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.1417,
+            "p95Ms": 1.5852,
+            "maxMs": 2.3723
+          },
+          "hud": {
+            "p50Ms": 0.4421,
+            "p95Ms": 0.5747,
+            "maxMs": 4.9566
+          },
+          "audio": {
+            "p50Ms": 0.1033,
+            "p95Ms": 0.5281,
+            "maxMs": 6.1971
+          },
+          "transfer": {
+            "p50Ms": 0.0592,
+            "p95Ms": 0.1046,
+            "maxMs": 0.2395
+          },
+          "drawing": {
+            "p50Ms": 12.0683,
+            "p95Ms": 14.5762,
+            "maxMs": 41.8208
+          },
+          "presentation": {
+            "p50Ms": 0.4712,
+            "p95Ms": 0.7061,
+            "maxMs": 7.7658
+          },
+          "frame": {
+            "p50Ms": 16.6738,
+            "p95Ms": 28.9158,
+            "maxMs": 57.0747
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 5.7813,
+            "p95Ms": 9.2653,
+            "maxMs": 52.0187
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.1726,
+            "p95Ms": 0.2913,
+            "maxMs": 0.4991
+          },
+          "navigationAndAI": {
+            "p50Ms": 4.1807,
+            "p95Ms": 7.5607,
+            "maxMs": 50.1245
+          },
+          "combatAndQueries": {
+            "p50Ms": 1.3806,
+            "p95Ms": 1.8805,
+            "maxMs": 9.7462
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0022,
+            "p95Ms": 0.0029,
+            "maxMs": 0.0234
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.9882,
+            "p95Ms": 2.637,
+            "maxMs": 18.7357
+          },
+          "hud": {
+            "p50Ms": 0.507,
+            "p95Ms": 0.7752,
+            "maxMs": 1.2497
+          },
+          "audio": {
+            "p50Ms": 0.1692,
+            "p95Ms": 0.5775,
+            "maxMs": 0.7548
+          },
+          "transfer": {
+            "p50Ms": 0.0582,
+            "p95Ms": 0.1162,
+            "maxMs": 0.4651
+          },
+          "drawing": {
+            "p50Ms": 12.8837,
+            "p95Ms": 15.995,
+            "maxMs": 186.2245
+          },
+          "presentation": {
+            "p50Ms": 0.4836,
+            "p95Ms": 0.7878,
+            "maxMs": 6.0481
+          },
+          "frame": {
+            "p50Ms": 22.1291,
+            "p95Ms": 42.8429,
+            "maxMs": 221.8809
+          }
+        }
+      ],
+      "time": "2026-10-05T00:14:43.126Z",
+      "sdlRenderer": "software",
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 689800,
+          "visualAndBakeNs": 105057300,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 3489300,
+          "visualAndBakeNs": 775242100,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 8405800,
+          "visualAndBakeNs": 2489612200,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "181696725883bd16d5b74852ab52422a5ccf5bcce20ceafa2745007ecacda308",
+      "stressProtocol": null,
+      "rawReport": "build/benchmark/windows/3d-sdl-offscreen/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": true
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": false
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "win32",
+      "osRelease": "10.0.26200",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "sdl",
+      "driver": "dummy",
+      "window": [
+        320,
+        200
+      ],
+      "optimize": "O2",
+      "stress": true,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": null,
+      "peakWorkingSetBytes": 54382592,
+      "compiler": "clang version 21.1.8 (https://github.com/llvm/llvm-project.git 2078da43e25a4623cab2d0d60decddf709aaea28)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "fa6492812a0f5ef8da511b2b09108372a27be9a37275621147817c9c0b8cb71f",
+      "metadata": [
+        "PREPARE=0,960500,105728000,1082,191,1620",
+        "STRESS_ACTORS=128",
+        "PREPARE=1,2919800,782948000,2214,455,3008",
+        "STRESS_ACTORS=128",
+        "PREPARE=2,8220000,2429483800,4008,846,5356",
+        "STRESS_ACTORS=128"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 19.2612,
+            "p95Ms": 25.9425,
+            "maxMs": 468.7029
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.1578,
+            "p95Ms": 0.2368,
+            "maxMs": 0.6275
+          },
+          "navigationAndAI": {
+            "p50Ms": 16.271,
+            "p95Ms": 22.4462,
+            "maxMs": 61.1613
+          },
+          "combatAndQueries": {
+            "p50Ms": 2.8048,
+            "p95Ms": 3.5568,
+            "maxMs": 455.5933
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0025,
+            "p95Ms": 0.0289,
+            "maxMs": 0.1006
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.9432,
+            "p95Ms": 3.9649,
+            "maxMs": 6.1397
+          },
+          "hud": {
+            "p50Ms": 2.4178,
+            "p95Ms": 3.3961,
+            "maxMs": 19.0364
+          },
+          "audio": {
+            "p50Ms": 0.0053,
+            "p95Ms": 0.9028,
+            "maxMs": 3.3906
+          },
+          "transfer": {
+            "p50Ms": 0.0603,
+            "p95Ms": 0.123,
+            "maxMs": 0.7682
+          },
+          "drawing": {
+            "p50Ms": 29.5708,
+            "p95Ms": 85.1648,
+            "maxMs": 240.9633
+          },
+          "presentation": {
+            "p50Ms": 0.4759,
+            "p95Ms": 0.7058,
+            "maxMs": 0.8609
+          },
+          "frame": {
+            "p50Ms": 52.2404,
+            "p95Ms": 119.5039,
+            "maxMs": 518.7752
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 39.9642,
+            "p95Ms": 63.3802,
+            "maxMs": 1435.8198
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.3085,
+            "p95Ms": 0.4456,
+            "maxMs": 4.5217
+          },
+          "navigationAndAI": {
+            "p50Ms": 33.8235,
+            "p95Ms": 56.0451,
+            "maxMs": 157.3175
+          },
+          "combatAndQueries": {
+            "p50Ms": 5.7053,
+            "p95Ms": 7.1917,
+            "maxMs": 1406.7468
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0023,
+            "p95Ms": 0.0337,
+            "maxMs": 0.1162
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.524,
+            "p95Ms": 4.261,
+            "maxMs": 21.2743
+          },
+          "hud": {
+            "p50Ms": 5.655,
+            "p95Ms": 6.9176,
+            "maxMs": 34.0308
+          },
+          "audio": {
+            "p50Ms": 0.0827,
+            "p95Ms": 1.8262,
+            "maxMs": 5.2201
+          },
+          "transfer": {
+            "p50Ms": 0.058,
+            "p95Ms": 0.1114,
+            "maxMs": 0.2509
+          },
+          "drawing": {
+            "p50Ms": 24.7025,
+            "p95Ms": 92.1586,
+            "maxMs": 99.9107
+          },
+          "presentation": {
+            "p50Ms": 0.4834,
+            "p95Ms": 0.7867,
+            "maxMs": 6.6761
+          },
+          "frame": {
+            "p50Ms": 72.7667,
+            "p95Ms": 161.2578,
+            "maxMs": 1489.2616
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 71.9372,
+            "p95Ms": 120.1778,
+            "maxMs": 2549.8084
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.5386,
+            "p95Ms": 0.7971,
+            "maxMs": 1.5811
+          },
+          "navigationAndAI": {
+            "p50Ms": 61.0668,
+            "p95Ms": 104.4167,
+            "maxMs": 216.4634
+          },
+          "combatAndQueries": {
+            "p50Ms": 10.2516,
+            "p95Ms": 12.173,
+            "maxMs": 2501.383
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0024,
+            "p95Ms": 0.029,
+            "maxMs": 0.1056
+          },
+          "lightingAndScene": {
+            "p50Ms": 2.2799,
+            "p95Ms": 5.851,
+            "maxMs": 12.4891
+          },
+          "hud": {
+            "p50Ms": 10.073,
+            "p95Ms": 11.3488,
+            "maxMs": 39.5536
+          },
+          "audio": {
+            "p50Ms": 0.1449,
+            "p95Ms": 0.4,
+            "maxMs": 9.89
+          },
+          "transfer": {
+            "p50Ms": 0.0602,
+            "p95Ms": 0.0991,
+            "maxMs": 0.3993
+          },
+          "drawing": {
+            "p50Ms": 25.1934,
+            "p95Ms": 94.5891,
+            "maxMs": 220.7425
+          },
+          "presentation": {
+            "p50Ms": 0.4884,
+            "p95Ms": 0.736,
+            "maxMs": 4.6183
+          },
+          "frame": {
+            "p50Ms": 110.1401,
+            "p95Ms": 215.2921,
+            "maxMs": 2617.1618
+          }
+        }
+      ],
+      "time": "2026-10-05T00:16:23.238Z",
+      "sdlRenderer": "software",
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 960500,
+          "visualAndBakeNs": 105728000,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 2919800,
+          "visualAndBakeNs": 782948000,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 8220000,
+          "visualAndBakeNs": 2429483800,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "884dd64f79d2156d5b1ff4c2b98c20f19d1426e1c02725d1d0bd9ae4f54d7153",
+      "stressProtocol": "128 armed actors remain active; player and actor health restored before each timed step; collision, projectiles, damage, navigation and effects enabled",
+      "rawReport": "build/benchmark/windows/3d-sdl-offscreen-stress/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": false
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "win32",
+      "osRelease": "10.0.26200",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "sdl",
+      "driver": "desktop",
+      "window": [
+        960,
+        600
+      ],
+      "optimize": "O2",
+      "stress": false,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": null,
+      "peakWorkingSetBytes": 92368896,
+      "compiler": "clang version 21.1.8 (https://github.com/llvm/llvm-project.git 2078da43e25a4623cab2d0d60decddf709aaea28)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "32490d9c26b664a4df5068779969f94030491242ae2f3085838f5d4808aaac76",
+      "metadata": [
+        "PREPARE=0,910900,107875200,1082,191,1620",
+        "PREPARE=1,1754700,354598100,2214,455,3008",
+        "PREPARE=2,5095900,1248185000,4008,846,5356"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 0.4192,
+            "p95Ms": 0.6432,
+            "maxMs": 6.1785
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.0471,
+            "p95Ms": 0.0841,
+            "maxMs": 0.1541
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.2586,
+            "p95Ms": 0.4224,
+            "maxMs": 5.8833
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.1045,
+            "p95Ms": 0.1653,
+            "maxMs": 0.2408
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0018,
+            "p95Ms": 0.0026,
+            "maxMs": 0.0031
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.4824,
+            "p95Ms": 0.7162,
+            "maxMs": 1.0218
+          },
+          "hud": {
+            "p50Ms": 0.2318,
+            "p95Ms": 0.3438,
+            "maxMs": 0.9576
+          },
+          "audio": {
+            "p50Ms": 0.0354,
+            "p95Ms": 0.0727,
+            "maxMs": 0.2068
+          },
+          "transfer": {
+            "p50Ms": 0.11,
+            "p95Ms": 0.1701,
+            "maxMs": 0.2647
+          },
+          "drawing": {
+            "p50Ms": 8.5906,
+            "p95Ms": 9.4063,
+            "maxMs": 10.1802
+          },
+          "presentation": {
+            "p50Ms": 0.2577,
+            "p95Ms": 0.399,
+            "maxMs": 1.2485
+          },
+          "frame": {
+            "p50Ms": 10.2212,
+            "p95Ms": 11.6637,
+            "maxMs": 16.2019
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 1.2174,
+            "p95Ms": 1.783,
+            "maxMs": 9.6512
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.0808,
+            "p95Ms": 0.1303,
+            "maxMs": 0.2325
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.8011,
+            "p95Ms": 1.2675,
+            "maxMs": 9.2449
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.3087,
+            "p95Ms": 0.4404,
+            "maxMs": 0.5418
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0018,
+            "p95Ms": 0.0027,
+            "maxMs": 0.0042
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.8291,
+            "p95Ms": 1.2087,
+            "maxMs": 1.4065
+          },
+          "hud": {
+            "p50Ms": 0.2337,
+            "p95Ms": 0.364,
+            "maxMs": 0.4116
+          },
+          "audio": {
+            "p50Ms": 0.1666,
+            "p95Ms": 0.307,
+            "maxMs": 0.4021
+          },
+          "transfer": {
+            "p50Ms": 0.1092,
+            "p95Ms": 0.1711,
+            "maxMs": 0.3659
+          },
+          "drawing": {
+            "p50Ms": 7.4597,
+            "p95Ms": 8.3594,
+            "maxMs": 9.5329
+          },
+          "presentation": {
+            "p50Ms": 0.2583,
+            "p95Ms": 0.4406,
+            "maxMs": 1.9163
+          },
+          "frame": {
+            "p50Ms": 10.3763,
+            "p95Ms": 12.782,
+            "maxMs": 19.1537
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 3.1036,
+            "p95Ms": 4.3972,
+            "maxMs": 22.0182
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.1246,
+            "p95Ms": 0.2007,
+            "maxMs": 0.2856
+          },
+          "navigationAndAI": {
+            "p50Ms": 2.117,
+            "p95Ms": 3.2045,
+            "maxMs": 20.9516
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.83,
+            "p95Ms": 1.0418,
+            "maxMs": 1.3086
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0018,
+            "p95Ms": 0.0025,
+            "maxMs": 0.0032
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.3758,
+            "p95Ms": 1.8444,
+            "maxMs": 2.3233
+          },
+          "hud": {
+            "p50Ms": 0.2693,
+            "p95Ms": 0.4011,
+            "maxMs": 0.4557
+          },
+          "audio": {
+            "p50Ms": 0.1689,
+            "p95Ms": 0.3156,
+            "maxMs": 0.5154
+          },
+          "transfer": {
+            "p50Ms": 0.107,
+            "p95Ms": 0.1436,
+            "maxMs": 0.2894
+          },
+          "drawing": {
+            "p50Ms": 8.045,
+            "p95Ms": 8.5435,
+            "maxMs": 8.9202
+          },
+          "presentation": {
+            "p50Ms": 0.2691,
+            "p95Ms": 0.3893,
+            "maxMs": 0.591
+          },
+          "frame": {
+            "p50Ms": 13.4168,
+            "p95Ms": 14.8114,
+            "maxMs": 32.1239
+          }
+        }
+      ],
+      "time": "2026-10-05T00:16:44.688Z",
+      "sdlRenderer": "platform default",
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 910900,
+          "visualAndBakeNs": 107875200,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 1754700,
+          "visualAndBakeNs": 354598100,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 5095900,
+          "visualAndBakeNs": 1248185000,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "00392001a110c7a07c9c4185274d311e88b791b10fb5ee69350808d48e46c8f0",
+      "stressProtocol": null,
+      "rawReport": "build/benchmark/windows/3d-sdl-desktop/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": true
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": true
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": true
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "win32",
+      "osRelease": "10.0.26200",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "gpu",
+      "driver": "offscreen",
+      "window": null,
+      "optimize": "O2",
+      "stress": false,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": null,
+      "peakWorkingSetBytes": 92753920,
+      "compiler": "clang version 21.1.8 (https://github.com/llvm/llvm-project.git 2078da43e25a4623cab2d0d60decddf709aaea28)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "128b98499b80cc8bdc34948a48a175ebc63bd4a4e86b7161e96de1843f716e16",
+      "metadata": [
+        "vulkan | NVIDIA GeForce RTX 5060 Ti | NVIDIA",
+        "PREPARE=0,616400,114147700,1082,191,1620",
+        "PREPARE=1,2391700,414814200,2214,455,3008",
+        "PREPARE=2,8917100,2669532900,4008,846,5356",
+        "GPU_enviadosBytes=260872752",
+        "GPU_recebidosBytes=0",
+        "GPU_buffersBytes=8388624",
+        "GPU_texturasBytes=7747584",
+        "GPU_stagingBytes=0",
+        "GPU_scratchBytes=0",
+        "GPU_frameUploadBytes=245668368",
+        "GPU_TIMESTAMPS=available"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 0.4474,
+            "p95Ms": 1.0144,
+            "maxMs": 6.708
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.0419,
+            "p95Ms": 0.1043,
+            "maxMs": 0.4932
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.2732,
+            "p95Ms": 0.5691,
+            "maxMs": 6.555
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.1151,
+            "p95Ms": 0.1993,
+            "maxMs": 0.4438
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0018,
+            "p95Ms": 0.0027,
+            "maxMs": 0.0523
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.5176,
+            "p95Ms": 1.0076,
+            "maxMs": 3.33
+          },
+          "hud": {
+            "p50Ms": 0.2667,
+            "p95Ms": 0.4775,
+            "maxMs": 1.1904
+          },
+          "audio": {
+            "p50Ms": 0.0725,
+            "p95Ms": 0.1719,
+            "maxMs": 0.5136
+          },
+          "transfer": {
+            "p50Ms": 0.5076,
+            "p95Ms": 1.0392,
+            "maxMs": 8.7204
+          },
+          "drawing": {
+            "p50Ms": 1.0141,
+            "p95Ms": 1.7784,
+            "maxMs": 3.0062
+          },
+          "presentation": {
+            "p50Ms": 0.0006,
+            "p95Ms": 0.0009,
+            "maxMs": 0.0217
+          },
+          "frame": {
+            "p50Ms": 3.0513,
+            "p95Ms": 5.7965,
+            "maxMs": 12.3983
+          },
+          "gpuSubmissions": {
+            "p50Ms": 0.033888,
+            "p95Ms": 0.042016,
+            "maxMs": 0.211488
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 1.3314,
+            "p95Ms": 2.718,
+            "maxMs": 17.4
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.0832,
+            "p95Ms": 0.1503,
+            "maxMs": 0.3327
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.8732,
+            "p95Ms": 2.1464,
+            "maxMs": 16.8431
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.3531,
+            "p95Ms": 0.5737,
+            "maxMs": 1.2791
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0019,
+            "p95Ms": 0.0023,
+            "maxMs": 0.0322
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.8573,
+            "p95Ms": 1.4065,
+            "maxMs": 1.9292
+          },
+          "hud": {
+            "p50Ms": 0.2629,
+            "p95Ms": 0.5064,
+            "maxMs": 0.884
+          },
+          "audio": {
+            "p50Ms": 0.2646,
+            "p95Ms": 0.7492,
+            "maxMs": 3.2294
+          },
+          "transfer": {
+            "p50Ms": 0.5613,
+            "p95Ms": 1.08,
+            "maxMs": 2.8646
+          },
+          "drawing": {
+            "p50Ms": 1.1019,
+            "p95Ms": 2.0678,
+            "maxMs": 7.0584
+          },
+          "presentation": {
+            "p50Ms": 0.0006,
+            "p95Ms": 0.0008,
+            "maxMs": 0.001
+          },
+          "frame": {
+            "p50Ms": 4.549,
+            "p95Ms": 8.5264,
+            "maxMs": 24.2325
+          },
+          "gpuSubmissions": {
+            "p50Ms": 0.042912,
+            "p95Ms": 0.050784,
+            "maxMs": 0.478976
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 5.766,
+            "p95Ms": 8.0651,
+            "maxMs": 39.3998
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.1697,
+            "p95Ms": 0.2608,
+            "maxMs": 0.3823
+          },
+          "navigationAndAI": {
+            "p50Ms": 4.1738,
+            "p95Ms": 6.5878,
+            "maxMs": 37.7185
+          },
+          "combatAndQueries": {
+            "p50Ms": 1.3607,
+            "p95Ms": 1.7462,
+            "maxMs": 2.1469
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.002,
+            "p95Ms": 0.0026,
+            "maxMs": 0.0934
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.8974,
+            "p95Ms": 2.3974,
+            "maxMs": 3.315
+          },
+          "hud": {
+            "p50Ms": 0.5033,
+            "p95Ms": 0.6682,
+            "maxMs": 0.9644
+          },
+          "audio": {
+            "p50Ms": 0.4194,
+            "p95Ms": 0.624,
+            "maxMs": 1.142
+          },
+          "transfer": {
+            "p50Ms": 0.797,
+            "p95Ms": 1.3868,
+            "maxMs": 2.8567
+          },
+          "drawing": {
+            "p50Ms": 1.504,
+            "p95Ms": 2.0571,
+            "maxMs": 3.5317
+          },
+          "presentation": {
+            "p50Ms": 0.0007,
+            "p95Ms": 0.0008,
+            "maxMs": 0.0019
+          },
+          "frame": {
+            "p50Ms": 11.1082,
+            "p95Ms": 13.4093,
+            "maxMs": 44.9951
+          },
+          "gpuSubmissions": {
+            "p50Ms": 0.048416,
+            "p95Ms": 0.059904,
+            "maxMs": 0.684448
+          }
+        }
+      ],
+      "time": "2026-10-05T00:17:07.711Z",
+      "sdlRenderer": null,
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 616400,
+          "visualAndBakeNs": 114147700,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 2391700,
+          "visualAndBakeNs": 414814200,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 8917100,
+          "visualAndBakeNs": 2669532900,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "2e1ddb5ddde581150459aa5bc90cb8a998d6976126fe5c86eea12fd3705d67d2",
+      "stressProtocol": null,
+      "rawReport": "build/benchmark/windows/3d-gpu-offscreen/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": true
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": true
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": true
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "win32",
+      "osRelease": "10.0.26200",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "gpu",
+      "driver": "offscreen",
+      "window": null,
+      "optimize": "O2",
+      "stress": true,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": null,
+      "peakWorkingSetBytes": 94261248,
+      "compiler": "clang version 21.1.8 (https://github.com/llvm/llvm-project.git 2078da43e25a4623cab2d0d60decddf709aaea28)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "69d13767740b1bb30a65f60290b5641b7eb5c8f8dc373ac26f7f3f49089bd496",
+      "metadata": [
+        "vulkan | NVIDIA GeForce RTX 5060 Ti | NVIDIA",
+        "PREPARE=0,671400,105223900,1082,191,1620",
+        "STRESS_ACTORS=128",
+        "PREPARE=1,3104400,894574500,2214,455,3008",
+        "STRESS_ACTORS=128",
+        "PREPARE=2,8383600,2607167900,4008,846,5356",
+        "STRESS_ACTORS=128",
+        "GPU_enviadosBytes=359264160",
+        "GPU_recebidosBytes=0",
+        "GPU_buffersBytes=8388624",
+        "GPU_texturasBytes=7747584",
+        "GPU_stagingBytes=0",
+        "GPU_scratchBytes=0",
+        "GPU_frameUploadBytes=344059776",
+        "GPU_TIMESTAMPS=available"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 17.5468,
+            "p95Ms": 20.3599,
+            "maxMs": 470.8035
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.1186,
+            "p95Ms": 0.2117,
+            "maxMs": 0.3769
+          },
+          "navigationAndAI": {
+            "p50Ms": 14.3849,
+            "p95Ms": 17.0386,
+            "maxMs": 23.0457
+          },
+          "combatAndQueries": {
+            "p50Ms": 2.6607,
+            "p95Ms": 3.2305,
+            "maxMs": 458.7574
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0023,
+            "p95Ms": 0.0291,
+            "maxMs": 0.0775
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.839,
+            "p95Ms": 3.8055,
+            "maxMs": 4.2911
+          },
+          "hud": {
+            "p50Ms": 2.0333,
+            "p95Ms": 2.6645,
+            "maxMs": 3.6772
+          },
+          "audio": {
+            "p50Ms": 0.0053,
+            "p95Ms": 1.0237,
+            "maxMs": 2.7837
+          },
+          "transfer": {
+            "p50Ms": 0.7142,
+            "p95Ms": 1.2374,
+            "maxMs": 2.6594
+          },
+          "drawing": {
+            "p50Ms": 1.2167,
+            "p95Ms": 2.1037,
+            "maxMs": 3.7571
+          },
+          "presentation": {
+            "p50Ms": 0.0011,
+            "p95Ms": 0.0016,
+            "maxMs": 0.0226
+          },
+          "frame": {
+            "p50Ms": 22.427,
+            "p95Ms": 29.6875,
+            "maxMs": 481.3266
+          },
+          "gpuSubmissions": {
+            "p50Ms": 0.044672,
+            "p95Ms": 0.056064,
+            "maxMs": 0.213408
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 40.2685,
+            "p95Ms": 61.6585,
+            "maxMs": 1444.7752
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.3049,
+            "p95Ms": 0.4651,
+            "maxMs": 0.7705
+          },
+          "navigationAndAI": {
+            "p50Ms": 34.2208,
+            "p95Ms": 54.0357,
+            "maxMs": 137.8575
+          },
+          "combatAndQueries": {
+            "p50Ms": 5.714,
+            "p95Ms": 6.9779,
+            "maxMs": 1416.9203
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0023,
+            "p95Ms": 0.0425,
+            "maxMs": 0.2162
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.5586,
+            "p95Ms": 4.3203,
+            "maxMs": 14.7272
+          },
+          "hud": {
+            "p50Ms": 5.6386,
+            "p95Ms": 6.3706,
+            "maxMs": 9.1965
+          },
+          "audio": {
+            "p50Ms": 0.0824,
+            "p95Ms": 1.974,
+            "maxMs": 6.4506
+          },
+          "transfer": {
+            "p50Ms": 0.7578,
+            "p95Ms": 1.3665,
+            "maxMs": 13.7799
+          },
+          "drawing": {
+            "p50Ms": 1.5726,
+            "p95Ms": 2.5238,
+            "maxMs": 3.8198
+          },
+          "presentation": {
+            "p50Ms": 0.0012,
+            "p95Ms": 0.0016,
+            "maxMs": 0.0309
+          },
+          "frame": {
+            "p50Ms": 50.5582,
+            "p95Ms": 75.3782,
+            "maxMs": 1478.8004
+          },
+          "gpuSubmissions": {
+            "p50Ms": 0.051296,
+            "p95Ms": 0.066496,
+            "maxMs": 0.219264
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 74.4764,
+            "p95Ms": 107.6418,
+            "maxMs": 2760.1814
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.5361,
+            "p95Ms": 0.7553,
+            "maxMs": 1.1316
+          },
+          "navigationAndAI": {
+            "p50Ms": 63.1478,
+            "p95Ms": 94.8932,
+            "maxMs": 433.5192
+          },
+          "combatAndQueries": {
+            "p50Ms": 10.4954,
+            "p95Ms": 13.8035,
+            "maxMs": 2709.9766
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0024,
+            "p95Ms": 0.0376,
+            "maxMs": 1.247
+          },
+          "lightingAndScene": {
+            "p50Ms": 2.5512,
+            "p95Ms": 5.6451,
+            "maxMs": 10.7048
+          },
+          "hud": {
+            "p50Ms": 10.3473,
+            "p95Ms": 12.9444,
+            "maxMs": 30.2011
+          },
+          "audio": {
+            "p50Ms": 0.146,
+            "p95Ms": 3.4437,
+            "maxMs": 9.9142
+          },
+          "transfer": {
+            "p50Ms": 0.8654,
+            "p95Ms": 1.9527,
+            "maxMs": 10.9263
+          },
+          "drawing": {
+            "p50Ms": 1.7515,
+            "p95Ms": 3.1852,
+            "maxMs": 57.8965
+          },
+          "presentation": {
+            "p50Ms": 0.0007,
+            "p95Ms": 0.0009,
+            "maxMs": 0.0014
+          },
+          "frame": {
+            "p50Ms": 90.4562,
+            "p95Ms": 128.8537,
+            "maxMs": 2792.5215
+          },
+          "gpuSubmissions": {
+            "p50Ms": 0.051808,
+            "p95Ms": 0.072576,
+            "maxMs": 0.490848
+          }
+        }
+      ],
+      "time": "2026-10-05T00:18:22.507Z",
+      "sdlRenderer": null,
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 671400,
+          "visualAndBakeNs": 105223900,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 3104400,
+          "visualAndBakeNs": 894574500,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 8383600,
+          "visualAndBakeNs": 2607167900,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "1773c9dd0b62a9ea691f4b98dc7f2b1df62a58c764d2a0ac81ce831c2e24804c",
+      "stressProtocol": "128 armed actors remain active; player and actor health restored before each timed step; collision, projectiles, damage, navigation and effects enabled",
+      "rawReport": "build/benchmark/windows/3d-gpu-offscreen-stress/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": false
+        }
+      ]
+    },
+    {
+      "version": "3d",
+      "platform": "win32",
+      "osRelease": "10.0.26200",
+      "cpu": "Intel(R) Core(TM) i5-14400F",
+      "logical": [
+        320,
+        200
+      ],
+      "scene": [
+        320,
+        176
+      ],
+      "renderer": "gpu",
+      "driver": "desktop",
+      "window": [
+        960,
+        600
+      ],
+      "optimize": "O2",
+      "stress": false,
+      "warmupPerMap": 20,
+      "framesPerMap": 240,
+      "peakRssBytes": null,
+      "peakWorkingSetBytes": 164876288,
+      "compiler": "clang version 21.1.8 (https://github.com/llvm/llvm-project.git 2078da43e25a4623cab2d0d60decddf709aaea28)",
+      "sourceSha256": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+      "benchmarkSourceSha256": "9170ceb20a27e5b22536c9da7ff6b2d8b89d5cc3b5d20116abb45b1485805ab8",
+      "metadata": [
+        "vulkan | NVIDIA GeForce RTX 5060 Ti | NVIDIA",
+        "PREPARE=0,822100,100328400,1082,191,1620",
+        "PREPARE=1,3033800,776059200,2214,455,3008",
+        "PREPARE=2,8019800,2468663600,4008,846,5356",
+        "GPU_enviadosBytes=260872752",
+        "GPU_recebidosBytes=0",
+        "GPU_buffersBytes=8388624",
+        "GPU_texturasBytes=7747584",
+        "GPU_stagingBytes=0",
+        "GPU_scratchBytes=0",
+        "GPU_frameUploadBytes=245668368",
+        "GPU_TIMESTAMPS=available"
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "simulation": {
+            "p50Ms": 0.6674,
+            "p95Ms": 1.2981,
+            "maxMs": 7.5386
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.0581,
+            "p95Ms": 0.1371,
+            "maxMs": 0.8385
+          },
+          "navigationAndAI": {
+            "p50Ms": 0.4211,
+            "p95Ms": 0.8171,
+            "maxMs": 7.2823
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.1547,
+            "p95Ms": 0.2798,
+            "maxMs": 0.8159
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0022,
+            "p95Ms": 0.0028,
+            "maxMs": 0.0216
+          },
+          "lightingAndScene": {
+            "p50Ms": 0.6345,
+            "p95Ms": 0.9209,
+            "maxMs": 1.3653
+          },
+          "hud": {
+            "p50Ms": 0.3754,
+            "p95Ms": 0.5662,
+            "maxMs": 0.8618
+          },
+          "audio": {
+            "p50Ms": 0.0055,
+            "p95Ms": 0.1004,
+            "maxMs": 0.2433
+          },
+          "transfer": {
+            "p50Ms": 0.59,
+            "p95Ms": 0.9626,
+            "maxMs": 1.3861
+          },
+          "drawing": {
+            "p50Ms": 0.8987,
+            "p95Ms": 1.4312,
+            "maxMs": 1.6378
+          },
+          "presentation": {
+            "p50Ms": 13.3626,
+            "p95Ms": 14.3504,
+            "maxMs": 14.9953
+          },
+          "frame": {
+            "p50Ms": 16.6438,
+            "p95Ms": 17.0253,
+            "maxMs": 17.6111
+          },
+          "gpuSubmissions": {
+            "p50Ms": 0.038528,
+            "p95Ms": 0.044288,
+            "maxMs": 0.213152
+          }
+        },
+        {
+          "level": 1,
+          "simulation": {
+            "p50Ms": 2.2088,
+            "p95Ms": 3.1546,
+            "maxMs": 17.1101
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.1205,
+            "p95Ms": 0.2573,
+            "maxMs": 0.6364
+          },
+          "navigationAndAI": {
+            "p50Ms": 1.5638,
+            "p95Ms": 2.4255,
+            "maxMs": 16.4589
+          },
+          "combatAndQueries": {
+            "p50Ms": 0.484,
+            "p95Ms": 0.7082,
+            "maxMs": 1.3783
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0022,
+            "p95Ms": 0.0028,
+            "maxMs": 0.0984
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.1405,
+            "p95Ms": 1.4588,
+            "maxMs": 2.4834
+          },
+          "hud": {
+            "p50Ms": 0.4416,
+            "p95Ms": 0.6162,
+            "maxMs": 3.6121
+          },
+          "audio": {
+            "p50Ms": 0.1101,
+            "p95Ms": 0.4922,
+            "maxMs": 1.1846
+          },
+          "transfer": {
+            "p50Ms": 0.6652,
+            "p95Ms": 1.1503,
+            "maxMs": 1.6436
+          },
+          "drawing": {
+            "p50Ms": 1.1627,
+            "p95Ms": 1.769,
+            "maxMs": 12.4382
+          },
+          "presentation": {
+            "p50Ms": 10.5435,
+            "p95Ms": 11.635,
+            "maxMs": 28.1776
+          },
+          "frame": {
+            "p50Ms": 16.6363,
+            "p95Ms": 21.2611,
+            "maxMs": 33.5155
+          },
+          "gpuSubmissions": {
+            "p50Ms": 0.04256,
+            "p95Ms": 0.049312,
+            "maxMs": 0.475392
+          }
+        },
+        {
+          "level": 2,
+          "simulation": {
+            "p50Ms": 5.7802,
+            "p95Ms": 7.9954,
+            "maxMs": 40.0523
+          },
+          "movementAndQueries": {
+            "p50Ms": 0.1923,
+            "p95Ms": 0.383,
+            "maxMs": 0.6195
+          },
+          "navigationAndAI": {
+            "p50Ms": 4.1626,
+            "p95Ms": 6.362,
+            "maxMs": 38.3581
+          },
+          "combatAndQueries": {
+            "p50Ms": 1.3353,
+            "p95Ms": 1.6532,
+            "maxMs": 2.2636
+          },
+          "effectsSimulation": {
+            "p50Ms": 0.0022,
+            "p95Ms": 0.0027,
+            "maxMs": 0.0217
+          },
+          "lightingAndScene": {
+            "p50Ms": 1.909,
+            "p95Ms": 2.4063,
+            "maxMs": 3.3572
+          },
+          "hud": {
+            "p50Ms": 0.505,
+            "p95Ms": 0.6423,
+            "maxMs": 0.8182
+          },
+          "audio": {
+            "p50Ms": 0.2012,
+            "p95Ms": 0.5229,
+            "maxMs": 0.7381
+          },
+          "transfer": {
+            "p50Ms": 0.7721,
+            "p95Ms": 1.3447,
+            "maxMs": 2.1493
+          },
+          "drawing": {
+            "p50Ms": 1.1602,
+            "p95Ms": 1.7142,
+            "maxMs": 2.8864
+          },
+          "presentation": {
+            "p50Ms": 5.739,
+            "p95Ms": 7.3053,
+            "maxMs": 23.5264
+          },
+          "frame": {
+            "p50Ms": 16.5267,
+            "p95Ms": 33.2848,
+            "maxMs": 44.7752
+          },
+          "gpuSubmissions": {
+            "p50Ms": 0.046496,
+            "p95Ms": 0.05264,
+            "maxMs": 0.503552
+          }
+        }
+      ],
+      "time": "2026-10-05T00:18:52.962Z",
+      "sdlRenderer": null,
+      "audioDriver": "dummy",
+      "preparation": [
+        {
+          "level": 0,
+          "loadNs": 822100,
+          "visualAndBakeNs": 100328400,
+          "canonicalTriangles": 1082,
+          "regions": 191,
+          "visualTriangles": 1620
+        },
+        {
+          "level": 1,
+          "loadNs": 3033800,
+          "visualAndBakeNs": 776059200,
+          "canonicalTriangles": 2214,
+          "regions": 455,
+          "visualTriangles": 3008
+        },
+        {
+          "level": 2,
+          "loadNs": 8019800,
+          "visualAndBakeNs": 2468663600,
+          "canonicalTriangles": 4008,
+          "regions": 846,
+          "visualTriangles": 5356
+        }
+      ],
+      "executableSha256": "cec02f03fb4ac28325bad7fb507c9c227d9d3252e6044128e1192d2fe793ba89",
+      "stressProtocol": null,
+      "rawReport": "build/benchmark/windows/3d-gpu-desktop/report.json",
+      "meta60FpsPorMapa": [
+        {
+          "level": 0,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 1,
+          "p95DentroDaMeta": false
+        },
+        {
+          "level": 2,
+          "p95DentroDaMeta": false
+        }
+      ]
+    }
+  ],
+  "evidenciasRelacionadas": [
+    "benchmarks/replay-3d-2026-10-04.json",
+    "docs/evolucao-3d.md"
+  ]
+}

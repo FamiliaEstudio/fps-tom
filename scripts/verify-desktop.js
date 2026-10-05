@@ -3,10 +3,12 @@ const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),asse
 const {build,app}=require('./build');
 function completed(child){return new Promise((resolve,reject)=>{child.once('error',reject);child.once('exit',(status,signal)=>resolve({status,signal}));});}
 async function main(){
-  const production=process.argv.includes('--package'),windows=process.platform==='win32';
-  const output=path.join(app,'build',windows?'windows':'linux',production?'package':'desktop');fs.mkdirSync(output,{recursive:true});
+  const args=process.argv.slice(2),index=args.indexOf('--renderer'),renderer=index<0?'sdl':args[index+1];
+  assert.ok(['sdl','gpu'].includes(renderer),'Use --renderer sdl|gpu');
+  const production=args.includes('--package')||renderer==='gpu',windows=process.platform==='win32';
+  const output=path.join(app,'build',windows?'windows':'linux',production?'package':'desktop',...(renderer==='gpu'?['gpu']:[]));fs.mkdirSync(output,{recursive:true});
   const receipt=path.join(output,'verification.json');fs.rmSync(receipt,{force:true});
-  const binary=build({testUI:!production,output}),trace=path.join(output,'desktop.trace');
+  const binary=build({testUI:!production,output,renderer}),trace=path.join(output,'desktop.trace');
   const env={...process.env};
   if(!production)env.SDL_RENDER_DRIVER='software';
   for(const name of ['TOM_UI_EVENTS','TOM_UI_TRACE','TOM_UI_SNAPSHOT','SDL_VIDEODRIVER','SDL_AUDIODRIVER','LD_LIBRARY_PATH'])delete env[name];
@@ -23,7 +25,7 @@ async function main(){
     const input=await completed(driver),result=await done;
     assert.equal(input.status,0,'desktop input');assert.equal(result.status,0,stdout+stderr);assert.equal(result.signal,null,stderr);
     if(!production)assert.ok(fs.readFileSync(trace,'utf8').split('FRAME').length>5);
-    const report={platform:process.platform,production,binary,status:'passed',renderer:env.SDL_RENDER_DRIVER||'default',audio:env.SDL_AUDIODRIVER||'system device',relativeMouse:!stdout.includes('Mouse relativo indisponivel'),time:new Date().toISOString()};
+    const report={platform:process.platform,production,binary,status:'passed',scope:production?'window-input-clean-exit':'window-render-loop-trace',renderer:renderer==='gpu'?'GPU/Vulkan':env.SDL_RENDER_DRIVER||'default',audio:env.SDL_AUDIODRIVER||'system device',relativeMouse:!stdout.includes('Mouse relativo indisponivel'),renderedFrames:production?null:(fs.readFileSync(trace,'utf8').match(/FRAME/g)||[]).length,simulationStateObserved:false,audibleQualityAssessed:false,time:new Date().toISOString()};
     fs.writeFileSync(receipt,JSON.stringify(report,null,2)+'\n');process.stdout.write(JSON.stringify(report,null,2)+'\n');
   }finally{clearTimeout(timeout);if(child.exitCode===null)child.kill();if(driver&&driver.exitCode===null)driver.kill();}
 }

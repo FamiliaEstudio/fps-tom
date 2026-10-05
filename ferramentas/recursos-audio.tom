@@ -1,0 +1,257 @@
+Importar[l'./recursos-comuns.tom']
+
+DefFuncaoxFpsSomRuido[InSd64xValor,InSd64xMultiplicador,InSd64xIncremento]yInSd64
+DefVarInSd64xNy(@Valor * @Multiplicador + @Incremento)
+Retornarx(@N - @N / 4294967296 * 4294967296)
+FimFuncao
+
+DefFuncaoxFpsSomNormalizar[InSd64xValor]yFl64
+InSd64ParaFl64[@Valor]
+Retornarx(@ULTIMO / 4294967296.0 * 2.0 - 1.0)
+FimFuncao
+
+// Tipos: 0 tiro, 1 dano, 2 item, 3 abrir, 4 fechar.
+DefFuncaoxFpsSomEfeito[InSd64xTipo,Fl64xT,Fl64xU,Fl64xRuido]yFl64
+CompararMaiorIgualxyInSd64x@Tipoy3
+Sex@ULTIMO
+DefVarFl64xFrequenciay(120.0 + 80.0 * @U)
+CompararIgualxyInSd64x@Tipoy4
+Sex@ULTIMO
+SetVarFl64xFrequenciay(200.0 - 80.0 * @U)
+FimSe
+SenoFl64[(2.0 * @FpsRecursoPI * @Frequencia * @T)]
+DefVarFl64xOnday(@Ruido * 0.12 + @ULTIMO * 0.25)
+SenoFl64[(@FpsRecursoPI * @U)]
+Retornarx(@Onda * @ULTIMO)
+FimSe
+CompararIgualxyInSd64x@Tipoy0
+Sex@ULTIMO
+SenoFl64[(2.0 * @FpsRecursoPI * (95.0 * @T - 120.0 * @T * @T))]
+DefVarFl64xOnday(@Ruido * 0.45 + @ULTIMO * 0.4)
+ExponencialFl64[(0.0 - @U * 7.0)]
+Retornarx(@Onda * @ULTIMO)
+FimSe
+CompararIgualxyInSd64x@Tipoy1
+Sex@ULTIMO
+SenoFl64[(2.0 * @FpsRecursoPI * 83.0 * @T)]
+Retornarx((@ULTIMO * 0.55 + @Ruido * 0.12) * (1.0 - @U))
+FimSe
+SenoFl64[(2.0 * @FpsRecursoPI * (520.0 * @T + 900.0 * @T * @T))]
+DefVarFl64xOnday(@ULTIMO * 0.35)
+SenoFl64[(@FpsRecursoPI * @U)]
+Retornarx(@Onda * @ULTIMO)
+FimFuncao
+
+DefFuncaoxFpsSomBaixo[InSd64xNivel,InSd64xNota]yFl64
+CompararIgualxyInSd64x@Nively0
+Sex@ULTIMO
+CompararIgualxyInSd64x@Notay0
+Sex@ULTIMO
+Retornarx110.0
+FimSe
+CompararIgualxyInSd64x@Notay1
+Sex@ULTIMO
+Retornarx130.8128
+FimSe
+CompararIgualxyInSd64x@Notay2
+Sex@ULTIMO
+Retornarx146.8324
+FimSe
+Retornarx98.0
+FimSe
+CompararIgualxyInSd64x@Nively1
+Sex@ULTIMO
+CompararIgualxyInSd64x@Notay0
+Sex@ULTIMO
+Retornarx82.4069
+FimSe
+CompararIgualxyInSd64x@Notay1
+Sex@ULTIMO
+Retornarx110.0
+FimSe
+CompararIgualxyInSd64x@Notay2
+Sex@ULTIMO
+Retornarx123.4708
+FimSe
+Retornarx73.4162
+FimSe
+CompararIgualxyInSd64x@Notay0
+Sex@ULTIMO
+Retornarx65.4064
+FimSe
+CompararIgualxyInSd64x@Notay1
+Sex@ULTIMO
+Retornarx98.0
+FimSe
+CompararIgualxyInSd64x@Notay2
+Sex@ULTIMO
+Retornarx82.4069
+FimSe
+Retornarx110.0
+FimFuncao
+
+DefFuncaoxFpsSomMusica[InSd64xNivel,Fl64xT,InSd64xI]yFl64
+Fl64ParaInSd64[(@T * 4.0)]
+DefVarInSd64xBatiday@ULTIMO
+InSd64ParaFl64[@Batida]
+DefVarFl64xFasey(@T - @ULTIMO * 0.25)
+DefVarInSd64xNotay(@Batida / 4)
+SetVarInSd64xNotay(@Nota - @Nota / 4 * 4)
+ChamarxFpsSomBaixo[@Nivel,@Nota]
+DefVarFl64xBaixoy@ULTIMO
+DefVarInSd64xPassoy(@Batida - @Batida / 8 * 8)
+DefVarFl64xFatory2.0
+CompararIgualxyInSd64x@Passoy1
+Sex@ULTIMO
+SetVarFl64xFatory3.0
+FimSe
+CompararIgualxyInSd64x@Passoy2
+Sex@ULTIMO
+SetVarFl64xFatory4.0
+FimSe
+CompararIgualxyInSd64x@Passoy3
+Sex@ULTIMO
+SetVarFl64xFatory3.0
+FimSe
+CompararIgualxyInSd64x@Passoy5
+Sex@ULTIMO
+SetVarFl64xFatory1.5
+FimSe
+CompararIgualxyInSd64x@Passoy7
+Sex@ULTIMO
+SetVarFl64xFatory3.0
+FimSe
+DefVarFl64xMelodiay(@Baixo * @Fator)
+ChamarxFpsSomRuido[@I,1664525,1013904223]
+ChamarxFpsSomNormalizar[@ULTIMO]
+DefVarFl64xRuidoy@ULTIMO
+SenoFl64[(@T * 2.0 * @FpsRecursoPI * @Baixo)]
+DefVarFl64xSy(@ULTIMO * 0.16)
+SenoFl64[(@T * 2.0 * @FpsRecursoPI * @Melodia)]
+DefVarFl64xOnday@ULTIMO
+ExponencialFl64[(0.0 - @Fase * 12.0)]
+SetVarFl64xSy(@S + @Onda * @ULTIMO * 0.12)
+SenoFl64[(2.0 * @FpsRecursoPI * (55.0 * @T - 30.0 * @Fase * @Fase))]yOnda
+ExponencialFl64[(0.0 - @Fase * 30.0)]
+SetVarFl64xSy(@S + @Onda * @ULTIMO * 0.13)
+ExponencialFl64[(0.0 - @Fase * 80.0)]
+Retornarx(@S + @Ruido * @ULTIMO * 0.035)
+FimFuncao
+
+// Tipos 3D: 0..2 música; 3 explosão; 4 ambiente; 5 TV.
+DefFuncaoxFpsSom3D[InSd64xTipo,Fl64xT,InSd64xI]yFl64
+CompararMenorxyInSd64x@Tipoy3
+Sex@ULTIMO
+ChamarxFpsSomMusica[@Tipo,@T,@I]
+Retornarx@ULTIMO
+FimSe
+CompararIgualxyInSd64x@Tipoy3
+Sex@ULTIMO
+ChamarxFpsSomRuido[@I,1103515245,12345]
+ChamarxFpsSomNormalizar[@ULTIMO]
+DefVarFl64xRuidoy@ULTIMO
+SenoFl64[(2.0 * @FpsRecursoPI * 43.0 * @T)]
+DefVarFl64xOnday(@Ruido * 0.65 + @ULTIMO * 0.25)
+ExponencialFl64[(0.0 - @T * 8.0)]
+Retornarx(@Onda * @ULTIMO)
+FimSe
+DefVarFl64xFrequenciaAy55.0
+DefVarFl64xFrequenciaBy83.0
+DefVarFl64xGanhoBy0.02
+CompararIgualxyInSd64x@Tipoy5
+Sex@ULTIMO
+SetVarFl64xFrequenciaAy164.8138
+SetVarFl64xFrequenciaBy329.6276
+SetVarFl64xGanhoBy0.025
+FimSe
+SenoFl64[(@T * 2.0 * @FpsRecursoPI * @FrequenciaA)]
+DefVarFl64xOnday(@ULTIMO * 0.07)
+SenoFl64[(@T * 2.0 * @FpsRecursoPI * @FrequenciaB)]
+Retornarx(@Onda + @ULTIMO * @GanhoB)
+FimFuncao
+
+DefFuncaoxFpsSomCabecalho[RefBufferBytesxBytes,InSd64xAmostras]yVazio
+InSd64ParaInUd32[(@Amostras * 2)]
+DefVarInUd32xDadosy@ULTIMO
+BufferBytesGravarInUd32LE[@Bytes,0,1179011410]
+BufferBytesGravarInUd32LE[@Bytes,4,(@Dados + 36)]
+BufferBytesGravarInUd32LE[@Bytes,8,1163280727]
+BufferBytesGravarInUd32LE[@Bytes,12,544501094]
+BufferBytesGravarInUd32LE[@Bytes,16,16]
+BufferBytesGravarInUd16LE[@Bytes,20,1]
+BufferBytesGravarInUd16LE[@Bytes,22,1]
+BufferBytesGravarInUd32LE[@Bytes,24,48000]
+BufferBytesGravarInUd32LE[@Bytes,28,96000]
+BufferBytesGravarInUd16LE[@Bytes,32,2]
+BufferBytesGravarInUd16LE[@Bytes,34,16]
+BufferBytesGravarInUd32LE[@Bytes,36,1635017060]
+BufferBytesGravarInUd32LE[@Bytes,40,@Dados]
+FimFuncao
+
+DefFuncaoxFpsSomSalvar[TxtxPasta,TxtxNome,InSd64xTipo,BlxTresD]yVazio
+DefVarInSd64xContagemy384000
+Sex@TresD
+CompararIgualxyInSd64x@Tipoy3
+Sex@ULTIMO
+SetVarInSd64xContagemy33600
+FimSe
+Senao
+SetVarInSd64xContagemy11520
+CompararIgualxyInSd64x@Tipoy0
+Sex@ULTIMO
+SetVarInSd64xContagemy6720
+FimSe
+CompararIgualxyInSd64x@Tipoy1
+Sex@ULTIMO
+SetVarInSd64xContagemy9120
+FimSe
+CompararMaiorIgualxyInSd64x@Tipoy3
+Sex@ULTIMO
+SetVarInSd64xContagemy24000
+FimSe
+FimSe
+InSd64ParaInUd64[(44 + @Contagem * 2)]
+DefVarInUd64xTamanhoy@ULTIMO
+DefRecursoxBytesyBufferBytesCriar[@Tamanho,@Tamanho]
+ChamarxFpsSomCabecalho[@Bytes,@Contagem]
+InSd64ParaFl64[@Contagem]
+DefVarFl64xNy@ULTIMO
+DefVarInSd64xSementey123456789
+ParaxI[0,@Contagem,1]
+InSd64ParaFl64[@I]
+DefVarFl64xIndicey@ULTIMO
+DefVarFl64xTy(@Indice / 48000.0)
+DefVarFl64xSy0.0
+DefVarFl64xGanhoy28000.0
+Sex@TresD
+ChamarxFpsSom3D[@Tipo,@T,@I]yS
+SetVarFl64xGanhoy24000.0
+CompararMenorxyFl64x@Sy-1.0
+Sex@ULTIMO
+SetVarFl64xSy-1.0
+FimSe
+CompararMaiorxyFl64x@Sy1.0
+Sex@ULTIMO
+SetVarFl64xSy1.0
+FimSe
+Senao
+ChamarxFpsSomRuido[@Semente,1664525,1013904223]ySemente
+ChamarxFpsSomNormalizar[@Semente]
+DefVarFl64xRuidoy@ULTIMO
+ChamarxFpsSomEfeito[@Tipo,@T,(@Indice / @N),@Ruido]yS
+FimSe
+ChamarxFpsRecursoArredondar[(@S * @Ganho)]
+DefVarInSd64xAmostray@ULTIMO
+CompararMenorxyInSd64x@Amostray0
+Sex@ULTIMO
+SetVarInSd64xAmostray(@Amostra + 65536)
+FimSe
+InSd64ParaInUd32[@Amostra]
+DefVarInUd32xPCMy@ULTIMO
+InSd64ParaInUd64[(44 + @I * 2)]
+BufferBytesGravarInUd16LE[@Bytes,@ULTIMO,@PCM]
+FimPara
+DefRecursoxCaminhoyTextoCriar[l'',65536]
+ChamarxFpsRecursoCaminho[@Pasta,@Nome,@Caminho]
+ArquivoGravarBytes[@Caminho,@Bytes]
+FimFuncao

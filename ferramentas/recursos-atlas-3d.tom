@@ -1,0 +1,107 @@
+Importar[l'./recursos-atlas.tom']
+DefFuncaoxFpsRecursosAtlas3D[RefBufferInUd32xPixels]yVazio
+ChamarxFpsRecursosAtlas[@Pixels]
+ParaxT[23,32,1]
+ChamarxFpsArteRetangulo[@Pixels,@T,0,0,64,64,0]
+FimPara
+ParaxY[0,64,1]
+ParaxX[0,64,1]
+DefVarInSd64xNy(@X * 7 + @Y * 13)
+SetVarInSd64xNy(@N - @N / 8 * 8)
+DefVarInSd64xX16y(@X - @X / 16 * 16)
+DefVarInSd64xY16y(@Y - @Y / 16 * 16)
+CompararIgualxyInSd64x@X16y0
+DefVarBlxJuntay@ULTIMO
+CompararIgualxyInSd64x@Y16y0
+OuxyBlx@Juntay@ULTIMO
+DefVarInUd32xCory0
+Sex@ULTIMO
+ChamarxFpsArteCor[28,32,37,255]yCor
+Senao
+ChamarxFpsArteCor[(70 + @N),(77 + @N),(72 + @N),255]yCor
+FimSe
+ChamarxFpsArtePixel[@Pixels,23,@X,@Y,@Cor]
+DefVarInSd64xX32y(@X - @X / 32 * 32)
+DefVarInSd64xY32y(@Y - @Y / 32 * 32)
+CompararMenorxyInSd64x@X32y2
+SetVarBlxJuntay@ULTIMO
+CompararMenorxyInSd64x@Y32y2
+OuxyBlx@Juntay@ULTIMO
+Sex@ULTIMO
+ChamarxFpsArteCor[18,26,35,255]yCor
+Senao
+ChamarxFpsArteCor[(40 + @N),(51 + @N),(62 + @N),255]yCor
+FimSe
+ChamarxFpsArtePixel[@Pixels,24,@X,@Y,@Cor]
+FimPara
+FimPara
+ChamarxFpsArteRetangulo[@Pixels,25,14,8,36,52,4279638561]
+ChamarxFpsArteRetangulo[@Pixels,25,17,10,30,47,4279907201]
+ParaxY[15,44,28]
+ChamarxFpsArteRetangulo[@Pixels,25,14,@Y,36,5,4282293193]
+FimPara
+ChamarxFpsArteRetangulo[@Pixels,25,26,25,12,13,4284998143]
+ChamarxFpsArteRetangulo[@Pixels,26,24,18,16,39,4287661160]
+ChamarxFpsArteRetangulo[@Pixels,26,27,4,10,18,4280960481]
+ChamarxFpsArteRetangulo[@Pixels,26,20,45,24,13,4283083967]
+ParaxY[0,64,1]
+ParaxX[0,64,1]
+InSd64ParaFl64[(@X - 32)]
+DefVarFl64xDXy@ULTIMO
+InSd64ParaFl64[(@Y - 32)]
+HipotenusaFl64[@DX,@ULTIMO]
+DefVarFl64xDy@ULTIMO
+CompararMenorxyFl64x@Dy12.0
+Sex@ULTIMO
+DefVarFl64xVerdey(210.0 - @D * 12.0)
+CompararMenorxyFl64x@Verdey20.0
+Sex@ULTIMO
+SetVarFl64xVerdey20.0
+FimSe
+Fl64ParaInSd64[@Verde]
+ChamarxFpsArteCor[255,@ULTIMO,30,255]
+ChamarxFpsArtePixel[@Pixels,27,@X,@Y,@ULTIMO]
+FimSe
+CompararMenorxyFl64x@Dy30.0
+Sex@ULTIMO
+DefVarInSd64xNy(@X * 17 + @Y * 31)
+SetVarInSd64xNy(@N - @N / 13 * 13)
+InSd64ParaFl64[@N]
+DefVarFl64xRuidoy(@ULTIMO / 13.0)
+ChamarxFpsRecursoArredondar[(80.0 + 150.0 * @Ruido)]
+DefVarInSd64xVerdey@ULTIMO
+ChamarxFpsRecursoArredondar[(255.0 * (1.0 - @D / 30.0))]
+ChamarxFpsArteCor[255,@Verde,18,@ULTIMO]
+ChamarxFpsArtePixel[@Pixels,28,@X,@Y,@ULTIMO]
+FimSe
+FimPara
+FimPara
+ChamarxFpsArteRetangulo[@Pixels,29,12,46,45,18,4281346590]
+ChamarxFpsArteRetangulo[@Pixels,29,17,23,33,28,4284569401]
+ChamarxFpsArteRetangulo[@Pixels,29,21,0,25,39,4287664495]
+ChamarxFpsArteRetangulo[@Pixels,29,26,2,15,19,4280753940]
+ChamarxFpsArteRetangulo[@Pixels,29,15,26,37,6,4281971675]
+ParaxY[0,64,1]
+ParaxX[0,64,1]
+DefVarInSd64xAlfay70
+CompararMenorxyInSd64x@Xy3
+DefVarBlxBorday@ULTIMO
+CompararMenorxyInSd64x@Yy3
+OuxyBlx@Borday@ULTIMO
+SetVarBlxBorday@ULTIMO
+CompararMaiorxyInSd64x@Xy60
+OuxyBlx@Borday@ULTIMO
+SetVarBlxBorday@ULTIMO
+CompararMaiorxyInSd64x@Yy60
+OuxyBlx@Borday@ULTIMO
+Sex@ULTIMO
+SetVarInSd64xAlfay200
+FimSe
+ChamarxFpsArteCor[56,173,201,@Alfa]
+ChamarxFpsArtePixel[@Pixels,30,@X,@Y,@ULTIMO]
+FimPara
+FimPara
+ChamarxFpsArteRetangulo[@Pixels,31,0,0,64,64,4281018139]
+ChamarxFpsArteRetangulo[@Pixels,31,7,25,50,14,4292605645]
+ChamarxFpsArteRetangulo[@Pixels,31,9,27,46,10,4292804598]
+FimFuncao

@@ -1,0 +1,11 @@
+Importar[l'./transparencias3d.tom']
+Importar[l'tom/composicao3d_gpu']
+
+DefFuncaoxFps3DMisturaGPU[RefAlvoGPUxAlvo,BufferGPUVec4Fl32xDados,BufferVec4Fl32xLista,MaterialGPU3DxAlpha,MaterialGPU3DxAditivo]yInUd64
+ChamarxComposicao3DDesenharGPU[@Alvo,@Dados,@Lista,@Alpha,@Aditivo]
+Retornarx@ULTIMO
+FimFuncao
+
+DefFuncaoxFps3DMisturaGravar[RefComandosGPUxComandos,BufferGPUVec4Fl32xDados,BufferVec4Fl32xLista,MaterialGPU3DxAlpha,MaterialGPU3DxAditivo]yVazio
+ChamarxComposicao3DGravar[@Comandos,@Dados,@Lista,@Alpha,@Aditivo]
+FimFuncao

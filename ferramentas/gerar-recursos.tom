@@ -1,0 +1,14 @@
+// Gerador autônomo do atlas original e dos cinco efeitos PCM.
+Importar[l'./recursos-atlas.tom']
+Importar[l'./recursos-audio.tom']
+DefRecursoxPastayTextoCriar[l'',65536]
+ChamarxFpsRecursoSaida[@Pasta]
+DefRecursoxPixelsyBufferInUd32Criar[524288,524288]
+ChamarxFpsRecursosAtlas[@Pixels]
+ChamarxFpsRecursoSalvarAtlas[@Pixels,@Pasta,l'atlas.png']
+ChamarxFpsSomSalvar[@Pasta,l'tiro.wav',0,Falso]
+ChamarxFpsSomSalvar[@Pasta,l'dano.wav',1,Falso]
+ChamarxFpsSomSalvar[@Pasta,l'item.wav',2,Falso]
+ChamarxFpsSomSalvar[@Pasta,l'abrir.wav',3,Falso]
+ChamarxFpsSomSalvar[@Pasta,l'fechar.wav',4,Falso]
+GerarTxtxl'Recursos gerados.\n'

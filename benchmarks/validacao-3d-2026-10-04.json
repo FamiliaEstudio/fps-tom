@@ -1,0 +1,351 @@
+{
+  "descricao": "Verificações finais da evolução 3D: regressões, pacotes com dependências locais, janela e dispositivo de áudio real.",
+  "registradoEmUTC": "2026-10-05T00:26:28.644651+00:00",
+  "sourceSha256Benchmark": "543e26e5ef7fbdf1b60b9b47c1bf2196577da140faac29ccb532fa13e3b84513",
+  "regressoes": [
+    {
+      "plataforma": "linux",
+      "suite": "fps",
+      "estatisticas": {
+        "tests": 90,
+        "pass": 90,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "log": "/tmp/fps3d-full-final-linux.log",
+      "sha256": "cf08fe202c0f5e735c442b8e10ceb88bc0fade43af60046f14cb01deacd48682"
+    },
+    {
+      "plataforma": "linux",
+      "suite": "gpu",
+      "estatisticas": {
+        "tests": 139,
+        "pass": 139,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "log": "/tmp/fps3d-gpu-full-linux.log",
+      "sha256": "05236e85efc934690bc373f3e2599444a105203f0b6a99a92f09da229c830c1d"
+    },
+    {
+      "plataforma": "linux",
+      "suite": "compilador-editor",
+      "estatisticas": {
+        "tests": 50,
+        "pass": 50,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "log": "/tmp/fps3d-compiler-editor-linux.log",
+      "sha256": "c803dc629502572565e833f80094d9010f080f6bcb7afd897838b269e2f9339f"
+    },
+    {
+      "plataforma": "linux",
+      "suite": "analise",
+      "estatisticas": {
+        "tests": 17,
+        "pass": 17,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "log": "/tmp/fps3d-analysis-linux.log",
+      "sha256": "f3deee95c48050b396a2f189f2999e23f13feb392e96a5480bd91c4685a35ce9"
+    },
+    {
+      "plataforma": "windows",
+      "suite": "fps",
+      "estatisticas": {
+        "tests": 90,
+        "pass": 90,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "log": ".tools/windows/tmp/fps3d-full-final-windows.log",
+      "sha256": "e7fe6e545b4d2aabc9a220fe116fe93b1042ae82e45d940bca4676fbc9996808"
+    },
+    {
+      "plataforma": "windows",
+      "suite": "gpu",
+      "estatisticas": {
+        "tests": 139,
+        "pass": 139,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "log": ".tools/windows/tmp/fps3d-gpu-full-windows.log",
+      "sha256": "f449f0219e21295514e1a608784761c0a096c5b03aa357392ace7a522bb35159"
+    },
+    {
+      "plataforma": "windows",
+      "suite": "compilador-editor",
+      "estatisticas": {
+        "tests": 50,
+        "pass": 50,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "log": ".tools/windows/tmp/fps3d-compiler-editor-windows.log",
+      "sha256": "6e01e5b31795264e1b91f0815a103738dc71498bbd15e4bc5b6ecbbf267a868a"
+    },
+    {
+      "plataforma": "windows",
+      "suite": "analise",
+      "estatisticas": {
+        "tests": 17,
+        "pass": 17,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "log": ".tools/windows/tmp/fps3d-analysis-windows.log",
+      "sha256": "6798015e6e79a490cb7471822be2eaacabd8b6b0c8321b7a069d514c7f11d9ff"
+    }
+  ],
+  "pacotes": [
+    {
+      "plataforma": "linux",
+      "renderizador": "sdl",
+      "diretorio": "build/linux/package/fps-tom",
+      "executavel": "fps-tom",
+      "sha256Executavel": "843ebb9464b1741b547d77ae6f3780e5f65ef28c95532d49d13bc48fea5a4da7",
+      "manifesto": {
+        "version": "0.4.0",
+        "source": "fps-tom.tom",
+        "target": "x86_64-pc-linux-gnu",
+        "optimize": "-O2",
+        "runtime": [
+          "audio",
+          "entity_pool",
+          "frame_profile",
+          "image",
+          "math",
+          "numeric_buffer",
+          "text",
+          "time",
+          "ui"
+        ],
+        "assets": []
+      },
+      "recibo": {
+        "platform": "linux",
+        "production": true,
+        "binary": "/mnt/c/projetos/linguagemtom/LinguagemTom/jogos/fps-tom/build/linux/package/fps-tom/fps-tom",
+        "status": "passed",
+        "scope": "window-input-clean-exit",
+        "renderer": "default",
+        "audio": "system device",
+        "relativeMouse": true,
+        "renderedFrames": null,
+        "simulationStateObserved": false,
+        "audibleQualityAssessed": false,
+        "time": "2026-10-05T00:20:02.438Z"
+      },
+      "sha256Recibo": "444cff1b0a1db0a36ebdafc2061af5a4bcc63ddbca63a731d4d2bd072d8700e1"
+    },
+    {
+      "plataforma": "linux",
+      "renderizador": "gpu",
+      "diretorio": "build/linux/package/gpu/fps-tom-gpu",
+      "executavel": "fps-tom-gpu",
+      "sha256Executavel": "c8a23ff45dd2f429109e4a6ad026d91af90bd98d41c3601e8fe44bf29e064df3",
+      "manifesto": {
+        "version": "0.4.0",
+        "source": "fps-tom-gpu.tom",
+        "target": "x86_64-pc-linux-gnu",
+        "optimize": "-O2",
+        "runtime": [
+          "audio",
+          "entity_pool",
+          "frame_profile",
+          "gpu",
+          "gpu_material",
+          "gpu_present",
+          "gpu_render",
+          "math",
+          "numeric_buffer",
+          "text",
+          "time",
+          "ui"
+        ],
+        "assets": []
+      },
+      "recibo": {
+        "platform": "linux",
+        "production": true,
+        "binary": "/mnt/c/projetos/linguagemtom/LinguagemTom/jogos/fps-tom/build/linux/package/gpu/fps-tom-gpu/fps-tom-gpu",
+        "status": "passed",
+        "scope": "window-input-clean-exit",
+        "renderer": "GPU/Vulkan",
+        "audio": "system device",
+        "relativeMouse": true,
+        "renderedFrames": null,
+        "simulationStateObserved": false,
+        "audibleQualityAssessed": false,
+        "time": "2026-10-05T00:20:32.487Z"
+      },
+      "sha256Recibo": "081412252f52ee860f0eadbfff45f45fa910361d68d900bad863f90554b20133"
+    },
+    {
+      "plataforma": "windows",
+      "renderizador": "sdl",
+      "diretorio": "build/windows/package/fps-tom",
+      "executavel": "fps-tom.exe",
+      "sha256Executavel": "b5d59fdc02d51edf52e26f3e5b699905bf6ab499e5b49128fdccf3c9810a3c9a",
+      "manifesto": {
+        "version": "0.4.0",
+        "source": "fps-tom.tom",
+        "target": "x86_64-w64-windows-gnu",
+        "optimize": "-O2",
+        "runtime": [
+          "audio",
+          "entity_pool",
+          "frame_profile",
+          "image",
+          "math",
+          "numeric_buffer",
+          "text",
+          "time",
+          "ui"
+        ],
+        "assets": []
+      },
+      "recibo": {
+        "platform": "win32",
+        "production": true,
+        "binary": "C:\\Projetos\\LinguagemTom\\LinguagemTom\\jogos\\fps-tom\\build\\windows\\package\\fps-tom\\fps-tom.exe",
+        "status": "passed",
+        "scope": "window-input-clean-exit",
+        "renderer": "default",
+        "audio": "system device",
+        "relativeMouse": true,
+        "renderedFrames": null,
+        "simulationStateObserved": false,
+        "audibleQualityAssessed": false,
+        "time": "2026-10-05T00:21:50.192Z"
+      },
+      "sha256Recibo": "78190882f1fcf915c7f1cd3242c1d722352192900728924be92a66ee0920ff24"
+    },
+    {
+      "plataforma": "windows",
+      "renderizador": "gpu",
+      "diretorio": "build/windows/package/gpu/fps-tom-gpu",
+      "executavel": "fps-tom-gpu.exe",
+      "sha256Executavel": "50ddce37e2a439a008b68385b5f584c6b98a52f6bee3727d8dcf25d07c8c9a28",
+      "manifesto": {
+        "version": "0.4.0",
+        "source": "fps-tom-gpu.tom",
+        "target": "x86_64-w64-windows-gnu",
+        "optimize": "-O2",
+        "runtime": [
+          "audio",
+          "entity_pool",
+          "frame_profile",
+          "gpu",
+          "gpu_material",
+          "gpu_present",
+          "gpu_render",
+          "math",
+          "numeric_buffer",
+          "text",
+          "time",
+          "ui"
+        ],
+        "assets": []
+      },
+      "recibo": {
+        "platform": "win32",
+        "production": true,
+        "binary": "C:\\Projetos\\LinguagemTom\\LinguagemTom\\jogos\\fps-tom\\build\\windows\\package\\gpu\\fps-tom-gpu\\fps-tom-gpu.exe",
+        "status": "passed",
+        "scope": "window-input-clean-exit",
+        "renderer": "GPU/Vulkan",
+        "audio": "system device",
+        "relativeMouse": true,
+        "renderedFrames": null,
+        "simulationStateObserved": false,
+        "audibleQualityAssessed": false,
+        "time": "2026-10-05T00:22:14.057Z"
+      },
+      "sha256Recibo": "f189e24558279c2e121f7a74fd48e99c3aa7cd1ced981d7dd7f7d1a6c4f50e9a"
+    }
+  ],
+  "desktopInstrumentado": [
+    {
+      "plataforma": "linux",
+      "recibo": {
+        "platform": "linux",
+        "production": false,
+        "binary": "/mnt/c/projetos/linguagemtom/LinguagemTom/jogos/fps-tom/build/linux/desktop/fps-tom/fps-tom",
+        "status": "passed",
+        "scope": "window-render-loop-trace",
+        "renderer": "software",
+        "audio": "system device",
+        "relativeMouse": true,
+        "renderedFrames": 21,
+        "simulationStateObserved": false,
+        "audibleQualityAssessed": false,
+        "time": "2026-10-05T00:20:56.492Z"
+      },
+      "sha256Recibo": "84b0648da6535d30b699307db480ff9769f87a9e994185dae27d0743699cad93",
+      "traceSha256": "f36ef2fec202e3e5f36b2242c401aa13feb97f4e6a4410910736ad054ba88d88",
+      "capturaSha256": "29bd6effd491b7ca7607797d27e4bc5cabf913f67e8c852730dc55eefc3f8197"
+    },
+    {
+      "plataforma": "windows",
+      "recibo": {
+        "platform": "win32",
+        "production": false,
+        "binary": "C:\\Projetos\\LinguagemTom\\LinguagemTom\\jogos\\fps-tom\\build\\windows\\desktop\\fps-tom\\fps-tom.exe",
+        "status": "passed",
+        "scope": "window-render-loop-trace",
+        "renderer": "software",
+        "audio": "system device",
+        "relativeMouse": true,
+        "renderedFrames": 343,
+        "simulationStateObserved": false,
+        "audibleQualityAssessed": false,
+        "time": "2026-10-05T00:22:34.082Z"
+      },
+      "sha256Recibo": "df6d447a97d59c46b96e200548151076e0d4095aacaee7f92cdf3110f6265312",
+      "traceSha256": "3a6aa5fa208ef871147c1da2e4091dc33547707aa3e338d8622fa1ce3590496d",
+      "capturaSha256": "1cf40bb8144d07d2e27476be5dc30e7f843804c8d10c58fb48f6617953de869f"
+    }
+  ],
+  "dispositivosAudio": [
+    {
+      "plataforma": "linux",
+      "driver": "pulseaudio",
+      "framesProcessados": 28908,
+      "resultado": ".tools/linux/validation-03/device/result.txt",
+      "sha256Resultado": "7332893c7d6a89d0ab79887349d39b7e857f1bb6c837f5ad99279c351c504c1b",
+      "qualidadeAudivelAvaliada": false
+    },
+    {
+      "plataforma": "windows",
+      "driver": "wasapi",
+      "framesProcessados": 28800,
+      "resultado": ".tools/windows/validation-03/device/result.txt",
+      "sha256Resultado": "eee5a7dcb2d961512964f40044d58eae37befce450cd88885ac3b9c039052db9",
+      "qualidadeAudivelAvaliada": false
+    }
+  ],
+  "evidenciasRelacionadas": [
+    "benchmarks/resultados-3d-2026-10-04.json",
+    "benchmarks/replay-3d-2026-10-04.json"
+  ],
+  "limites": [
+    "Os tempos de quadro atingem 60 FPS parcialmente; consultar todas as combinações no relatório de benchmark.",
+    "Recibos de janela verificam envio de entrada, laço gráfico instrumentado e encerramento; não observam estado de simulação. Testes e replay verificam esse estado.",
+    "relativeMouse indica ausência de erro da solicitação de captura, sem provar trajetória observada.",
+    "Qualidade audível, sincronismo percebido e sensação dos controles não receberam avaliação humana.",
+    "CI remota e sessão interativa do VS Code não foram executadas.",
+    "Linux usa Vulkan llvmpipe por software; Windows usa RTX 5060 Ti."
+  ]
+}

@@ -15,20 +15,32 @@ SetVarRegistro<FpsEstado>xEstadoyPadrao
 SetVarEnum<FpsFase>xEstado.fasey@FpsFase.Jogando
 SetVarFl64xEstado.pxy2.5
 SetVarFl64xEstado.pyy2.5
+SetVarInSd32xEstado.totalInimigosy6
 SetVarInSd32xEstado.viday100
 SetVarInSd32xEstado.municaoy30
 ParaIndiceSOAxI[@Mapa]
+SetVarInSd32xMapa@@I.materialy1
+DividxyInSd64x@Iy32
+DefVarInSd64xYy@ULTIMO
+DefVarInSd64xXy(@I - @Y * 32)
+CompararMenorxyInSd64x@Xy16
+DefVarBlxDentroy@ULTIMO
+CompararMenorxyInSd64x@Yy16
+ExyBlx@Dentroy@ULTIMO
+Sex@ULTIMO
 SetVarInSd32xMapa@@I.materialy0
+FimSe
+SetVarBlxMapa@@I.portayFalso
 FimPara
 ParaIndiceSOAxI[@Entidades]
 SetVarBlxEntidades@@I.ativayFalso
 FimPara
 FimFuncao
 DefArraySoAxMapaxFpsCelulax1024
-DefArraySoAxEntidadesxFpsEntidadex32
+DefArraySoAxEntidadesxFpsEntidadex64
 DefVarRegistro<FpsEstado>xEstadoyPadrao
 DefArraySoAxColunasxFpsColunax320
-DefArraySoAxSpritesxFpsSpritex32
+DefArraySoAxSpritesxFpsSpritex64
 `;
 const source=prefix+
 scope('Raios',`
@@ -141,7 +153,7 @@ ChamarxFpsItens[@Estado,@Entidades]
 ${eq('@Estado.fase','@FpsFase.Jogando','Enum<FpsFase>')}
 SetVarInSd32xEstado.abatidosy6
 ChamarxFpsItens[@Estado,@Entidades]
-${eq('@Estado.fase','@FpsFase.Vitoria','Enum<FpsFase>')}
+${eq('@Estado.fase','@FpsFase.SetorConcluido','Enum<FpsFase>')}
 SetVarInSd32xEstado.viday10
 SetVarInSd32xEntidades@0.ataquey0
 ChamarxFpsInimigos[@Mapa,@Estado,@Entidades]

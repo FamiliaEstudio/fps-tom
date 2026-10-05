@@ -1,0 +1,17 @@
+// Atlas 3D, música, ambiente, explosão e TV sintetizados sem assets de entrada.
+Importar[l'./recursos-atlas-3d.tom']
+Importar[l'./recursos-audio.tom']
+Importar[l'./recursos-tv.tom']
+DefRecursoxPastayTextoCriar[l'',65536]
+ChamarxFpsRecursoSaida[@Pasta]
+DefRecursoxPixelsyBufferInUd32Criar[524288,524288]
+ChamarxFpsRecursosAtlas3D[@Pixels]
+ChamarxFpsRecursoSalvarAtlas[@Pixels,@Pasta,l'atlas3d.png']
+ChamarxFpsSomSalvar[@Pasta,l'musica0.wav',0,Verdadeiro]
+ChamarxFpsSomSalvar[@Pasta,l'musica1.wav',1,Verdadeiro]
+ChamarxFpsSomSalvar[@Pasta,l'musica2.wav',2,Verdadeiro]
+ChamarxFpsSomSalvar[@Pasta,l'explosao.wav',3,Verdadeiro]
+ChamarxFpsSomSalvar[@Pasta,l'ambiente.wav',4,Verdadeiro]
+ChamarxFpsRecursoTV[@Pasta]
+ChamarxFpsSomSalvar[@Pasta,l'tv.wav',5,Verdadeiro]
+GerarTxtxl'Recursos 3D gerados.\n'

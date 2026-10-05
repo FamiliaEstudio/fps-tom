@@ -1,4 +1,5 @@
 Importar[l'./fase.tom']
+Importar[l'./portas.tom']
 
 DefFuncaoxFpsMover[SOA<FpsCelula>xMapa,RefRegistro<FpsEstado>xEstado,Registro<FpsComando>xComando]yVazio
 MultixyFl64x@Comando.giroy0.04
@@ -94,7 +95,11 @@ ChamarxFpsRaioLancar[@Mapa,@Estado.px,@Estado.py,@DX,@DY]
 DefVarRegistro<FpsRaio>xParedey@ULTIMO
 DefVarFl64xDistanciay@Parede.distancia
 DefVarInSd64xAlvoy-1
-ParaxI[0,16,1]
+ParaIndiceSOAxI[@Entidades]
+CompararDiferentexyInSd32xEntidades@@I.tipoy1
+Sex@ULTIMO
+Continuar
+FimSe
 NaoBlxEntidades@@I.ativa
 Sex@ULTIMO
 Continuar
@@ -128,7 +133,11 @@ FimSe
 FimFuncao
 
 DefFuncaoxFpsInimigos[SOA<FpsCelula>xMapa,RefRegistro<FpsEstado>xEstado,RefSOA<FpsEntidade>xEntidades]yVazio
-ParaxI[0,16,1]
+ParaIndiceSOAxI[@Entidades]
+CompararDiferentexyInSd32xEntidades@@I.tipoy1
+Sex@ULTIMO
+Continuar
+FimSe
 NaoBlxEntidades@@I.ativa
 Sex@ULTIMO
 Continuar
@@ -198,7 +207,7 @@ FimPara
 FimFuncao
 
 DefFuncaoxFpsItens[RefRegistro<FpsEstado>xEstado,RefSOA<FpsEntidade>xEntidades]yVazio
-ParaxI[16,32,1]
+ParaIndiceSOAxI[@Entidades]
 NaoBlxEntidades@@I.ativa
 Sex@ULTIMO
 Continuar
@@ -239,17 +248,35 @@ SetVarBlxEntidades@@I.ativayFalso
 SetVarBlxEstado.somItemyVerdadeiro
 FimSe
 FimSe
+CompararIgualxyInSd32xEntidades@@I.tipoy5
+DefVarBlxAzuly@ULTIMO
+CompararIgualxyInSd32xEntidades@@I.tipoy6
+DefVarBlxVermelhay@ULTIMO
+OuxyBlx@Azuly@Vermelha
+Sex@ULTIMO
+OuxyBlx@Estado.chaveAzuly@Azul
+SetVarBlxEstado.chaveAzuly@ULTIMO
+OuxyBlx@Estado.chaveVermelhay@Vermelha
+SetVarBlxEstado.chaveVermelhay@ULTIMO
+SetVarBlxEntidades@@I.ativayFalso
+SetVarBlxEstado.somItemyVerdadeiro
+FimSe
 CompararIgualxyInSd32xEntidades@@I.tipoy4
 Sex@ULTIMO
-CompararMaiorIgualxyInSd32x@Estado.abatidosy@FPS_TOTAL_INIMIGOS
+CompararMaiorIgualxyInSd32x@Estado.abatidosy@Estado.totalInimigos
+Sex@ULTIMO
+CompararIgualxyInSd32x@Estado.nively2
 Sex@ULTIMO
 SetVarEnum<FpsFase>xEstado.fasey@FpsFase.Vitoria
+Senao
+SetVarEnum<FpsFase>xEstado.fasey@FpsFase.SetorConcluido
+FimSe
 FimSe
 FimSe
 FimPara
 FimFuncao
 
-DefFuncaoxFpsPasso[SOA<FpsCelula>xMapa,RefRegistro<FpsEstado>xEstado,RefSOA<FpsEntidade>xEntidades,Registro<FpsComando>xComando]yVazio
+DefFuncaoxFpsPasso[RefSOA<FpsCelula>xMapa,RefRegistro<FpsEstado>xEstado,RefSOA<FpsEntidade>xEntidades,Registro<FpsComando>xComando]yVazio
 CompararDiferentexyEnum<FpsFase>x@Estado.fasey@FpsFase.Jogando
 Sex@ULTIMO
 Retornar
@@ -271,6 +298,17 @@ Sex@ULTIMO
 SubtrxyInSd32x@Estado.danoTelay1
 SetVarInSd32xEstado.danoTelay@ULTIMO
 FimSe
+SetVarFl64xEstado.anteriorXy@Estado.px
+SetVarFl64xEstado.anteriorYy@Estado.py
+SetVarFl64xEstado.anteriorAnguloy@Estado.angulo
+ParaIndiceSOAxI[@Entidades]
+SetVarFl64xEntidades@@I.anteriorXyEntidades@@I.px
+SetVarFl64xEntidades@@I.anteriorYyEntidades@@I.py
+FimPara
+Sex@Comando.interagir
+ChamarxFpsInteragir[@Mapa,@Estado]
+FimSe
+ChamarxFpsPortasPasso[@Mapa,@Estado,@Entidades]
 ChamarxFpsMover[@Mapa,@Estado,@Comando]
 Sex@Comando.atirar
 ChamarxFpsAtirar[@Mapa,@Estado,@Entidades]

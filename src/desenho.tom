@@ -1,0 +1,252 @@
+Importar[l'./render.tom']
+Importar[l'./portas.tom']
+
+DefRegistroxFpsLista
+PropInUd64xusados
+FimDef
+
+DefFuncaoxFpsListaAbrir[RefBufferVec4Fl32xLista,RefRegistro<FpsLista>xL]yVazio
+BufferVec4Fl32Capacidade[@Lista]
+BufferVec4Fl32Redimensionar[@Lista,@ULTIMO]
+SetVarInUd64xL.usadosy0
+FimFuncao
+DefFuncaoxFpsListaFechar[RefBufferVec4Fl32xLista,Registro<FpsLista>xL]yVazio
+BufferVec4Fl32Redimensionar[@Lista,@L.usados]
+FimFuncao
+
+// Tres Vec4 por quad: centro/tamanho, UV relativo ao atlas, tinta RGBA.
+DefFuncaoxFpsQuad[RefBufferVec4Fl32xLista,RefRegistro<FpsLista>xL,InSd32xTile,Fl64xX,Fl64xY,Fl64xW,Fl64xH,Fl64xU,Fl64xV,Fl64xUW,Fl64xVH,Vec4<Fl32>xCor]yVazio
+BufferVec4Fl32Comprimento[@Lista]
+DefVarInUd64xLimitey@ULTIMO
+DefVarInUd64xFimYy(@L.usados + 3)
+CompararMenorIgualxyInUd64x@FimYy@Limite
+Exigir[@ULTIMO]
+DefVarVec4<Fl32>xRy[0.0,0.0,0.0,0.0]
+Fl64ParaFl32[(@X + @W * 0.5)]yR.x
+Fl64ParaFl32[(@Y + @H * 0.5)]yR.y
+Fl64ParaFl32[@W]yR.z
+Fl64ParaFl32[@H]yR.w
+DividxyInSd32x@Tiley16
+DefVarInSd32xTYy@ULTIMO
+DefVarInSd32xTXy(@Tile - @TY * 16)
+InSd32ParaFl64[@TX]
+DefVarFl64xBaseXy@ULTIMO
+InSd32ParaFl64[@TY]
+DefVarFl64xBaseYy@ULTIMO
+DefVarVec4<Fl32>xUVy[0.0,0.0,0.0,0.0]
+Fl64ParaFl32[((@BaseX + @U) / 16.0)]yUV.x
+Fl64ParaFl32[((@BaseY + @V) / 8.0)]yUV.y
+Fl64ParaFl32[(@UW / 16.0)]yUV.z
+Fl64ParaFl32[(@VH / 8.0)]yUV.w
+BufferVec4Fl32Gravar[@Lista,@L.usados,@R]
+BufferVec4Fl32Gravar[@Lista,(@L.usados + 1),@UV]
+BufferVec4Fl32Gravar[@Lista,(@L.usados + 2),@Cor]
+SetVarInUd64xL.usadosy@FimY
+FimFuncao
+
+DefFuncaoxFpsTinta[Fl64xDistancia,InSd32xFace,InSd32xNivel]yVec4<Fl32>
+DefVarFl32xCy1.0
+CompararMaiorxyFl64x@Distanciay3.0
+DefVarBlxLongey@ULTIMO
+CompararIgualxyInSd32x@Facey1
+OuxyBlx@Longey@ULTIMO
+Sex@ULTIMO
+SetVarFl32xCy0.73
+FimSe
+CompararMaiorxyFl64x@Distanciay6.0
+Sex@ULTIMO
+SetVarFl32xCy0.5
+FimSe
+CompararMaiorxyFl64x@Distanciay10.0
+Sex@ULTIMO
+SetVarFl32xCy0.35
+FimSe
+CompararIgualxyInSd32x@Nively2
+Sex@ULTIMO
+Retornarx[(@C * 0.8),(@C * 0.95),@C,1.0]
+FimSe
+Retornarx[@C,@C,@C,1.0]
+FimFuncao
+
+DefFuncaoxFpsCenaLista[RefBufferVec4Fl32xLista,SOA<FpsColuna>xColunas,RefSOA<FpsSprite>xSprites,Registro<FpsEstado>xEstado,BlxTexturas]yVazio
+DefVarRegistro<FpsLista>xLyPadrao
+ChamarxFpsListaAbrir[@Lista,@L]
+DefVarVec4<Fl32>xCeuy[0.07,0.10,0.13,1.0]
+DefVarVec4<Fl32>xChaoy[0.23,0.25,0.23,1.0]
+CompararIgualxyInSd32x@Estado.nively1
+Sex@ULTIMO
+SetVarVec4<Fl32>xCeuy[0.28,0.13,0.08,1.0]
+SetVarVec4<Fl32>xChaoy[0.25,0.19,0.12,1.0]
+FimSe
+CompararIgualxyInSd32x@Estado.nively2
+Sex@ULTIMO
+SetVarVec4<Fl32>xCeuy[0.02,0.06,0.10,1.0]
+SetVarVec4<Fl32>xChaoy[0.08,0.16,0.18,1.0]
+FimSe
+ChamarxFpsQuad[@Lista,@L,14,0.0,0.0,320.0,88.0,0.0,0.0,1.0,1.0,@Ceu]
+ChamarxFpsQuad[@Lista,@L,14,0.0,88.0,320.0,88.0,0.0,0.0,1.0,1.0,@Chao]
+ParaxX[0,320,1]
+DefVarFl64xDistanciayColunas@@X.distancia
+CompararMenorxyFl64x@Distanciay0.05
+Sex@ULTIMO
+SetVarFl64xDistanciay0.05
+FimSe
+DefVarFl64xAlturay(240.0 / @Distancia)
+DefVarFl64xTopoy(88.0 - @Altura * 0.5)
+DefVarInSd32xTiley(Colunas@@X.material - 1)
+CompararMaiorxyInSd32xColunas@@X.materialy3
+Sex@ULTIMO
+SetVarInSd32xTiley(Colunas@@X.material + 4)
+Senao
+CompararIgualxyInSd32x@Estado.nively1
+Sex@ULTIMO
+SetVarInSd32xTiley(@Tile + 16)
+FimSe
+CompararIgualxyInSd32x@Estado.nively2
+Sex@ULTIMO
+SetVarInSd32xTiley(@Tile + 20)
+FimSe
+FimSe
+NaoBlx@Texturas
+Sex@ULTIMO
+SetVarInSd32xTiley14
+FimSe
+ChamarxFpsTinta[@Distancia,Colunas@@X.face,@Estado.nivel]
+DefVarVec4<Fl32>xCory@ULTIMO
+Fl64ParaInSd32[(Colunas@@X.u * 64.0)]
+DefVarInSd32xUYy@ULTIMO
+CompararMaiorxyInSd32x@UYy63
+Sex@ULTIMO
+SetVarInSd32xUYy63
+FimSe
+CompararMenorxyInSd32x@UYy0
+Sex@ULTIMO
+SetVarInSd32xUYy0
+FimSe
+InSd32ParaFl64[@UY]
+DefVarFl64xUy(@ULTIMO / 64.0)
+InSd64ParaFl64[@X]
+ChamarxFpsQuad[@Lista,@L,@Tile,@ULTIMO,@Topo,1.0,@Altura,@U,0.0,0.015625,1.0,@Cor]
+FimPara
+// Pintor do fundo para a frente, com mascara de parede por coluna.
+ParaIndiceSOAxOrdem[@Sprites]
+DefVarInSd64xEscolhiday-1
+DefVarFl64xMaiory0.0
+ParaIndiceSOAxI[@Sprites]
+SexSprites@@I.visivel
+CompararMaiorxyFl64xSprites@@I.profundidadey@Maior
+Sex@ULTIMO
+SetVarInSd64xEscolhiday@I
+SetVarFl64xMaiorySprites@@I.profundidade
+FimSe
+FimSe
+FimPara
+CompararMenorxyInSd64x@Escolhiday0
+Sex@ULTIMO
+Interromper
+FimSe
+SetVarBlxSprites@@Escolhida.visivelyFalso
+DefVarFl64xTamanhoySprites@@Escolhida.tamanho
+DefVarFl64xEsquerdoy(Sprites@@Escolhida.centro - @Tamanho * 0.5)
+DefVarFl64xTopoy(88.0 - @Tamanho * 0.5)
+DefVarInSd32xTiley(Sprites@@Escolhida.tipo + 2)
+CompararMaiorIgualxyInSd32xSprites@@Escolhida.tipoy5
+Sex@ULTIMO
+SetVarInSd32xTiley(Sprites@@Escolhida.tipo + 6)
+FimSe
+ChamarxFpsTinta[@Maior,0,@Estado.nivel]
+DefVarVec4<Fl32>xCory@ULTIMO
+ParaxX[0,320,1]
+CompararMenorxyFl64x@MaioryColunas@@X.distancia
+Sex@ULTIMO
+InSd64ParaFl64[@X]
+DefVarFl64xPXy@ULTIMO
+DefVarFl64xUy((@PX + 0.5 - @Esquerdo) / @Tamanho)
+CompararMaiorIgualxyFl64x@Uy0.0
+DefVarBlxDentroy@ULTIMO
+CompararMenorxyFl64x@Uy1.0
+ExyBlx@Dentroy@ULTIMO
+Sex@ULTIMO
+Fl64ParaInSd32[(@U * 64.0)]
+InSd32ParaFl64[@ULTIMO]
+SetVarFl64xUy(@ULTIMO / 64.0)
+ChamarxFpsQuad[@Lista,@L,@Tile,@PX,@Topo,1.0,@Tamanho,@U,0.0,0.015625,1.0,@Cor]
+FimSe
+FimSe
+FimPara
+FimPara
+DefVarFl64xArmaYy109.0
+CompararMaiorxyInSd32x@Estado.tiroTelay0
+Sex@ULTIMO
+SetVarFl64xArmaYy113.0
+ChamarxFpsQuad[@Lista,@L,14,154.0,103.0,12.0,18.0,0.0,0.0,1.0,1.0,[1.0,0.8,0.2,1.0]]
+FimSe
+ChamarxFpsQuad[@Lista,@L,7,112.0,@ArmaY,96.0,80.0,0.0,0.0,1.0,1.0,[1.0,1.0,1.0,1.0]]
+ChamarxFpsQuad[@Lista,@L,14,156.0,88.0,9.0,1.0,0.0,0.0,1.0,1.0,[1.0,1.0,0.9,0.8]]
+ChamarxFpsQuad[@Lista,@L,14,160.0,84.0,1.0,9.0,0.0,0.0,1.0,1.0,[1.0,1.0,0.9,0.8]]
+ChamarxFpsListaFechar[@Lista,@L]
+FimFuncao
+
+DefFuncaoxFpsListaSDL[RefJanelaxJanela,VisualxAtlas,BufferVec4Fl32xLista]yVazio
+BufferVec4Fl32Comprimento[@Lista]
+InUd64ParaInSd64[@ULTIMO]
+DefVarInSd64xFimy@ULTIMO
+ParaxI[0,@Fim,3]
+InSd64ParaInUd64[@I]
+DefVarInUd64xJy@ULTIMO
+BufferVec4Fl32Ler[@Lista,@J]
+DefVarVec4<Fl32>xRy@ULTIMO
+BufferVec4Fl32Ler[@Lista,(@J + 1)]
+DefVarVec4<Fl32>xUVy@ULTIMO
+BufferVec4Fl32Ler[@Lista,(@J + 2)]
+DefVarVec4<Fl32>xCy@ULTIMO
+Fl32ParaInSd32[(@UV.x * 1024.0)]
+DefVarInSd32xSXy@ULTIMO
+Fl32ParaInSd32[(@UV.y * 512.0)]
+DefVarInSd32xSYy@ULTIMO
+Fl32ParaInSd32[(@UV.z * 1024.0)]
+DefVarInSd32xSWy@ULTIMO
+Fl32ParaInSd32[(@UV.w * 512.0)]
+DefVarInSd32xSHy@ULTIMO
+Fl32ParaFl64[(@R.x - @R.z * 0.5)]
+DefVarFl64xXy@ULTIMO
+Fl32ParaFl64[(@R.y - @R.w * 0.5)]
+DefVarFl64xYy@ULTIMO
+Fl32ParaFl64[@R.z]
+DefVarFl64xWy@ULTIMO
+Fl32ParaFl64[@R.w]
+DefVarFl64xHy@ULTIMO
+Fl32ParaInUd32[(@C.x * 255.0)]
+DefVarInUd32xCory(@ULTIMO * 16777216)
+Fl32ParaInUd32[(@C.y * 255.0)]
+SetVarInUd32xCory(@Cor + @ULTIMO * 65536)
+Fl32ParaInUd32[(@C.z * 255.0)]
+SetVarInUd32xCory(@Cor + @ULTIMO * 256)
+Fl32ParaInUd32[(@C.w * 255.0)]
+SetVarInUd32xCory(@Cor + @ULTIMO)
+DesenharVisualRegiao[@Janela,@Atlas,@SX,@SY,@SW,@SH,@X,@Y,@W,@H,@Cor]
+FimPara
+FimFuncao
+
+// Aproximacao da vinheta em blocos no caminho SDL software.
+DefFuncaoxFpsVinhetaSDL[RefJanelaxJanela,BlxAtiva]yVazio
+NaoBlx@Ativa
+Sex@ULTIMO
+Retornar
+FimSe
+ParaxY[0,176,16]
+ParaxX[0,320,16]
+InSd64ParaFl64[@X]
+DefVarFl64xDXy((@ULTIMO + 8.0) / 320.0 - 0.5)
+InSd64ParaFl64[@Y]
+DefVarFl64xDYy((@ULTIMO + 8.0) / 176.0 - 0.5)
+Fl64ParaFl32[((@DX * @DX + @DY * @DY) * 127.5)]
+Fl32ParaInUd32[@ULTIMO]
+DefVarInUd32xCory@ULTIMO
+InSd64ParaInSd32[@X]
+DefVarInSd32xIXy@ULTIMO
+InSd64ParaInSd32[@Y]
+DesenharRetangulo[@Janela,@IX,@ULTIMO,16,16,@Cor]
+FimPara
+FimPara
+FimFuncao

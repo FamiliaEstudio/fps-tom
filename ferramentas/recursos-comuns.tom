@@ -1,0 +1,128 @@
+// Operações compartilhadas pelos geradores offline do FPS.
+Importar[l'tom/imagens']
+DefConstFl64xFpsRecursoPIy3.141592653589793
+
+DefFuncaoxFpsRecursoSaida[RefTextoxPasta]yVazio
+DefRecursoxArgsyArgumentosCriar[262144]
+ArgumentosQuantidade[@Args]
+CompararIgualxyInUd64x@ULTIMOy2
+Sex@ULTIMO
+DefStkFB128CxOpcaoyl''
+ArgumentosLer[@Args,0,@Opcao]
+TextosIguais[@Opcao,l'--output']
+Exigir[@ULTIMO]
+ArgumentosLer[@Args,1,@Pasta]
+QuantidadeCaracteresTxt[@Pasta]
+CompararMaiorxyInUd64x@ULTIMOy0
+Exigir[@ULTIMO]
+ArquivoDiretorioCriar[@Pasta]
+Senao
+GerarTxtxl'Use --output pasta.\n'
+Falhar[4]
+FimSe
+FimFuncao
+
+DefFuncaoxFpsRecursoCaminho[TxtxPasta,TxtxNome,RefTextoxSaida]yVazio
+CopiarTxt[@Saida,@Pasta]
+AnexarTxt[@Saida,l'/']
+AnexarTxt[@Saida,@Nome]
+FimFuncao
+
+// Domínio usado por canais/PCM: arredonda ao mais próximo, empate para +infinito.
+DefFuncaoxFpsRecursoArredondar[Fl64xValor]yInSd64
+Fl64ParaInSd64[@Valor]
+DefVarInSd64xInteiroy@ULTIMO
+InSd64ParaFl64[@Inteiro]
+DefVarFl64xFracaoy(@Valor - @ULTIMO)
+CompararMenorxyFl64x@Fracaoy-0.5
+Sex@ULTIMO
+Retornarx(@Inteiro - 1)
+FimSe
+CompararMaiorIgualxyFl64x@Fracaoy0.5
+Sex@ULTIMO
+Retornarx(@Inteiro + 1)
+FimSe
+Retornarx@Inteiro
+FimFuncao
+
+// As imagens CPU usam 0xAABBGGRR, inverso da cor de desenho 0xRRGGBBAA.
+DefFuncaoxFpsArteCor[InSd64xR,InSd64xG,InSd64xB,InSd64xA]yInUd32
+ChamarxPixelRGBA8[@R,@G,@B,@A]
+Retornarx@ULTIMO
+FimFuncao
+
+DefFuncaoxFpsArtePixel[RefBufferInUd32xPixels,InSd64xTile,InSd64xX,InSd64xY,InUd32xCor]yVazio
+CompararMenorxyInSd64x@Xy0
+Sex@ULTIMO
+Retornar
+FimSe
+CompararMaiorIgualxyInSd64x@Xy64
+Sex@ULTIMO
+Retornar
+FimSe
+CompararMenorxyInSd64x@Yy0
+Sex@ULTIMO
+Retornar
+FimSe
+CompararMaiorIgualxyInSd64x@Yy64
+Sex@ULTIMO
+Retornar
+FimSe
+InSd64ParaInUd64[((@Tile / 16 * 64 + @Y) * 1024 + (@Tile - @Tile / 16 * 16) * 64 + @X)]
+BufferInUd32Gravar[@Pixels,@ULTIMO,@Cor]
+FimFuncao
+
+DefFuncaoxFpsArteRetangulo[RefBufferInUd32xPixels,InSd64xTile,InSd64xX,InSd64xY,InSd64xW,InSd64xH,InUd32xCor]yVazio
+DefVarInSd64xFimy(@Y + @H)
+DefVarInSd64xDireitay(@X + @W)
+ParaxLinha[@Y,@Fim,1]
+ParaxColuna[@X,@Direita,1]
+ChamarxFpsArtePixel[@Pixels,@Tile,@Coluna,@Linha,@Cor]
+FimPara
+FimPara
+FimFuncao
+
+DefFuncaoxFpsArteElipse[RefBufferInUd32xPixels,InSd64xTile,InSd64xCX,InSd64xCY,InSd64xRX,InSd64xRY,InUd32xCor]yVazio
+DefVarInSd64xEsquerday(@CX - @RX)
+DefVarInSd64xDireitay(@CX + @RX + 1)
+DefVarInSd64xTopoy(@CY - @RY)
+DefVarInSd64xFundoy(@CY + @RY + 1)
+InSd64ParaFl64[@RX]
+DefVarFl64xRaioXy@ULTIMO
+InSd64ParaFl64[@RY]
+DefVarFl64xRaioYy@ULTIMO
+ParaxY[@Topo,@Fundo,1]
+ParaxX[@Esquerda,@Direita,1]
+InSd64ParaFl64[(@X - @CX)]
+DefVarFl64xDXy(@ULTIMO / @RaioX)
+InSd64ParaFl64[(@Y - @CY)]
+DefVarFl64xDYy(@ULTIMO / @RaioY)
+DefVarFl64xDistanciay(@DX * @DX + @DY * @DY)
+CompararMenorIgualxyFl64x@Distanciay1.0
+Sex@ULTIMO
+ChamarxFpsArtePixel[@Pixels,@Tile,@X,@Y,@Cor]
+FimSe
+FimPara
+FimPara
+FimFuncao
+
+DefFuncaoxFpsArteGlifo[RefBufferInUd32xPixels,InSd64xTile,TxtxPadrao]yVazio
+ParaxY[0,7,1]
+ParaxX[0,5,1]
+InSd64ParaInUd64[(@Y * 6 + @X)]
+CodigoCaractereTxt[@Padrao,@ULTIMO]
+CompararIgualxyInSd32x@ULTIMOy49
+Sex@ULTIMO
+ChamarxFpsArteRetangulo[@Pixels,@Tile,(@X * 10),(@Y * 8),10,8,4294967295]
+FimSe
+FimPara
+FimPara
+FimFuncao
+
+DefFuncaoxFpsRecursoSalvarAtlas[BufferInUd32xPixels,TxtxPasta,TxtxNome]yVazio
+DefRecursoxImagemyImagemCriar[1024,512]
+ImagemPixelsEnviar[@Imagem,@Pixels]
+DefRecursoxCaminhoyTextoCriar[l'',65536]
+ChamarxFpsRecursoCaminho[@Pasta,@Nome,@Caminho]
+ImagemSalvarPNG[@Imagem,@Caminho]
+FimFuncao
